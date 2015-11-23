@@ -1,0 +1,13 @@
+PODS:
+  - Alamofire (3.1.2)
+  - HCYoutubeParser (0.0.4)
+
+DEPENDENCIES:
+  - Alamofire
+  - HCYoutubeParser
+
+SPEC CHECKSUMS:
+  Alamofire: 7c16ca65f3c7e681fd925fd7f2dec7747ff96855
+  HCYoutubeParser: 490db7db2997a293ace484a5d63419b3b053d95f
+
+COCOAPODS: 0.39.0.rc.1

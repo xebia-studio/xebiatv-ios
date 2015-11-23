@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder.AppleTV.Storyboard" version="3.0" toolsVersion="9060" systemVersion="14F27" targetRuntime="AppleTV" propertyAccessControl="none" useAutolayout="YES" initialViewController="OaF-7h-mIf">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9051"/>
+    </dependencies>
+    <scenes>
+        <!--AV Player View Controller-->
+        <scene sceneID="leg-Ws-vDK">
+            <objects>
+                <avPlayerViewController storyboardIdentifier="VideoPlayerViewController" videoGravity="AVLayerVideoGravityResizeAspect" id="Bi2-Nu-lOb" customClass="VideoPlayerViewController" customModule="XebiaTV" customModuleProvider="target" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="12u-jQ-wVI" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1299" y="451"/>
+        </scene>
+        <!--Home View Controller-->
+        <scene sceneID="NY7-ss-uqA">
+            <objects>
+                <viewController id="OaF-7h-mIf" customClass="HomeViewController" customModule="XebiaTV" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="ati-Mr-UlG"/>
+                        <viewControllerLayoutGuide type="bottom" id="Pgt-zY-a1e"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="uft-wy-QKd" customClass="HomeView" customModule="XebiaTV" customModuleProvider="target">
+                        <rect key="frame" x="0.0" y="0.0" width="1920" height="1080"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="GQD-BB-Db3">
+                                <rect key="frame" x="0.0" y="0.0" width="1920" height="1080"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fma-lw-0Pr" userLabel="Left View">
+                                        <rect key="frame" x="0.0" y="0.0" width="400" height="1080"/>
+                                        <subviews>
+                                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="66" sectionHeaderHeight="40" sectionFooterHeight="40" translatesAutoresizingMaskIntoConstraints="NO" id="dal-TX-haU">
+                                                <rect key="frame" x="0.0" y="0.0" width="400" height="1080"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                            </tableView>
+                                        </subviews>
+                                        <color key="backgroundColor" red="0.42786523699760437" green="0.10273886471986771" blue="0.38452368974685669" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="400" id="58K-Kc-wpm"/>
+                                            <constraint firstAttribute="trailing" secondItem="dal-TX-haU" secondAttribute="trailing" id="6RH-sE-jVI"/>
+                                            <constraint firstAttribute="bottom" secondItem="dal-TX-haU" secondAttribute="bottom" id="VZv-4a-xwN"/>
+                                            <constraint firstItem="dal-TX-haU" firstAttribute="top" secondItem="fma-lw-0Pr" secondAttribute="top" id="aqX-XB-lSl"/>
+                                            <constraint firstItem="dal-TX-haU" firstAttribute="leading" secondItem="fma-lw-0Pr" secondAttribute="leading" id="cEr-aY-IKH"/>
+                                        </constraints>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Aj4-Mp-3aN" userLabel="Right View">
+                                        <rect key="frame" x="420" y="0.0" width="1500" height="1080"/>
+                                        <subviews>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo_xebia_tv" translatesAutoresizingMaskIntoConstraints="NO" id="3Jg-WI-Sbf">
+                                                <rect key="frame" x="1091" y="40" width="369" height="100"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="369" id="FqP-vT-E5H"/>
+                                                    <constraint firstAttribute="height" constant="100" id="G9b-Pd-eSp"/>
+                                                </constraints>
+                                            </imageView>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="owi-kF-ccD" userLabel="Collection View Container" customClass="GradientView" customModule="XebiaTV" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="160" width="1500" height="920"/>
+                                                <subviews>
+                                                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="46s-MM-uq0">
+                                                        <rect key="frame" x="0.0" y="0.0" width="1500" height="920"/>
+                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="EQh-na-oCf">
+                                                            <size key="itemSize" width="50" height="50"/>
+                                                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                                        </collectionViewFlowLayout>
+                                                        <cells/>
+                                                    </collectionView>
+                                                </subviews>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="trailing" secondItem="46s-MM-uq0" secondAttribute="trailing" id="1TW-Wk-LNM"/>
+                                                    <constraint firstItem="46s-MM-uq0" firstAttribute="leading" secondItem="owi-kF-ccD" secondAttribute="leading" id="8Yu-3S-JnE"/>
+                                                    <constraint firstItem="46s-MM-uq0" firstAttribute="top" secondItem="owi-kF-ccD" secondAttribute="top" id="8vz-3G-Ke2"/>
+                                                    <constraint firstAttribute="bottom" secondItem="46s-MM-uq0" secondAttribute="bottom" id="wUY-yU-jCp"/>
+                                                </constraints>
+                                            </view>
+                                        </subviews>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="bottom" secondItem="owi-kF-ccD" secondAttribute="bottom" id="EI0-tr-gbk"/>
+                                            <constraint firstAttribute="trailing" secondItem="3Jg-WI-Sbf" secondAttribute="trailing" constant="40" id="Kfu-XV-kvA"/>
+                                            <constraint firstItem="owi-kF-ccD" firstAttribute="top" secondItem="3Jg-WI-Sbf" secondAttribute="bottom" constant="20" id="WwW-hv-wcV"/>
+                                            <constraint firstItem="owi-kF-ccD" firstAttribute="leading" secondItem="Aj4-Mp-3aN" secondAttribute="leading" id="ZVa-Ww-0Un"/>
+                                            <constraint firstAttribute="trailing" secondItem="owi-kF-ccD" secondAttribute="trailing" id="gAz-cR-z3E"/>
+                                            <constraint firstItem="3Jg-WI-Sbf" firstAttribute="top" secondItem="Aj4-Mp-3aN" secondAttribute="top" constant="40" id="tBQ-C3-8En"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" red="0.0" green="0.60527414083480835" blue="0.78467422723770142" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstItem="fma-lw-0Pr" firstAttribute="leading" secondItem="GQD-BB-Db3" secondAttribute="leading" id="5i3-4l-0c2"/>
+                                    <constraint firstAttribute="bottom" secondItem="fma-lw-0Pr" secondAttribute="bottom" id="GGX-ht-Y14"/>
+                                    <constraint firstAttribute="trailing" secondItem="Aj4-Mp-3aN" secondAttribute="trailing" id="Prp-u9-ZY0"/>
+                                    <constraint firstAttribute="bottom" secondItem="Aj4-Mp-3aN" secondAttribute="bottom" id="f5N-an-mCv"/>
+                                    <constraint firstItem="fma-lw-0Pr" firstAttribute="top" secondItem="GQD-BB-Db3" secondAttribute="top" id="kOm-DB-Dl5"/>
+                                    <constraint firstItem="Aj4-Mp-3aN" firstAttribute="top" secondItem="GQD-BB-Db3" secondAttribute="top" id="t0D-2b-Ps4"/>
+                                </constraints>
+                            </stackView>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="GQD-BB-Db3" firstAttribute="leading" secondItem="uft-wy-QKd" secondAttribute="leading" id="MjG-IZ-d9d"/>
+                            <constraint firstAttribute="trailing" secondItem="GQD-BB-Db3" secondAttribute="trailing" id="NRY-3s-W9a"/>
+                            <constraint firstAttribute="bottom" secondItem="GQD-BB-Db3" secondAttribute="bottom" id="hkP-Be-atL"/>
+                            <constraint firstItem="GQD-BB-Db3" firstAttribute="top" secondItem="ati-Mr-UlG" secondAttribute="bottom" id="zrL-DK-TCL"/>
+                        </constraints>
+                        <connections>
+                            <outlet property="collectionView" destination="46s-MM-uq0" id="3gC-MC-WVg"/>
+                            <outlet property="collectionViewContainer" destination="owi-kF-ccD" id="616-MC-SbA"/>
+                            <outlet property="collectionViewFlowLayout" destination="EQh-na-oCf" id="Wow-WK-0Rg"/>
+                            <outlet property="tableView" destination="dal-TX-haU" id="UPl-VJ-JFl"/>
+                        </connections>
+                    </view>
+                    <connections>
+                        <segue destination="Bi2-Nu-lOb" kind="show" identifier="ShowVideoPlayer" id="d9a-Tp-i9G"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="srl-96-9TH" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1059" y="451"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="logo_xebia_tv" width="369" height="100"/>
+    </resources>
+</document>
