@@ -23,20 +23,15 @@ struct Constants {
     }
     
     struct Endpoints {
-        
-#if DEBUG_ENVIRONMENT
-        static let BaseURL = "http://10.7.1.38:9000/"
-#elseif DEV_ENVIRONMENT
-        static let BaseURL = "https://lv-live-dev.xebia.fr/"
-        //static let BaseURL = "https://lv-live-dev.xebia.fr/"
-#elseif PREPROD_ENVIRONMENT
-        static let BaseURL = "https://lv-live-prp.xebia.fr/"
-#elseif RELEASE_ENVIRONMENT
-        static let BaseURL = "https://lv-live.xebia.fr/"
-#endif
-        
-        static let ApiBaseEndpoint = "api/"
-        static let ActivitiesEndpoint = ApiBaseEndpoint + "activities"
+        static let BaseURL = "https://xebiatv.herokuapp.com/"
+        static let YoutubeBaseURL = "https://www.googleapis.com/youtube/v3/"
+        static let CategoriesListEndpoint = "categories"
+        static let PlaylistItemsEndpoint = "playlistItems"
+    }
+    
+    struct MenuKeys {
+        static let CategoriesKey = "categories"
+        static let FundationsKey = "fundations"
     }
     
     struct ScreenSize {

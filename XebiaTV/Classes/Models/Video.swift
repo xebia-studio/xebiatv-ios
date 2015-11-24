@@ -6,28 +6,37 @@
 //  Copyright © 2015 Xebia. All rights reserved.
 //
 
-import UIKit
+import Foundation
 
-struct Video {
-
+struct Video: JSONJoy {
+    
     var thumbnailUrl:String?
     var videoMedium:String?
     var videoHD720:String?
     var videoSmall:String?
-    var length:NSInteger?
+    var length:String?
     var title:String?
     
-}
-
-extension Video:ArrowParsable {
+    internal init() {
+        
+    }
     
-    init(json: JSON) {
-        length <-- json.valueForKeyPath("moreInfo.length_seconds")
-        thumbnailUrl <-- json.valueForKeyPath("moreInfo.iurl")
-        title <-- json.valueForKeyPath("moreInfo.title")
-        videoMedium <-- json["medium"]
-        videoHD720 <-- json["hd720"]
-        videoSmall <-- json["small"]
+    internal init(parameters: NSDictionary) {
+        title = parameters["moreInfo.title"] as? String
+        length = parameters["moreInfo.length_seconds"] as? String
+        videoSmall = parameters["small"] as? String
+        videoHD720 = parameters["hd720"] as? String
+        videoMedium = parameters["medium"] as? String
+        thumbnailUrl = parameters["moreInfo.iurl"] as? String
+    }
+    
+    internal init(_ decoder: JSONDecoder) {
+        title = decoder["moreInfo.title"].string
+        length = decoder["moreInfo.length_seconds"].string
+        videoSmall = decoder["small"].string
+        videoHD720 = decoder["hd720"].string
+        videoMedium = decoder["medium"].string
+        thumbnailUrl = decoder["moreInfo.iurl"].string
     }
     
 }

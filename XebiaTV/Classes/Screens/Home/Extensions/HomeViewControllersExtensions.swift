@@ -18,7 +18,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource, UIColl
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.titles.count
+        return self.dataSource.count
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -36,7 +36,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource, UIColl
     private func homeCellAtIndexPath(indexPath:NSIndexPath) -> HomeCell {
         let view = self.view as! HomeView
         let cell = view.tableView.dequeueReusableCellWithIdentifier(HomeCell.reuseIdentifier(), forIndexPath: indexPath) as! HomeCell
-        cell.titleLabel.text = self.titles[indexPath.row]
+        cell.category = self.dataSource[indexPath.row]
         return cell
     }
     
@@ -70,9 +70,9 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource, UIColl
         let view = self.view as! HomeView
         let cell = view.collectionView.dequeueReusableCellWithReuseIdentifier(VideoCell.reuseIdentifier(), forIndexPath: indexPath) as! VideoCell
         
-        let videos = HCYoutubeParser.h264videosWithYoutubeURL(NSURL(string:"https://www.youtube.com/watch?v=kX9Xf0a5QiY")!)
-        let video = Video(json: videos)
-        cell.setup(video)
+        //let videos = HCYoutubeParser.h264videosWithYoutubeURL(NSURL(string:"https://www.youtube.com/watch?v=kX9Xf0a5QiY")!)
+        //let video = Video(parameters: videos)
+        //cell.setup(video)
         
         return cell
     }

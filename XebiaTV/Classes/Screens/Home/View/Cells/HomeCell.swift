@@ -11,5 +11,12 @@ import UIKit
 class HomeCell: AbstractTableViewCell {
 
     @IBOutlet weak var titleLabel:UILabel!
+ 
+    var category:CategoryProtocol? = nil {
+        didSet {
+            guard let category = category else { return }
+            self.titleLabel.text = category.name
+        }
+    }
     
 }

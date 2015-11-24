@@ -34,7 +34,8 @@ class VideoPlayerViewController: AVPlayerViewController {
         
         // AVPlayer Instance with NSURL
         let videos = HCYoutubeParser.h264videosWithYoutubeURL(NSURL(string:"https://www.youtube.com/watch?v=TxfXs7jOYgo")!)
-        print("Videos : \(videos)")
+        XBLog("Videos : \(videos)")
+        
         guard let url = videos["hd720"] as? String else { return }
         self.player = AVPlayer(URL: NSURL(string: url)!)
         self.player?.play()
