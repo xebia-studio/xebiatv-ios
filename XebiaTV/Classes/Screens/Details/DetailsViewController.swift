@@ -44,13 +44,7 @@ class DetailsViewController: UIViewController {
         //let effectiveWidth = view.collectionView.frame.width - view.collectionView.contentInset.left - view.collectionView.contentInset.right - view.collectionViewFlowLayout.minimumInteritemSpacing
         //let width = effectiveWidth / CGFloat(Constants.Configuration.NumCellsPerLine)
         //view.collectionViewFlowLayout.itemSize = CGSizeMake(width, width * 9 / 16)
-        //view.collectionViewFlowLayout.minimumInteritemSpacing = 100
-    }
-    
-    // MARK: - Actions
-    
-    @IBAction func handlePlay(sender:UIButton) {
-        self.performSegueWithIdentifier(Constants.Segues.ShowVideoPlayer, sender: nil)
+        view.collectionViewFlowLayout.minimumInteritemSpacing = 1000
     }
     
     // MARK: - Segues

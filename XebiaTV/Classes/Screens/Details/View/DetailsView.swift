@@ -27,7 +27,11 @@ class DetailsView: UIView {
         
         self.setupFocusGuide()
         
+        // Labels
+        self.titleLabel.font = UIFont.fontLight(70)
         self.titleLabel.textColor = UIColor.commonPurpleColor()
+        self.descriptionLabel.font = UIFont.fontRegular(30)
+        
         //self.playButton.setTitle("PLAY_TITLE".localized, forState: UIControlState.Normal)
     }
     

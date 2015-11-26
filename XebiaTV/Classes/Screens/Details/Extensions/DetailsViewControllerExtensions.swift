@@ -28,9 +28,9 @@ extension DetailsViewController: UICollectionViewDataSource, UICollectionViewDel
     
     // MARK: - UICollectionViewDelegateFlowLayout
     
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAtIndex section: Int) -> CGFloat {
+    /*func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAtIndex section: Int) -> CGFloat {
         return 100
-    }
+    }*/
     
     // MARK: - UICollectionView DataSource
     
