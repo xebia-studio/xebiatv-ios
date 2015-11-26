@@ -188,6 +188,10 @@
                                                     <segue destination="Bi2-Nu-lOb" kind="show" id="0Eh-7F-VI5"/>
                                                 </connections>
                                             </button>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ooq-KD-9yi" userLabel="Focus Transparent View">
+                                                <rect key="frame" x="0.0" y="590" width="1920" height="190"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                            </view>
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
@@ -195,13 +199,17 @@
                                             <constraint firstItem="RlW-SR-4TU" firstAttribute="trailing" secondItem="ubF-aR-UG7" secondAttribute="trailing" id="1Ha-sF-7iO"/>
                                             <constraint firstItem="c19-o7-Ge8" firstAttribute="leading" secondItem="Mni-ya-lMs" secondAttribute="leading" id="5yI-ZW-4hd"/>
                                             <constraint firstItem="Mni-ya-lMs" firstAttribute="leading" secondItem="ubF-aR-UG7" secondAttribute="trailing" constant="50" id="7Kw-B5-hTG"/>
+                                            <constraint firstAttribute="bottom" secondItem="Ooq-KD-9yi" secondAttribute="bottom" id="7QT-pu-sm1"/>
                                             <constraint firstAttribute="bottom" secondItem="c19-o7-Ge8" secondAttribute="bottom" constant="100" id="CEy-md-xP7"/>
+                                            <constraint firstItem="Ooq-KD-9yi" firstAttribute="leading" secondItem="mx3-Gg-kmp" secondAttribute="leading" id="Fxc-ob-G1w"/>
+                                            <constraint firstAttribute="trailing" secondItem="Ooq-KD-9yi" secondAttribute="trailing" id="LMG-Gc-bbL"/>
                                             <constraint firstItem="Mni-ya-lMs" firstAttribute="top" secondItem="mx3-Gg-kmp" secondAttribute="top" constant="100" id="WMZ-US-Ztx"/>
                                             <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="RlW-SR-4TU" secondAttribute="bottom" constant="50" id="Xqs-87-9vg"/>
                                             <constraint firstItem="ubF-aR-UG7" firstAttribute="top" secondItem="mx3-Gg-kmp" secondAttribute="top" constant="100" id="dNV-Yc-9kD"/>
                                             <constraint firstItem="RlW-SR-4TU" firstAttribute="leading" secondItem="ubF-aR-UG7" secondAttribute="leading" id="dRW-4w-6O3"/>
                                             <constraint firstAttribute="trailing" secondItem="Mni-ya-lMs" secondAttribute="trailing" constant="100" id="i4Y-hU-OA9"/>
                                             <constraint firstItem="RlW-SR-4TU" firstAttribute="top" secondItem="ubF-aR-UG7" secondAttribute="bottom" constant="50" id="xdy-aa-BKV"/>
+                                            <constraint firstItem="Ooq-KD-9yi" firstAttribute="top" secondItem="c19-o7-Ge8" secondAttribute="top" id="ylH-83-XsM"/>
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9kM-3m-GQA">
@@ -276,6 +284,7 @@
                             <outlet property="detailsImageView" destination="Mni-ya-lMs" id="GO2-pG-9o2"/>
                             <outlet property="playButton" destination="c19-o7-Ge8" id="D81-3J-qbS"/>
                             <outlet property="titleLabel" destination="ubF-aR-UG7" id="zjT-As-GEx"/>
+                            <outlet property="transparentFocusView" destination="Ooq-KD-9yi" id="jic-jx-Orl"/>
                         </connections>
                     </view>
                 </viewController>

@@ -22,11 +22,20 @@ class VideoPlayerViewController: AVPlayerViewController {
         }
     }
     
+    // MARK: - LifeCycle
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        let watermark = UIImageView(image: UIImage(named: "logo_xebia"))
+        self.contentOverlayView?.addSubview(watermark)
+    }
+    
     // MARK: - Data
     
     private func loadData() {
         guard let videoId = self.selectedVideo?.snippet?.resourceId?.videoId else { return }
-
+        
         // Categories request
         VideoDataAccess.retrieveVideoUrls(videoId)
             .success { [weak self] response -> Void in // Populate

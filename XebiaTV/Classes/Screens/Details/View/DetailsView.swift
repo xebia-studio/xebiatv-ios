@@ -15,6 +15,7 @@ class DetailsView: UIView {
     @IBOutlet weak var playButton:UIButton!
     @IBOutlet weak var descriptionLabel:UILabel!
     @IBOutlet weak var backgroundView:UIImageView!
+    @IBOutlet weak var transparentFocusView:UIView!
     @IBOutlet weak var detailsImageView:UIImageView!
     @IBOutlet weak var collectionView:UICollectionView!
     @IBOutlet weak var collectionViewFlowLayout:UICollectionViewFlowLayout!
@@ -24,8 +25,24 @@ class DetailsView: UIView {
     override func awakeFromNib() {
         super.awakeFromNib()
         
+        self.setupFocusGuide()
+        
         self.titleLabel.textColor = UIColor.commonPurpleColor()
         //self.playButton.setTitle("PLAY_TITLE".localized, forState: UIControlState.Normal)
+    }
+    
+    // MARK: - Focus
+    
+    private func setupFocusGuide() {
+        let topButtonFocusGuide = UIFocusGuide()
+        topButtonFocusGuide.preferredFocusedView = self.playButton
+        self.addLayoutGuide(topButtonFocusGuide)
+        self.addConstraints([
+            topButtonFocusGuide.topAnchor.constraintEqualToAnchor(self.transparentFocusView.topAnchor),
+            topButtonFocusGuide.bottomAnchor.constraintEqualToAnchor(self.transparentFocusView.bottomAnchor),
+            topButtonFocusGuide.leadingAnchor.constraintEqualToAnchor(self.transparentFocusView.leadingAnchor),
+            topButtonFocusGuide.widthAnchor.constraintEqualToAnchor(self.transparentFocusView.widthAnchor),
+        ])
     }
     
     // MARK: - Display
