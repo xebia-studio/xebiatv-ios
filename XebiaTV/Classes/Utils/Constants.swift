@@ -13,6 +13,7 @@ public typealias GenericJSON = [String: AnyObject]
 struct Constants {
     
     struct Segues {
+        static let ShowDetails = "ShowDetails"
         static let ShowVideoPlayer = "ShowVideoPlayer"
     }
     
@@ -22,11 +23,18 @@ struct Constants {
         static let VideoPlayerViewController = "VideoPlayerViewController"
     }
     
+    struct Configuration {
+        static let YoutubeAPIKey = "AIzaSyD6Q8VDZwz8KrJXQvKJ6n9_X5hoL34vkJg"
+        static let PrivateVideoKey = "Private video"
+        static let NumCellsPerLine = 3
+    }
+    
     struct Endpoints {
         static let BaseURL = "https://xebiatv.herokuapp.com/"
         static let YoutubeBaseURL = "https://www.googleapis.com/youtube/v3/"
-        static let CategoriesListEndpoint = "categories"
-        static let PlaylistItemsEndpoint = "playlistItems"
+        static let CategoriesListEndpoint = "categories/"
+        static let PlaylistItemsEndpoint = "playlistItems/"
+        static let VideoEndpoint = "video/"
     }
     
     struct MenuKeys {

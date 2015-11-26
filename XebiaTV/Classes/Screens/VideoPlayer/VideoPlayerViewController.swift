@@ -8,37 +8,46 @@
 
 import UIKit
 import AVKit
-import HCYoutubeParser
+import Async
 
 class VideoPlayerViewController: AVPlayerViewController {
 
-    // MARK: - Properties
+    // MARK: - Variables
     
-    let watermarkView:UIImageView = UIImageView(image: UIImage(named:"logo_xebia"))
+    var selectedVideo:Video? {
+        didSet {
+            if selectedVideo?.urls.count == 0 {
+                self.loadData()
+            }
+        }
+    }
+    
+    // MARK: - Data
+    
+    private func loadData() {
+        guard let videoId = self.selectedVideo?.snippet?.resourceId?.videoId else { return }
 
-    // MARK: - Lifecycle
-    
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        self.setVideoPlayer()
+        // Categories request
+        VideoDataAccess.retrieveVideoUrls(videoId)
+            .success { [weak self] response -> Void in // Populate
+                guard let strongSelf = self else { return }
+                strongSelf.selectedVideo?.urls = response
+                strongSelf.playVideo()
+            }
+            .failure { [weak self] (error, isCancelled) -> Void in
+                guard let strongSelf = self else { return }
+                //strongSelf.clearRefresh()
+        }
     }
     
     // MARK: - Video Player
     
-    func setVideoPlayer() {
-        // Overlay
-        self.watermarkView.frame = CGRectMake(50, 50, self.watermarkView.bounds.width, self.watermarkView.bounds.height)
-        self.watermarkView.alpha = 0.5
-        self.contentOverlayView?.addSubview(self.watermarkView)
-        
-        // AVPlayer Instance with NSURL
-        let videos = HCYoutubeParser.h264videosWithYoutubeURL(NSURL(string:"https://www.youtube.com/watch?v=TxfXs7jOYgo")!)
-        XBLog("Videos : \(videos)")
-        
-        guard let url = videos["hd720"] as? String else { return }
-        self.player = AVPlayer(URL: NSURL(string: url)!)
-        self.player?.play()
+    private func playVideo() {
+        Async.main {
+            guard let url = self.selectedVideo?.bestUrl?.url else { return }
+            self.player = AVPlayer(URL: NSURL(string: url)!)
+            self.player?.play()
+        }
     }
 
 }

@@ -11,13 +11,17 @@ import Async
 
 class HomeViewController: UIViewController {
 
-    //MARK: - Variables
+    // MARK: - Variables
     
-    internal var dataSource:[CategoryProtocol] = []
-    let numCellsPerLine = 2.0
-    let numVideos = 10
+    internal var menuDataSource:[CategoryProtocol] = []
+    internal var selectedBackgroundImage:UIImage?
+    internal var videosDataSource:[Video] = []
+    internal var selectedVideo:Video?
     
-    //MARK: - LifeCycle
+    let SpaceBetweenCells:CGFloat = 100
+    let SpaceBetweenLines:CGFloat = 50
+    
+    // MARK: - LifeCycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,12 +36,8 @@ class HomeViewController: UIViewController {
         // UICollectionView
         view.collectionView.delegate = self
         view.collectionView.dataSource = self
-        view.collectionView.contentInset = UIEdgeInsetsMake(30, 100, 100, 100)
+        view.collectionView.contentInset = UIEdgeInsetsMake(30, SpaceBetweenCells, SpaceBetweenCells, SpaceBetweenCells)
         view.collectionView.registerNib(VideoCell.nib(), forCellWithReuseIdentifier: VideoCell.reuseIdentifier())
-        
-        //UICollectionViewFlowLayout
-        view.collectionViewFlowLayout.minimumInteritemSpacing = 100
-        view.collectionViewFlowLayout.minimumLineSpacing = 50
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -46,7 +46,7 @@ class HomeViewController: UIViewController {
         self.loadData()
     }
     
-    //MARK: - Categories Data
+    // MARK: - Categories Data
     
     private func loadData() {
         // Categories request
@@ -63,19 +63,25 @@ class HomeViewController: UIViewController {
     
     private func populateData(categories:[CategoryProtocol]) {
         Async.main {
-            self.dataSource = categories
+            self.menuDataSource = categories
             self.refreshTableView()
         }
     }
     
-    //MARK: - Playlist Data
+    // MARK: - Playlist Data
     
-    private func loadPlaylistData() {
+    internal func loadPlaylistData(playlistId:String) {
         // Playlist request
-        CategoriesDataAccess.retrieveCategories()
+        var parameters = GenericJSON()
+        parameters["part"] = "snippet"
+        parameters["key"] = Constants.Configuration.YoutubeAPIKey
+        parameters["playlistId"] = playlistId
+        parameters["maxResults"] = 50
+        
+        PlaylistDataAccess.retrieveVideos(parameters)
             .success { [weak self] response -> Void in // Populate
                 guard let strongSelf = self else { return }
-                strongSelf.populateData(response.categories)
+                strongSelf.populatePlaylistData(response)
             }
             .failure { [weak self] (error, isCancelled) -> Void in
                 guard let strongSelf = self else { return }
@@ -83,10 +89,10 @@ class HomeViewController: UIViewController {
         }
     }
     
-    private func populatePlaylistData(categories:[CategoryProtocol]) {
+    private func populatePlaylistData(videos:[Video]) {
         Async.main {
-            self.dataSource = categories
-            self.refreshTableView()
+            self.videosDataSource = videos
+            self.refreshCollectionView()
         }
     }
     
@@ -98,9 +104,24 @@ class HomeViewController: UIViewController {
         //view.showTableView()
     }
     
+    private func refreshCollectionView() {
+        let view = self.view as! HomeView
+        view.collectionView.reloadData()
+        //view.showCollectionView()
+    }
+    
     private func clearRefresh() {
         //let view = self.view as! HomeView
         //view.showErrorMessage()
+    }
+    
+    // MARK: - Segues
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        guard let viewController = segue.destinationViewController as? DetailsViewController where segue.identifier == Constants.Segues.ShowDetails else { return }
+        viewController.dataSource = self.videosDataSource
+        viewController.selectedVideo = self.selectedVideo
+        viewController.selectedVideoImage = self.selectedBackgroundImage
     }
     
 }

@@ -8,35 +8,161 @@
 
 import Foundation
 
-struct Video: JSONJoy {
+enum ThumbnailType: String {
+    case Default = "default"
+    case High = "high"
+    case MaxRes = "maxres"
+    case Medium = "medium"
+    case Standard = "standard"
+}
+
+enum QualityType: String {
+    case Best = "best"
+    case HD720 = "720p"
+    case Medium = "360p"
+    case Small = "240p"
+    case Low = "144p"
+    case Worst = "worst"
+}
+
+struct Thumbnail: JSONJoy {
     
-    var thumbnailUrl:String?
-    var videoMedium:String?
-    var videoHD720:String?
-    var videoSmall:String?
-    var length:String?
-    var title:String?
+    var url:String?
+    var width:NSInteger?
+    var height:NSInteger?
+    var type:ThumbnailType?
     
-    internal init() {
-        
-    }
-    
-    internal init(parameters: NSDictionary) {
-        title = parameters["moreInfo.title"] as? String
-        length = parameters["moreInfo.length_seconds"] as? String
-        videoSmall = parameters["small"] as? String
-        videoHD720 = parameters["hd720"] as? String
-        videoMedium = parameters["medium"] as? String
-        thumbnailUrl = parameters["moreInfo.iurl"] as? String
+    var urlString:String {
+        return (url != nil) ? String(url!) : ""
     }
     
     internal init(_ decoder: JSONDecoder) {
-        title = decoder["moreInfo.title"].string
-        length = decoder["moreInfo.length_seconds"].string
-        videoSmall = decoder["small"].string
-        videoHD720 = decoder["hd720"].string
-        videoMedium = decoder["medium"].string
-        thumbnailUrl = decoder["moreInfo.iurl"].string
+        
+        url = decoder["url"].string
+        width = decoder["width"].integer
+        height = decoder["height"].integer
+        
+    }
+}
+
+struct VideoResource: JSONJoy {
+    
+    var url:String?
+    var type:String?
+    var quality:String?
+    
+    var urlString:String {
+        return (url != nil) ? String(url!) : ""
+    }
+    
+    internal init(_ decoder: JSONDecoder) {
+        
+        url = decoder["url"].string
+        type = decoder["type"].string
+        quality = decoder["quality"].string
+        
+    }
+}
+
+struct Resource: JSONJoy {
+    
+    var kind:String?
+    var videoId:String?
+   
+    internal init(_ decoder: JSONDecoder) {
+        
+        kind = decoder["kind"].string
+        videoId = decoder["videoId"].string
+        
+    }
+}
+
+struct Snippet: JSONJoy {
+
+    var title:String?
+    var channelId:String?
+    var playlistId:String?
+    var position:NSInteger?
+    var publishedAt:String?
+    var description:String?
+    var channelTitle:String?
+    var resourceId:Resource?
+    var thumbnails:Array<Thumbnail> = []
+    
+    var bestThumbnail:Thumbnail? {
+        
+        if thumbnails.count == 0 {
+            return nil
+        }
+        
+        var selectedThumbnail = thumbnails[0]
+        let thumbnailsOrder:Array<ThumbnailType> = [.Default, .Medium, .High, .Standard, .MaxRes]
+        
+        for thumbnail in thumbnails {
+            guard let thumbType = thumbnail.type, currentThumbType = selectedThumbnail.type else { continue }
+            if thumbnailsOrder.indexOf(thumbType) > thumbnailsOrder.indexOf(currentThumbType) {
+                selectedThumbnail = thumbnail
+            }
+        }
+        
+        return selectedThumbnail
+    }
+    
+    internal init(_ decoder: JSONDecoder) {
+        title = decoder["title"].string
+        position = decoder["position"].integer
+        channelId = decoder["channelId"].string
+        playlistId = decoder["playlistId"].string
+        publishedAt = decoder["publishedAt"].string
+        description = decoder["description"].string
+        channelTitle = decoder["channelTitle"].string
+        channelId = decoder["channelId"].string
+        resourceId = Resource(decoder["resourceId"])
+        
+        // Thumbnails
+        guard let thumbs = decoder["thumbnails"].dictionary else {
+            return
+        }
+        
+        thumbnails = Array<Thumbnail>()
+        for thumbnailDecoder in thumbs {
+            var thumbnail = Thumbnail(thumbnailDecoder.1)
+            thumbnail.type = ThumbnailType(rawValue: thumbnailDecoder.0)
+            thumbnails.append(thumbnail)
+        }
+    }
+    
+}
+
+struct Video: JSONJoy {
+
+    var id:String?
+    var etag:String?
+    var snippet:Snippet?
+    var urls:Array<VideoResource> = []
+    
+    var bestUrl:VideoResource? {
+        if urls.count == 0 {
+            return nil
+        }
+        
+        var selectedUrl = urls[0]
+        let urlsOrder:Array<QualityType> = [.Worst, .Low, .Small, .Medium, .HD720, .Best]
+        
+        for url in urls {
+            guard let urlType = QualityType(rawValue: url.quality!), currentUrlType = QualityType(rawValue: selectedUrl.quality!) else { continue }
+            if urlsOrder.indexOf(urlType) > urlsOrder.indexOf(currentUrlType) {
+                selectedUrl = url
+            }
+        }
+        
+        return selectedUrl
+    }
+
+    internal init(_ decoder: JSONDecoder) {
+        id = decoder["id"].string
+        etag = decoder["etag"].string
+        snippet = Snippet(decoder["snippet"])
     }
     
 }

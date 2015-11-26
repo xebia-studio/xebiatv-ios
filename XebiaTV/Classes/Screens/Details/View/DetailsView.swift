@@ -1,0 +1,52 @@
+//
+//  DetailsView.swift
+//  XebiaTV
+//
+//  Created by Fabien Mirault on 26/11/2015.
+//  Copyright © 2015 Xebia. All rights reserved.
+//
+
+import UIKit
+import Async
+
+class DetailsView: UIView {
+
+    @IBOutlet weak var titleLabel:UILabel!
+    @IBOutlet weak var playButton:UIButton!
+    @IBOutlet weak var descriptionLabel:UILabel!
+    @IBOutlet weak var backgroundView:UIImageView!
+    @IBOutlet weak var detailsImageView:UIImageView!
+    @IBOutlet weak var collectionView:UICollectionView!
+    @IBOutlet weak var collectionViewFlowLayout:UICollectionViewFlowLayout!
+    
+    // MARK: - LifeCycle
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        
+        self.titleLabel.textColor = UIColor.commonPurpleColor()
+        //self.playButton.setTitle("PLAY_TITLE".localized, forState: UIControlState.Normal)
+    }
+    
+    // MARK: - Display
+    
+    func updateDisplay(video:Video?) {
+        guard let video = video else { return }
+        
+        self.titleLabel.text = video.snippet?.title
+        self.descriptionLabel.text = video.snippet?.description
+    }
+    
+    func setImage(image:UIImage?) {
+        guard let image = image else { return }
+        
+        UIView.transitionWithView(self.backgroundView, duration: 0.25, options: UIViewAnimationOptions.TransitionCrossDissolve, animations: {
+                self.backgroundView.image = image
+            }, completion: nil)
+        
+        UIView.transitionWithView(self.detailsImageView, duration: 0.25, options: UIViewAnimationOptions.TransitionCrossDissolve, animations: {
+            self.detailsImageView.image = image
+            }, completion: nil)
+    }
+    
+}

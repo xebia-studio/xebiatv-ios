@@ -13,7 +13,7 @@ typealias WSRequestTask = Task<Progress, NSData, ErrorType>
 
 protocol WSClientProtocol  {
     
-    static func requestContent(method:Alamofire.Method, urlRequest: NSMutableURLRequest, parameters: GenericJSON?, cached:Bool?, encoding: ParameterEncoding) -> WSRequestTask
+    static func requestContent(method:Alamofire.Method, urlRequest: NSMutableURLRequest, parameters: GenericJSON?, encoding: ParameterEncoding) -> WSRequestTask
     
 }
 

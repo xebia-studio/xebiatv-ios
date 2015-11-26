@@ -7,9 +7,8 @@
 //
 
 import UIKit
-import HCYoutubeParser
 
-extension HomeViewController: UITableViewDelegate, UITableViewDataSource, UICollectionViewDataSource, UICollectionViewDelegate {
+extension HomeViewController: UITableViewDelegate, UITableViewDataSource, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     
     // MARK: UITableView DataSource
     
@@ -18,7 +17,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource, UIColl
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.dataSource.count
+        return self.menuDataSource.count
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -31,33 +30,51 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource, UIColl
         return HomeCell.cellHeight()
     }
     
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        let item = self.menuDataSource[indexPath.row]
+        self.loadPlaylistData(item.idString)
+    }
+    
     // MARK: - Cell
     
     private func homeCellAtIndexPath(indexPath:NSIndexPath) -> HomeCell {
         let view = self.view as! HomeView
         let cell = view.tableView.dequeueReusableCellWithIdentifier(HomeCell.reuseIdentifier(), forIndexPath: indexPath) as! HomeCell
-        cell.category = self.dataSource[indexPath.row]
+        cell.category = self.menuDataSource[indexPath.row]
         return cell
     }
     
     // MARK: - UICollectionView Delegate
     
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-        let view = self.view as! HomeView
-        let effectiveWidth = collectionView.frame.width - collectionView.contentInset.left - collectionView.contentInset.right - view.collectionViewFlowLayout.minimumInteritemSpacing
-        let width = effectiveWidth / CGFloat(self.numCellsPerLine)
+        let effectiveWidth = collectionView.frame.width - collectionView.contentInset.left - collectionView.contentInset.right - (CGFloat(Constants.Configuration.NumCellsPerLine - 1) * SpaceBetweenCells)
+        let width = effectiveWidth / CGFloat(Constants.Configuration.NumCellsPerLine)
         return CGSizeMake(width, width * 9 / 16)
     }
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         collectionView.remembersLastFocusedIndexPath = true
-        self.performSegueWithIdentifier(Constants.Segues.ShowVideoPlayer, sender: nil)
+        
+        let cell = collectionView.cellForItemAtIndexPath(indexPath) as! VideoCell
+        self.selectedBackgroundImage = cell.videoImageView.image
+        self.selectedVideo = self.videosDataSource[indexPath.item]
+        self.performSegueWithIdentifier(Constants.Segues.ShowDetails, sender: nil)
     }
     
+    // MARK: - UICollectionViewDelegateFlowLayout
+    
+    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAtIndex section: Int) -> CGFloat {
+        return SpaceBetweenCells
+    }
+    
+    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAtIndex section: Int) -> CGFloat {
+        return SpaceBetweenLines
+    }
+
     // MARK: - UICollectionView DataSource
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
+        return self.videosDataSource.count
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
@@ -69,10 +86,8 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource, UIColl
     private func videoCellAtIndexPath(indexPath:NSIndexPath) -> VideoCell {
         let view = self.view as! HomeView
         let cell = view.collectionView.dequeueReusableCellWithReuseIdentifier(VideoCell.reuseIdentifier(), forIndexPath: indexPath) as! VideoCell
-        
-        //let videos = HCYoutubeParser.h264videosWithYoutubeURL(NSURL(string:"https://www.youtube.com/watch?v=kX9Xf0a5QiY")!)
-        //let video = Video(parameters: videos)
-        //cell.setup(video)
+        let video = self.videosDataSource[indexPath.item]
+        cell.setup(video)
         
         return cell
     }

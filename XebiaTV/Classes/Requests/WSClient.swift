@@ -16,7 +16,7 @@ public class WSClient: WSClientProtocol {
     
     // MARK: Content
     
-    static func requestContent(method:Alamofire.Method, urlRequest: NSMutableURLRequest, parameters: [String: AnyObject]? = nil, cached:Bool? = false, encoding: ParameterEncoding = .JSON) -> WSRequestTask {
+    static func requestContent(method:Alamofire.Method, urlRequest: NSMutableURLRequest, parameters: [String: AnyObject]? = nil, encoding: ParameterEncoding = .JSON) -> WSRequestTask {
         
         // Update Manager
         self.updateManager(urlRequest)

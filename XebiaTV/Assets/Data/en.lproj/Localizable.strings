@@ -1,0 +1,10 @@
+/* 
+  Localizable.strings
+  XebiaTV
+
+  Created by Fabien Mirault on 26/11/2015.
+  Copyright © 2015 Xebia. All rights reserved.
+*/
+
+// Details
+"PLAY_TITLE" = "Play";

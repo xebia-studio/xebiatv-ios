@@ -14,3 +14,11 @@ protocol CategoryProtocol: JSONJoy  {
     var name:String?  { get set }
     
 }
+
+extension CategoryProtocol {
+    
+    var idString:String {
+        return (id != nil) ? String(id!) : ""
+    }
+    
+}

@@ -68,6 +68,13 @@ public extension UIColor {
         return UIColor(red: (redColor / 255.0), green: (greenColor / 255.0), blue: (blueColor / 255.0), alpha: alpha)
     }
     
+    class func commonOrangeColor(alpha:CGFloat = 1.0) -> UIColor {
+        let redColor:CGFloat = 248.0
+        let greenColor:CGFloat = 150.0
+        let blueColor:CGFloat = 65.0
+        return UIColor(red: (redColor / 255.0), green: (greenColor / 255.0), blue: (blueColor / 255.0), alpha: alpha)
+    }
+    
     class func randomColor() -> UIColor {
         let r = randomCGFloat()
         let g = randomCGFloat()
