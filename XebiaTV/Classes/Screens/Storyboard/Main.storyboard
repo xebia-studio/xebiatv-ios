@@ -176,14 +176,14 @@
                                                     <constraint firstAttribute="width" constant="640" id="jaI-4k-wMT"/>
                                                 </constraints>
                                             </imageView>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="c19-o7-Ge8" userLabel="Play button">
-                                                <rect key="frame" x="1180" y="510" width="170" height="90"/>
+                                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="c19-o7-Ge8" userLabel="Play button">
+                                                <rect key="frame" x="1228" y="525" width="205" height="100"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="width" constant="170" id="4CL-1O-PmD"/>
-                                                    <constraint firstAttribute="height" constant="90" id="n7K-B7-f18"/>
+                                                    <constraint firstAttribute="width" constant="300" id="4CL-1O-PmD"/>
+                                                    <constraint firstAttribute="height" constant="130" id="n7K-B7-f18"/>
                                                 </constraints>
-                                                <inset key="contentEdgeInsets" minX="40" minY="20" maxX="40" maxY="20"/>
-                                                <inset key="titleEdgeInsets" minX="0.0" minY="90" maxX="0.0" maxY="0.0"/>
+                                                <inset key="titleEdgeInsets" minX="0.0" minY="140" maxX="0.0" maxY="0.0"/>
+                                                <state key="normal" title="Play"/>
                                                 <connections>
                                                     <segue destination="Bi2-Nu-lOb" kind="show" id="0Eh-7F-VI5"/>
                                                 </connections>

@@ -6,3 +6,4 @@ pod 'Alamofire'
 pod 'AsyncSwift'
 pod 'Crashlytics'
 pod 'Fabric'
+pod 'Reveal-tvOS-SDK', :configurations => ['Debug']

@@ -4,20 +4,20 @@ PODS:
   - Crashlytics (3.4.1):
     - Fabric (~> 1.6.0)
   - Fabric (1.6.1)
-  - HCYoutubeParser (0.0.4)
+  - Reveal-tvOS-SDK (1.6.2)
 
 DEPENDENCIES:
   - Alamofire
   - AsyncSwift
   - Crashlytics
   - Fabric
-  - HCYoutubeParser
+  - Reveal-tvOS-SDK
 
 SPEC CHECKSUMS:
   Alamofire: 7c16ca65f3c7e681fd925fd7f2dec7747ff96855
   AsyncSwift: 3c90beed237324f1b57e1f1c414dc5501985d208
   Crashlytics: 41574a245bc6ae10c55d57f385ebd2004e5bee05
   Fabric: bf0ceb04e7c924090efc5f8c55e4fbcca189e0a0
-  HCYoutubeParser: 490db7db2997a293ace484a5d63419b3b053d95f
+  Reveal-tvOS-SDK: acb8ac785e0b1426b2f275fb67f12b54632540ee
 
 COCOAPODS: 0.39.0.rc.1
