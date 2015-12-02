@@ -36,15 +36,8 @@ class DetailsViewController: UIViewController {
         // UICollectionView
         view.collectionView.delegate = self
         view.collectionView.dataSource = self
-        view.collectionView.contentInset = UIEdgeInsetsMake(10, 50, 10, 50)
+        view.collectionView.contentInset = UIEdgeInsetsMake(50, 50, 50, 50)
         view.collectionView.registerNib(VideoCell.nib(), forCellWithReuseIdentifier: VideoCell.reuseIdentifier())
-        
-        // UICollectionViewFlowLayout
-
-        //let effectiveWidth = view.collectionView.frame.width - view.collectionView.contentInset.left - view.collectionView.contentInset.right - view.collectionViewFlowLayout.minimumInteritemSpacing
-        //let width = effectiveWidth / CGFloat(Constants.Configuration.NumCellsPerLine)
-        //view.collectionViewFlowLayout.itemSize = CGSizeMake(width, width * 9 / 16)
-        view.collectionViewFlowLayout.minimumInteritemSpacing = 1000
     }
     
     // MARK: - Segues
