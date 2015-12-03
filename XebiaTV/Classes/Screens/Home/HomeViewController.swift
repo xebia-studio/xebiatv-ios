@@ -13,36 +13,19 @@ class HomeViewController: UIViewController {
 
     // MARK: - Variables
     
+    internal var collectionViews:[UICollectionView] = []
     internal var menuDataSource:[CategoryProtocol] = []
-    internal var selectedCategory:CategoryProtocol?
+    internal var selectedIndex:NSInteger = NSIntegerMax
     internal var selectedBackgroundImage:UIImage?
-    internal var videosDataSource:[Video] = []
+    internal var videosDataSource:[[Video]] = []
     internal var selectedVideo:Video?
     
-    let SpaceBetweenCells:CGFloat = 100
-    let SpaceBetweenLines:CGFloat = 50
+    let spaceBetweenCells:CGFloat = 100
     
     // MARK: - LifeCycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        // UITableView
-        let view = self.view as! HomeView
-        view.tableView.delegate = self
-        view.tableView.dataSource = self
-        view.tableView.contentInset = UIEdgeInsetsMake(100, 0, 100, 0)
-        view.tableView.registerNib(HomeCell.nib(), forCellReuseIdentifier: HomeCell.reuseIdentifier())
-
-        // UICollectionView
-        view.collectionView.delegate = self
-        view.collectionView.dataSource = self
-        view.collectionView.contentInset = UIEdgeInsetsMake(30, SpaceBetweenCells, SpaceBetweenCells, SpaceBetweenCells)
-        view.collectionView.registerNib(VideoCell.nib(), forCellWithReuseIdentifier: VideoCell.reuseIdentifier())
-    }
-    
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
         
         self.loadData()
     }
@@ -65,13 +48,66 @@ class HomeViewController: UIViewController {
     private func populateData(categories:[CategoryProtocol]) {
         Async.main {
             self.menuDataSource = categories
-            self.refreshTableView()
+            
+            let view = self.view as! HomeView
+            var refView = view.scrollViewContent
+            var index = 0
+            for category in categories {
+                // Label
+                let titleLabel = UILabel()
+                titleLabel.backgroundColor = UIColor.clearColor()
+                titleLabel.text = category.name
+                titleLabel.font = UIFont.fontLight(50)
+                titleLabel.textColor = UIColor.commonPurpleColor()
+                view.scrollViewContent.addSubview(titleLabel)
+                
+                if refView == view.scrollViewContent {
+                    constrain(titleLabel, refView) { titleLabel, refView in
+                        titleLabel.top == refView.top + 50
+                        titleLabel.leading == refView.leading + 50
+                    }
+                } else {
+                    constrain(titleLabel, refView) { titleLabel, refView in
+                        titleLabel.top == refView.bottom + 50
+                        titleLabel.leading == refView.leading + 50
+                    }
+                }
+                
+                let collectionViewFlowLayout = UICollectionViewFlowLayout()
+                collectionViewFlowLayout.scrollDirection = .Horizontal
+                
+                let collectionView = UICollectionView(frame: CGRect.null, collectionViewLayout: collectionViewFlowLayout)
+                collectionView.contentInset = UIEdgeInsetsMake(50, self.spaceBetweenCells, self.spaceBetweenCells, self.spaceBetweenCells)
+                collectionView.delegate = self
+                collectionView.dataSource = self
+                collectionView.registerNib(VideoCell.nib(), forCellWithReuseIdentifier: VideoCell.reuseIdentifier())
+                collectionView.backgroundColor = UIColor.clearColor()
+                view.scrollViewContent.addSubview(collectionView)
+                
+                self.collectionViews.append(collectionView)
+                
+                constrain(collectionView, titleLabel, view) { collectionView, titleLabel, view in
+                    collectionView.top == titleLabel.bottom + 20
+                    collectionView.leading == titleLabel.leading - 50
+                    collectionView.trailing == view.trailing
+                    collectionView.height == 450
+                }
+                
+                self.videosDataSource.append([])
+                
+                if index == 0 {
+                    self.loadPlaylistData(index, playlistId: category.idString)
+                }
+                
+                refView = collectionView
+                index++
+            }
         }
     }
     
     // MARK: - Playlist Data
     
-    internal func loadPlaylistData(playlistId:String) {
+    internal func loadPlaylistData(index:NSInteger, playlistId:String) {
         // Playlist request
         var parameters = GenericJSON()
         parameters["part"] = "snippet"
@@ -82,34 +118,28 @@ class HomeViewController: UIViewController {
         PlaylistDataAccess.retrieveVideos(parameters)
             .success { [weak self] response -> Void in // Populate
                 guard let strongSelf = self else { return }
-                strongSelf.populatePlaylistData(response)
+                strongSelf.populatePlaylistData(index, videos: response)
+                
+                let nextIndex = index + 1
+                if strongSelf.menuDataSource.count > nextIndex {
+                    let category = strongSelf.menuDataSource[nextIndex]
+                    strongSelf.loadPlaylistData(nextIndex, playlistId: category.idString)
+                }
             }
-            .failure { [weak self] (error, isCancelled) -> Void in
-                guard let strongSelf = self else { return }
-                strongSelf.clearRefresh()
+            .failure { /*[weak self]*/ (error, isCancelled) -> Void in
+                //guard let strongSelf = self else { return }
+                //strongSelf.clearRefresh()
         }
     }
     
-    private func populatePlaylistData(videos:[Video]) {
+    private func populatePlaylistData(index:NSInteger, videos:[Video]) {
         Async.main {
-            self.videosDataSource = videos
-            self.refreshCollectionView()
+            self.videosDataSource[index] = videos
+            self.collectionViews[index].reloadData()
         }
     }
     
     // MARK: - Display
-    
-    private func refreshTableView() {
-        let view = self.view as! HomeView
-        view.tableView.reloadData()
-        //view.showTableView()
-    }
-    
-    private func refreshCollectionView() {
-        let view = self.view as! HomeView
-        view.collectionView.reloadData()
-        //view.showCollectionView()
-    }
     
     private func clearRefresh() {
         //let view = self.view as! HomeView
@@ -120,10 +150,14 @@ class HomeViewController: UIViewController {
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         guard let viewController = segue.destinationViewController as? DetailsViewController where segue.identifier == Constants.Segues.ShowDetails else { return }
+        
         viewController.selectedVideo = self.selectedVideo
-        viewController.selectedCategory = self.selectedCategory
         viewController.selectedVideoImage = self.selectedBackgroundImage
-        viewController.dataSource = self.videosDataSource
+        
+        if self.menuDataSource.count > self.selectedIndex {
+            viewController.dataSource = self.videosDataSource[self.selectedIndex]
+            viewController.selectedCategory = self.menuDataSource[self.selectedIndex]
+        }
     }
     
 }

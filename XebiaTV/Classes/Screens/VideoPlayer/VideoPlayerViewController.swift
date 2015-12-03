@@ -55,8 +55,8 @@ class VideoPlayerViewController: AVPlayerViewController {
                 strongSelf.selectedVideo?.urls = response
                 strongSelf.playVideo()
             }
-            .failure { [weak self] (error, isCancelled) -> Void in
-                guard let strongSelf = self else { return }
+            .failure { /*[weak self]*/ (error, isCancelled) -> Void in
+                //guard let strongSelf = self else { return }
                 //strongSelf.clearRefresh()
         }
     }

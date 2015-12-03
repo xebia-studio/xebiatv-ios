@@ -10,9 +10,13 @@ import UIKit
 
 class HomeView: UIView {
 
-    @IBOutlet weak var tableView:UITableView!
-    @IBOutlet weak var collectionViewContainer:UIView!
-    @IBOutlet weak var collectionView:UICollectionView!
-    @IBOutlet weak var collectionViewFlowLayout:UICollectionViewFlowLayout!
+    @IBOutlet weak var scrollView:UIScrollView!
+    @IBOutlet weak var scrollViewContent:UIView!
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        
+        self.scrollView.panGestureRecognizer.allowedTouchTypes = [NSNumber(integer: UITouchType.Indirect.rawValue)]
+    }
     
 }
