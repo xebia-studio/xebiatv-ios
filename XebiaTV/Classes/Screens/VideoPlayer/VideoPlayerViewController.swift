@@ -12,8 +12,13 @@ import Async
 
 class VideoPlayerViewController: AVPlayerViewController {
 
+    // MARK: - Constants
+    
+    let watermarkOffset:CGFloat = 50.0
+    
     // MARK: - Variables
     
+    private var watermarkView:UIImageView?
     var selectedVideo:Video? {
         didSet {
             if selectedVideo?.urls.count == 0 {
@@ -24,11 +29,18 @@ class VideoPlayerViewController: AVPlayerViewController {
     
     // MARK: - LifeCycle
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
         
-        let watermark = UIImageView(image: UIImage(named: "logo_xebia"))
-        self.contentOverlayView?.addSubview(watermark)
+        self.watermarkView = UIImageView(image: UIImage(named: "logo_xebia"))
+        self.watermarkView?.alpha = 0
+        
+        guard let watermarkView = self.watermarkView, contentOverlayView = self.contentOverlayView else { return }
+        self.contentOverlayView?.addSubview(watermarkView)
+        watermarkView.frame = CGRectMake(contentOverlayView.frame.width - watermarkView.bounds.width - watermarkOffset, contentOverlayView.frame.height - watermarkView.bounds.height - watermarkOffset, watermarkView.bounds.width, watermarkView.bounds.height)
+        UIView.animateWithDuration(0.25, animations: {
+            watermarkView.alpha = 0.75
+        })
     }
     
     // MARK: - Data
