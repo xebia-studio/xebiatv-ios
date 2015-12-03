@@ -31,8 +31,9 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource, UIColl
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let item = self.menuDataSource[indexPath.row]
-        self.loadPlaylistData(item.idString)
+        let category = self.menuDataSource[indexPath.row]
+        self.selectedCategory = category
+        self.loadPlaylistData(category.idString)
     }
     
     // MARK: - Cell

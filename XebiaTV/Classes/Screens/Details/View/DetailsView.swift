@@ -11,9 +11,15 @@ import Async
 
 class DetailsView: UIView {
 
+    // MARK: - IBOutlets
+    
     @IBOutlet weak var titleLabel:UILabel!
     @IBOutlet weak var playButton:UIButton!
+    @IBOutlet weak var categoryLabel:UILabel!
+    @IBOutlet weak var moreInfoButton:UIButton!
+    @IBOutlet weak var buttonsContainer:UIView!
     @IBOutlet weak var descriptionLabel:UILabel!
+    @IBOutlet weak var relatedVideosLabel:UILabel!
     @IBOutlet weak var backgroundView:UIImageView!
     @IBOutlet weak var transparentFocusView:UIView!
     @IBOutlet weak var detailsImageView:UIImageView!
@@ -28,20 +34,25 @@ class DetailsView: UIView {
         self.setupFocusGuide()
         
         // Labels
-        self.titleLabel.font = UIFont.fontLight(70)
+        self.titleLabel.font = UIFont.fontLight(60)
         self.titleLabel.textColor = UIColor.commonPurpleColor()
         self.descriptionLabel.font = UIFont.fontRegular(30)
+        self.categoryLabel.font = UIFont.fontLight(30)
+        self.categoryLabel.textColor = UIColor.commonPurpleColor()
+        self.relatedVideosLabel.font = UIFont.fontRegular(30)
+        self.relatedVideosLabel.text = "RELATED_VIDEOS".localized
+        self.relatedVideosLabel.textColor = UIColor.commonPurpleColor()
      
         // Buttons
-        self.playButton.setImage(UIImage(named: "IconPlay"), forState: UIControlState.Normal)
-        self.playButton.setTitle("PLAY_TITLE".localized, forState: UIControlState.Normal)
+        //self.playButton.setImage(UIImage(named: "IconPlay"), forState: UIControlState.Normal)
+        //self.playButton.setTitle("PLAY_TITLE".localized, forState: UIControlState.Normal)
     }
     
     // MARK: - Focus
     
     private func setupFocusGuide() {
         let topButtonFocusGuide = UIFocusGuide()
-        topButtonFocusGuide.preferredFocusedView = self.playButton
+        topButtonFocusGuide.preferredFocusedView = self.buttonsContainer
         self.addLayoutGuide(topButtonFocusGuide)
         self.addConstraints([
             topButtonFocusGuide.topAnchor.constraintEqualToAnchor(self.transparentFocusView.topAnchor),
@@ -58,6 +69,15 @@ class DetailsView: UIView {
         
         self.titleLabel.text = video.snippet?.title
         self.descriptionLabel.text = video.snippet?.description
+    }
+    
+    func setCategory(category:String?) {
+        guard let category = category else {
+            self.categoryLabel.text = nil
+            return
+        }
+        
+        self.categoryLabel.text = "#\(category.capitalizedString.removeWhitespace())"
     }
     
     func setImage(image:UIImage?) {

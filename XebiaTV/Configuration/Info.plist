@@ -20,11 +20,6 @@
 	<string>????</string>
 	<key>CFBundleVersion</key>
 	<string>1</string>
-	<key>UIAppFonts</key>
-	<array>
-		<string>Lato-Light.ttf</string>
-		<string>Lato-Regular.ttf</string>
-	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSAppTransportSecurity</key>
@@ -32,6 +27,14 @@
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>
 	</dict>
+	<key>UIAppFonts</key>
+	<array>
+		<string>Lato-Light.ttf</string>
+		<string>Lato-Medium.ttf</string>
+		<string>Lato-Regular.ttf</string>
+		<string>Lato-Semibold.ttf</string>
+		<string>Lato-Thin.ttf</string>
+	</array>
 	<key>UIMainStoryboardFile</key>
 	<string>Main</string>
 	<key>UIRequiredDeviceCapabilities</key>

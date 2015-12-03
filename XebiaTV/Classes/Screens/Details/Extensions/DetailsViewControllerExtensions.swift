@@ -20,10 +20,11 @@ extension DetailsViewController: UICollectionViewDataSource, UICollectionViewDel
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         collectionView.remembersLastFocusedIndexPath = true
         // Reload data with this video
-        let video = self.dataSource[indexPath.item]
+        let video = self.filteredDataSource[indexPath.item]
         let cell = collectionView.cellForItemAtIndexPath(indexPath) as! VideoCell
         self.selectedVideoImage = cell.videoImageView.image
         self.selectedVideo = video
+        self.filterDataSource()
     }
     
     // MARK: - UICollectionViewDelegateFlowLayout
@@ -35,7 +36,7 @@ extension DetailsViewController: UICollectionViewDataSource, UICollectionViewDel
     // MARK: - UICollectionView DataSource
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return self.dataSource.count
+        return self.filteredDataSource.count
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
@@ -47,7 +48,7 @@ extension DetailsViewController: UICollectionViewDataSource, UICollectionViewDel
     private func videoCellAtIndexPath(indexPath:NSIndexPath) -> VideoCell {
         let view = self.view as! DetailsView
         let cell = view.collectionView.dequeueReusableCellWithReuseIdentifier(VideoCell.reuseIdentifier(), forIndexPath: indexPath) as! VideoCell
-        let video = self.dataSource[indexPath.item]
+        let video = self.filteredDataSource[indexPath.item]
         cell.setup(video)
         
         return cell

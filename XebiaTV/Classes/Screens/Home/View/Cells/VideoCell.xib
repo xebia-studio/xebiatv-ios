@@ -1,32 +1,69 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder.AppleTV.XIB" version="3.0" toolsVersion="9052" systemVersion="14F27" targetRuntime="AppleTV" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder.AppleTV.XIB" version="3.0" toolsVersion="9060" systemVersion="14F27" targetRuntime="AppleTV" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9040"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9051"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <collectionViewCell opaque="NO" multipleTouchEnabled="YES" contentMode="center" id="LsO-qh-KLs" customClass="VideoCell" customModule="XebiaTV" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="200" height="100"/>
+            <rect key="frame" x="0.0" y="0.0" width="400" height="250"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                <rect key="frame" x="0.0" y="0.0" width="200" height="100"/>
+                <rect key="frame" x="0.0" y="0.0" width="400" height="250"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="1vf-Ee-mPq">
-                        <rect key="frame" x="0.0" y="0.0" width="200" height="100"/>
+                        <rect key="frame" x="0.0" y="0.0" width="400" height="250"/>
                     </imageView>
+                    <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="c5N-Pa-xEX">
+                        <rect key="frame" x="0.0" y="217" width="400" height="29"/>
+                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="lYi-T8-ReR">
+                            <rect key="frame" x="0.0" y="0.0" width="400" height="29"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        </view>
+                        <blurEffect style="extraLight"/>
+                    </visualEffectView>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xZF-Q4-YEs">
+                        <rect key="frame" x="0.0" y="217" width="400" height="29"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZZw-eK-Dz8">
+                                <rect key="frame" x="4" y="4" width="392" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="ZZw-eK-Dz8" firstAttribute="leading" secondItem="xZF-Q4-YEs" secondAttribute="leading" constant="4" id="25B-0s-X0h"/>
+                            <constraint firstItem="ZZw-eK-Dz8" firstAttribute="top" secondItem="xZF-Q4-YEs" secondAttribute="top" constant="4" id="K8q-bH-IAZ"/>
+                            <constraint firstAttribute="bottom" secondItem="ZZw-eK-Dz8" secondAttribute="bottom" constant="4" id="Oef-DI-ObI"/>
+                            <constraint firstAttribute="trailing" secondItem="ZZw-eK-Dz8" secondAttribute="trailing" constant="4" id="Vs7-nk-WFt"/>
+                        </constraints>
+                    </view>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             </view>
             <constraints>
+                <constraint firstAttribute="trailing" secondItem="xZF-Q4-YEs" secondAttribute="trailing" id="0Zp-g6-gPJ"/>
+                <constraint firstItem="c5N-Pa-xEX" firstAttribute="bottom" secondItem="xZF-Q4-YEs" secondAttribute="bottom" id="11V-8C-hF2"/>
                 <constraint firstAttribute="trailing" secondItem="1vf-Ee-mPq" secondAttribute="trailing" id="9Cx-jR-IQk"/>
-                <constraint firstAttribute="bottom" secondItem="1vf-Ee-mPq" secondAttribute="bottom" id="FBR-n7-CBy"/>
+                <constraint firstItem="c5N-Pa-xEX" firstAttribute="trailing" secondItem="xZF-Q4-YEs" secondAttribute="trailing" id="EGA-3u-CXE"/>
+                <constraint firstAttribute="bottom" secondItem="1vf-Ee-mPq" secondAttribute="bottom" id="Nbp-jh-01Q"/>
+                <constraint firstAttribute="bottom" secondItem="xZF-Q4-YEs" secondAttribute="bottom" constant="4" id="Qsb-FT-FHf"/>
+                <constraint firstItem="xZF-Q4-YEs" firstAttribute="leading" secondItem="LsO-qh-KLs" secondAttribute="leading" id="XAQ-5M-wSU"/>
                 <constraint firstItem="1vf-Ee-mPq" firstAttribute="leading" secondItem="LsO-qh-KLs" secondAttribute="leading" id="Y57-Hq-7HM"/>
                 <constraint firstItem="1vf-Ee-mPq" firstAttribute="top" secondItem="LsO-qh-KLs" secondAttribute="top" id="j0z-Fo-NGy"/>
+                <constraint firstItem="c5N-Pa-xEX" firstAttribute="leading" secondItem="xZF-Q4-YEs" secondAttribute="leading" id="qgV-5N-8L6"/>
+                <constraint firstItem="c5N-Pa-xEX" firstAttribute="top" secondItem="xZF-Q4-YEs" secondAttribute="top" id="vax-Ti-nFr"/>
             </constraints>
             <connections>
+                <outlet property="videoContainer" destination="xZF-Q4-YEs" id="jfU-ff-hJI"/>
+                <outlet property="videoContainerBottomConstraint" destination="Qsb-FT-FHf" id="1If-eL-YdZ"/>
                 <outlet property="videoImageView" destination="1vf-Ee-mPq" id="E7r-Xe-Lm2"/>
+                <outlet property="videoTitle" destination="ZZw-eK-Dz8" id="gab-14-BUv"/>
+                <outlet property="videoVisualEffectView" destination="c5N-Pa-xEX" id="PCk-Y0-0yq"/>
             </connections>
         </collectionViewCell>
     </objects>

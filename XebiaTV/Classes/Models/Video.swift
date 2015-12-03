@@ -134,6 +134,11 @@ struct Snippet: JSONJoy {
     
 }
 
+extension Video: Equatable { }
+func ==(lhs: Video, rhs: Video) -> Bool {
+    return lhs.id == rhs.id
+}
+
 struct Video: JSONJoy {
 
     var id:String?

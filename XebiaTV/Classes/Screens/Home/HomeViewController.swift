@@ -14,6 +14,7 @@ class HomeViewController: UIViewController {
     // MARK: - Variables
     
     internal var menuDataSource:[CategoryProtocol] = []
+    internal var selectedCategory:CategoryProtocol?
     internal var selectedBackgroundImage:UIImage?
     internal var videosDataSource:[Video] = []
     internal var selectedVideo:Video?
@@ -119,9 +120,10 @@ class HomeViewController: UIViewController {
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         guard let viewController = segue.destinationViewController as? DetailsViewController where segue.identifier == Constants.Segues.ShowDetails else { return }
-        viewController.dataSource = self.videosDataSource
         viewController.selectedVideo = self.selectedVideo
+        viewController.selectedCategory = self.selectedCategory
         viewController.selectedVideoImage = self.selectedBackgroundImage
+        viewController.dataSource = self.videosDataSource
     }
     
 }
