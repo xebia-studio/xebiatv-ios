@@ -54,7 +54,24 @@ class VideoPlayerViewController: AVPlayerViewController {
     private func playVideo() {
         Async.main {
             guard let url = self.selectedVideo?.bestUrl?.url else { return }
-            self.player = AVPlayer(URL: NSURL(string: url)!)
+
+            let titleMetadataItem = AVMutableMetadataItem()
+            titleMetadataItem.locale = NSLocale.currentLocale()
+            titleMetadataItem.key = AVMetadataCommonKeyTitle
+            titleMetadataItem.keySpace = AVMetadataKeySpaceCommon
+            titleMetadataItem.value = self.selectedVideo?.snippet?.title
+            
+            let descriptionMetadataItem = AVMutableMetadataItem()
+            descriptionMetadataItem.locale = NSLocale.currentLocale()
+            descriptionMetadataItem.key = AVMetadataCommonKeyDescription
+            descriptionMetadataItem.keySpace = AVMetadataKeySpaceCommon
+            descriptionMetadataItem.value = self.selectedVideo?.snippet?.description
+            
+            let mediaItem = AVPlayerItem(URL: NSURL(string: url)!)
+            mediaItem.externalMetadata.append(titleMetadataItem)
+            mediaItem.externalMetadata.append(descriptionMetadataItem)
+            
+            self.player = AVPlayer(playerItem: mediaItem)
             self.player?.play()
         }
     }

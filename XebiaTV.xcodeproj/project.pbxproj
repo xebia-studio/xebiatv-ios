@@ -60,6 +60,8 @@
 		5F97A5E41BFDD297004A753B /* HomeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5F97A5E21BFDD297004A753B /* HomeCell.xib */; };
 		5F97BA891BFF4A4C0029D242 /* UIColor+Design.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F97BA881BFF4A4C0029D242 /* UIColor+Design.swift */; };
 		5FB617C11C10528C00712F6E /* Array+Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FB617C01C10528C00712F6E /* Array+Utilities.swift */; };
+		5FB617C31C10768600712F6E /* DetailsAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FB617C21C10768600712F6E /* DetailsAlertView.swift */; };
+		5FB617C71C107BD200712F6E /* DetailsAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FB617C61C107BD200712F6E /* DetailsAlertViewController.swift */; };
 		CBA3E0FC52E4F75AABF39C83 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E0BDC962CC754910151386D /* Pods.framework */; };
 /* End PBXBuildFile section */
 
@@ -121,6 +123,8 @@
 		5F97A5E21BFDD297004A753B /* HomeCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = HomeCell.xib; path = View/Cells/HomeCell.xib; sourceTree = "<group>"; };
 		5F97BA881BFF4A4C0029D242 /* UIColor+Design.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Design.swift"; sourceTree = "<group>"; };
 		5FB617C01C10528C00712F6E /* Array+Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Array+Utilities.swift"; sourceTree = "<group>"; };
+		5FB617C21C10768600712F6E /* DetailsAlertView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DetailsAlertView.swift; path = Details/View/DetailsAlertView.swift; sourceTree = "<group>"; };
+		5FB617C61C107BD200712F6E /* DetailsAlertViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DetailsAlertViewController.swift; path = Details/DetailsAlertViewController.swift; sourceTree = "<group>"; };
 		6E0BDC962CC754910151386D /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CA238AAE215C73FBC961A30D /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		E7AC0F65E75D8202B8134A58 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
@@ -226,6 +230,7 @@
 			children = (
 				5F4A920A1C070BF900C1B516 /* Extensions */,
 				5F4A92041C06F4D600C1B516 /* View */,
+				5FB617C61C107BD200712F6E /* DetailsAlertViewController.swift */,
 				5F4A92021C06F45400C1B516 /* DetailsViewController.swift */,
 			);
 			name = Details;
@@ -234,6 +239,7 @@
 		5F4A92041C06F4D600C1B516 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				5FB617C21C10768600712F6E /* DetailsAlertView.swift */,
 				5F4A92051C06F4E500C1B516 /* DetailsView.swift */,
 			);
 			name = View;
@@ -633,6 +639,7 @@
 				5F97A5DB1BFCD63F004A753B /* VideoCell.swift in Sources */,
 				5F109CDF1C04A33900DC76B2 /* Crashlytics+Logging.swift in Sources */,
 				5F97A5E31BFDD297004A753B /* HomeCell.swift in Sources */,
+				5FB617C71C107BD200712F6E /* DetailsAlertViewController.swift in Sources */,
 				5F97A5B51BFCB08E004A753B /* Video.swift in Sources */,
 				5F109CD41C0491A900DC76B2 /* CategoriesDataAccess.swift in Sources */,
 				5F109CC91C048EC300DC76B2 /* _Atomic.swift in Sources */,
@@ -646,6 +653,7 @@
 				5F4A92061C06F4E500C1B516 /* DetailsView.swift in Sources */,
 				5F109CDD1C049E8300DC76B2 /* CategoryProtocol.swift in Sources */,
 				5F109CBB1C048DBE00DC76B2 /* AbstractRequest.swift in Sources */,
+				5FB617C31C10768600712F6E /* DetailsAlertView.swift in Sources */,
 				5F109CD61C0499DD00DC76B2 /* Category.swift in Sources */,
 				5F97A5CC1BFCC6B3004A753B /* NSObject+Utilities.swift in Sources */,
 				5F109CBF1C048DBE00DC76B2 /* WSClient.swift in Sources */,

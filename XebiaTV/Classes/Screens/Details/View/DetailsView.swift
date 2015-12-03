@@ -44,8 +44,8 @@ class DetailsView: UIView {
         self.relatedVideosLabel.textColor = UIColor.commonPurpleColor()
      
         // Buttons
-        //self.playButton.setImage(UIImage(named: "IconPlay"), forState: UIControlState.Normal)
-        //self.playButton.setTitle("PLAY_TITLE".localized, forState: UIControlState.Normal)
+        self.playButton.setImage(UIImage(named: "IconPlay"), forState: UIControlState.Normal)
+        self.moreInfoButton.setImage(UIImage(named: "IconDots"), forState: UIControlState.Normal)
     }
     
     // MARK: - Focus

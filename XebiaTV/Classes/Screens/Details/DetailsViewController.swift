@@ -65,8 +65,13 @@ class DetailsViewController: UIViewController {
     // MARK: - Segues
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        guard let viewController = segue.destinationViewController as? VideoPlayerViewController else { return }
-        viewController.selectedVideo = self.selectedVideo
+        if let viewController = segue.destinationViewController as? VideoPlayerViewController {
+            viewController.selectedVideo = self.selectedVideo
+        }
+        
+        if let viewController = segue.destinationViewController as? DetailsAlertViewController {
+            viewController.video = self.selectedVideo
+        }
     }
     
 }
