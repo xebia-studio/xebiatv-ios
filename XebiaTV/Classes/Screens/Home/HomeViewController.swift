@@ -51,12 +51,14 @@ class HomeViewController: UIViewController {
             
             let view = self.view as! HomeView
             var refView = view.scrollViewContent
+            view.scrollViewContent.translatesAutoresizingMaskIntoConstraints = false
             var index = 0
             for category in categories {
                 // Label
                 let titleLabel = UILabel()
                 titleLabel.backgroundColor = UIColor.clearColor()
                 titleLabel.text = category.name
+                titleLabel.translatesAutoresizingMaskIntoConstraints = false
                 titleLabel.font = UIFont.fontLight(50)
                 titleLabel.textColor = UIColor.commonPurpleColor()
                 view.scrollViewContent.addSubview(titleLabel)
@@ -78,8 +80,10 @@ class HomeViewController: UIViewController {
                 
                 let collectionView = UICollectionView(frame: CGRect.null, collectionViewLayout: collectionViewFlowLayout)
                 collectionView.contentInset = UIEdgeInsetsMake(50, self.spaceBetweenCells, self.spaceBetweenCells, self.spaceBetweenCells)
+                collectionView.translatesAutoresizingMaskIntoConstraints = false
                 collectionView.delegate = self
                 collectionView.dataSource = self
+                collectionView.clipsToBounds = false // Allows to see cell bottom shadow
                 collectionView.registerNib(VideoCell.nib(), forCellWithReuseIdentifier: VideoCell.reuseIdentifier())
                 collectionView.backgroundColor = UIColor.clearColor()
                 view.scrollViewContent.addSubview(collectionView)
@@ -90,7 +94,7 @@ class HomeViewController: UIViewController {
                     collectionView.top == titleLabel.bottom + 20
                     collectionView.leading == titleLabel.leading - 50
                     collectionView.trailing == view.trailing
-                    collectionView.height == 450
+                    collectionView.height == 350
                 }
                 
                 self.videosDataSource.append([])
@@ -102,6 +106,21 @@ class HomeViewController: UIViewController {
                 refView = collectionView
                 index++
             }
+            
+            /*let bottomView = UIView()
+            bottomView.backgroundColor = UIColor.greenColor()
+            view.scrollViewContent.addSubview(bottomView)
+            
+            constrain(bottomView, refView) { bottomView, refView in
+                bottomView.top == refView.bottom + 20
+                bottomView.leading == bottomView.superview!.leading
+                bottomView.trailing == bottomView.superview!.trailing
+                bottomView.bottom == bottomView.superview!.bottom
+            }*/
+            
+            view.layoutIfNeeded()
+            
+            print("Content Size : \(view.scrollView.contentSize)   \(view.scrollViewContent.bounds)")
         }
     }
     

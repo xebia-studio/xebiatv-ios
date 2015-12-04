@@ -20,8 +20,6 @@ public class WSClient: WSClientProtocol {
         
         // Update Manager
         self.updateManager(urlRequest)
-
-        print("Request : \(urlRequest)  \(parameters)")
         
         let task = WSRequestTask { fulfill, reject in
             self.manager?.request(method, urlRequest, parameters:parameters?.count > 0 ? parameters : nil, encoding:encoding)

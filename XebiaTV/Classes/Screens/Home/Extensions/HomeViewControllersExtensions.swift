@@ -44,7 +44,7 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         guard let index = self.collectionViews.indexOf(collectionView) else { return 0 }
-        return self.videosDataSource[index].count
+        return max(self.videosDataSource[index].count, 1)
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
@@ -55,7 +55,7 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
     
     private func videoCellAtIndexPath(collectionView:UICollectionView, indexPath:NSIndexPath) -> VideoCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(VideoCell.reuseIdentifier(), forIndexPath: indexPath) as! VideoCell
-        if let index = self.collectionViews.indexOf(collectionView) {
+        if let index = self.collectionViews.indexOf(collectionView) where self.videosDataSource[index].count > indexPath.item {
             let video = self.videosDataSource[index][indexPath.item]
             cell.setup(video)
         }

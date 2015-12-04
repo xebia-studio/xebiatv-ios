@@ -32,15 +32,16 @@ class VideoPlayerViewController: AVPlayerViewController {
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         
-        self.watermarkView = UIImageView(image: UIImage(named: "logo_xebia"))
+        // Watermark
+        /*self.watermarkView = UIImageView(image: UIImage(named: "logo_xebia"))
         self.watermarkView?.alpha = 0
         
         guard let watermarkView = self.watermarkView, contentOverlayView = self.contentOverlayView else { return }
         self.contentOverlayView?.addSubview(watermarkView)
-        watermarkView.frame = CGRectMake(contentOverlayView.frame.width - watermarkView.bounds.width - watermarkOffset, contentOverlayView.frame.height - watermarkView.bounds.height - watermarkOffset, watermarkView.bounds.width, watermarkView.bounds.height)
+        watermarkView.frame = CGRectMake(self.watermarkOffset, contentOverlayView.frame.height - watermarkView.bounds.height - self.watermarkOffset, watermarkView.bounds.width, watermarkView.bounds.height)
         UIView.animateWithDuration(0.25, animations: {
             watermarkView.alpha = 0.75
-        })
+        })*/
     }
     
     // MARK: - Data
