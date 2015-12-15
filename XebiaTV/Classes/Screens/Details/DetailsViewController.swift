@@ -26,6 +26,11 @@ class DetailsViewController: UIViewController {
     internal var filteredDataSource:[Video] = []
     var selectedVideoImage:UIImage? {
         didSet {
+            if self.selectedVideoImage == nil {
+                self.loadPicture()
+                return
+            }
+            
             let view = self.view as! DetailsView
             view.setImage(selectedVideoImage)
         }
@@ -48,6 +53,20 @@ class DetailsViewController: UIViewController {
         view.collectionView.dataSource = self
         view.collectionView.contentInset = UIEdgeInsetsMake(100, 50, 50, 50)
         view.collectionView.registerNib(VideoCell.nib(), forCellWithReuseIdentifier: VideoCell.reuseIdentifier())
+    }
+    
+    // MARK: - Load Picture
+    
+    private func loadPicture() {
+        if let pictureUrl = self.selectedVideo?.snippet?.bestThumbnail?.urlString {
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), { () -> Void in
+                if let data = NSData(contentsOfURL: NSURL(string: pictureUrl)!) {
+                    dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                        self.selectedVideoImage = UIImage(data: data)
+                    })
+                }
+            })
+        }
     }
     
     // MARK: - Data

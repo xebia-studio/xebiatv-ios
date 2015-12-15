@@ -14,13 +14,13 @@ class DetailsView: UIView {
     // MARK: - IBOutlets
     
     @IBOutlet weak var titleLabel:UILabel!
-    @IBOutlet weak var playButton:UIButton!
     @IBOutlet weak var categoryLabel:UILabel!
-    @IBOutlet weak var moreInfoButton:UIButton!
+    @IBOutlet weak var playButton:CommonButton!
     @IBOutlet weak var buttonsContainer:UIView!
     @IBOutlet weak var descriptionLabel:UILabel!
     @IBOutlet weak var relatedVideosLabel:UILabel!
     @IBOutlet weak var backgroundView:UIImageView!
+    @IBOutlet weak var moreInfoButton:CommonButton!
     @IBOutlet weak var transparentFocusView:UIView!
     @IBOutlet weak var detailsImageView:UIImageView!
     @IBOutlet weak var collectionView:UICollectionView!
@@ -45,7 +45,9 @@ class DetailsView: UIView {
      
         // Buttons
         self.playButton.setImage(UIImage(named: "IconPlay"), forState: UIControlState.Normal)
+        self.playButton.setDescriptiveText("PLAY_BUTTON".localized.uppercaseString)
         self.moreInfoButton.setImage(UIImage(named: "IconDots"), forState: UIControlState.Normal)
+        self.moreInfoButton.setDescriptiveText("MORE_INFORMATIONS_BUTTON".localized.uppercaseString)
     }
     
     // MARK: - Focus

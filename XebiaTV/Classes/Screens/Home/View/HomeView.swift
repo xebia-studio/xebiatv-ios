@@ -12,6 +12,7 @@ class HomeView: UIView {
 
     @IBOutlet weak var scrollView:UIScrollView!
     @IBOutlet weak var scrollViewContent:UIView!
+    @IBOutlet weak var logoImageView:UIImageView!
     
     override func awakeFromNib() {
         super.awakeFromNib()

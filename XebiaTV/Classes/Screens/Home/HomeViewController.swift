@@ -50,7 +50,7 @@ class HomeViewController: UIViewController {
             self.menuDataSource = categories
             
             let view = self.view as! HomeView
-            var refView = view.scrollViewContent
+            var refView:UIView = view.logoImageView
             view.scrollViewContent.translatesAutoresizingMaskIntoConstraints = false
             var index = 0
             for category in categories {
@@ -63,10 +63,10 @@ class HomeViewController: UIViewController {
                 titleLabel.textColor = UIColor.commonPurpleColor()
                 view.scrollViewContent.addSubview(titleLabel)
                 
-                if refView == view.scrollViewContent {
-                    constrain(titleLabel, refView) { titleLabel, refView in
-                        titleLabel.top == refView.top + 50
-                        titleLabel.leading == refView.leading + 50
+                if refView == view.logoImageView {
+                    constrain(titleLabel, refView, view.scrollViewContent) { titleLabel, refView, scrollViewContent in
+                        titleLabel.top == refView.bottom + 20
+                        titleLabel.leading == scrollViewContent.leading + 50
                     }
                 } else {
                     constrain(titleLabel, refView) { titleLabel, refView in

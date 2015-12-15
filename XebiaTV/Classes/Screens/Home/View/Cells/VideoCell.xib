@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder.AppleTV.XIB" version="3.0" toolsVersion="9060" systemVersion="14F27" targetRuntime="AppleTV" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder.AppleTV.XIB" version="3.0" toolsVersion="9531" systemVersion="14F1509" targetRuntime="AppleTV" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9051"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -42,12 +42,21 @@
                             <constraint firstAttribute="trailing" secondItem="ZZw-eK-Dz8" secondAttribute="trailing" constant="4" id="Vs7-nk-WFt"/>
                         </constraints>
                     </view>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ofk-eI-UqF" userLabel="Loader" customClass="NVActivityIndicatorView" customModule="XebiaTV" customModuleProvider="target">
+                        <rect key="frame" x="200" y="125" width="0.0" height="0.0"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="height" id="ITB-PT-h8X"/>
+                            <constraint firstAttribute="width" id="OtO-t0-dkX"/>
+                        </constraints>
+                    </view>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             </view>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="xZF-Q4-YEs" secondAttribute="trailing" id="0Zp-g6-gPJ"/>
                 <constraint firstItem="c5N-Pa-xEX" firstAttribute="bottom" secondItem="xZF-Q4-YEs" secondAttribute="bottom" id="11V-8C-hF2"/>
+                <constraint firstItem="Ofk-eI-UqF" firstAttribute="centerX" secondItem="LsO-qh-KLs" secondAttribute="centerX" id="8Ar-0B-KaL"/>
                 <constraint firstAttribute="trailing" secondItem="1vf-Ee-mPq" secondAttribute="trailing" id="9Cx-jR-IQk"/>
                 <constraint firstItem="c5N-Pa-xEX" firstAttribute="trailing" secondItem="xZF-Q4-YEs" secondAttribute="trailing" id="EGA-3u-CXE"/>
                 <constraint firstAttribute="bottom" secondItem="1vf-Ee-mPq" secondAttribute="bottom" id="Nbp-jh-01Q"/>
@@ -57,11 +66,13 @@
                 <constraint firstItem="1vf-Ee-mPq" firstAttribute="top" secondItem="LsO-qh-KLs" secondAttribute="top" id="j0z-Fo-NGy"/>
                 <constraint firstItem="c5N-Pa-xEX" firstAttribute="leading" secondItem="xZF-Q4-YEs" secondAttribute="leading" id="qgV-5N-8L6"/>
                 <constraint firstItem="c5N-Pa-xEX" firstAttribute="top" secondItem="xZF-Q4-YEs" secondAttribute="top" id="vax-Ti-nFr"/>
+                <constraint firstItem="Ofk-eI-UqF" firstAttribute="centerY" secondItem="LsO-qh-KLs" secondAttribute="centerY" id="yfl-qk-rVc"/>
             </constraints>
             <connections>
                 <outlet property="videoContainer" destination="xZF-Q4-YEs" id="jfU-ff-hJI"/>
                 <outlet property="videoContainerBottomConstraint" destination="Qsb-FT-FHf" id="1If-eL-YdZ"/>
                 <outlet property="videoImageView" destination="1vf-Ee-mPq" id="E7r-Xe-Lm2"/>
+                <outlet property="videoLoader" destination="Ofk-eI-UqF" id="SKZ-rB-Ee4"/>
                 <outlet property="videoTitle" destination="ZZw-eK-Dz8" id="gab-14-BUv"/>
                 <outlet property="videoVisualEffectView" destination="c5N-Pa-xEX" id="PCk-Y0-0yq"/>
             </connections>

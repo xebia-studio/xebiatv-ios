@@ -1,0 +1,12 @@
+//
+//  Release.xcconfig
+//  XebiaTV
+//
+//  Created by Fabien Mirault on 15/12/2015.
+//  Copyright © 2015 Xebia. All rights reserved.
+//
+
+#include "Pods/Target Support Files/Pods/Pods.release.xcconfig"
+
+PRODUCT_IDENTIFIER = fr.xebia.xebiatv
+PRODUCT_NAME = Xebia TV

@@ -16,7 +16,8 @@ class CategoriesDataAccess {
     // MARK: Listing
     
     static func retrieveCategories(parameters:GenericJSON = GenericJSON(), client:WSClientProtocol.Type? = WSClient.self) -> CategoriesRetrieveTask {
-        return CategoriesRequest.listCategories(parameters, client:client!).success { data in
+        return CategoriesRequest.listCategories(parameters, client:client!)
+            .success { data in
                 return JSONDictionaryDeserializer.deserialize(data)
             }
             .success { data in

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder.AppleTV.Storyboard" version="3.0" toolsVersion="9060" systemVersion="14F27" targetRuntime="AppleTV" propertyAccessControl="none" useAutolayout="YES" initialViewController="OaF-7h-mIf">
+<document type="com.apple.InterfaceBuilder.AppleTV.Storyboard" version="3.0" toolsVersion="9531" systemVersion="14F1509" targetRuntime="AppleTV" propertyAccessControl="none" useAutolayout="YES" initialViewController="OaF-7h-mIf">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9051"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
     </dependencies>
     <scenes>
         <!--AV Player View Controller-->
@@ -110,7 +110,20 @@
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7ja-Ld-ljx" userLabel="Content View">
                                         <rect key="frame" x="0.0" y="0.0" width="1920" height="1080"/>
+                                        <subviews>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo_xebia_tv" translatesAutoresizingMaskIntoConstraints="NO" id="7A4-Jo-BNQ">
+                                                <rect key="frame" x="1501" y="50" width="369" height="100"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="100" id="RK0-Ka-CR8"/>
+                                                    <constraint firstAttribute="width" constant="369" id="axN-zE-pci"/>
+                                                </constraints>
+                                            </imageView>
+                                        </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="trailing" secondItem="7A4-Jo-BNQ" secondAttribute="trailing" constant="50" id="6R8-bw-KGg"/>
+                                            <constraint firstItem="7A4-Jo-BNQ" firstAttribute="top" secondItem="7ja-Ld-ljx" secondAttribute="top" constant="50" id="rSa-Qz-dD4"/>
+                                        </constraints>
                                     </view>
                                 </subviews>
                                 <constraints>
@@ -130,6 +143,7 @@
                             <constraint firstItem="cDA-Lv-LTm" firstAttribute="leading" secondItem="uft-wy-QKd" secondAttribute="leading" id="rbT-vW-Thn"/>
                         </constraints>
                         <connections>
+                            <outlet property="logoImageView" destination="7A4-Jo-BNQ" id="JVy-Ce-1AI"/>
                             <outlet property="scrollView" destination="cDA-Lv-LTm" id="asA-XV-AI1"/>
                             <outlet property="scrollViewContent" destination="7ja-Ld-ljx" id="miO-wW-UWv"/>
                         </connections>
@@ -206,7 +220,7 @@
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ukB-eV-zEh">
                                                 <rect key="frame" x="1375" y="468" width="350" height="100"/>
                                                 <subviews>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="c19-o7-Ge8" userLabel="Play button">
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="c19-o7-Ge8" userLabel="Play button" customClass="CommonButton" customModule="XebiaTV" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="0.0" width="150" height="100"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="150" id="4CL-1O-PmD"/>
@@ -217,7 +231,7 @@
                                                             <segue destination="Bi2-Nu-lOb" kind="show" id="0Eh-7F-VI5"/>
                                                         </connections>
                                                     </button>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7gO-Tp-crB" userLabel="More info">
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7gO-Tp-crB" userLabel="More info" customClass="CommonButton" customModule="XebiaTV" customModuleProvider="target">
                                                         <rect key="frame" x="200" y="0.0" width="150" height="100"/>
                                                         <inset key="contentEdgeInsets" minX="40" minY="20" maxX="40" maxY="20"/>
                                                         <connections>
@@ -356,4 +370,7 @@
             <point key="canvasLocation" x="1092" y="451"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="logo_xebia_tv" width="369" height="100"/>
+    </resources>
 </document>
