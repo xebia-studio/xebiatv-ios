@@ -18,4 +18,8 @@ class HomeHeaderCollectionReusableView: UICollectionReusableView {
         return UINib(nibName: self.reuseIdentifier(), bundle: nil)
     }
     
+    class func cellHeight() -> CGFloat {
+        return 110.0
+    }
+    
 }

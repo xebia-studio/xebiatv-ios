@@ -67,7 +67,7 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
     
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
         if (section == 0) {
-            return CGSizeMake(collectionView.bounds.size.width, 130)
+            return CGSizeMake(collectionView.bounds.size.width, HomeHeaderCollectionReusableView.cellHeight())
         } else {
             return CGSizeZero
         }

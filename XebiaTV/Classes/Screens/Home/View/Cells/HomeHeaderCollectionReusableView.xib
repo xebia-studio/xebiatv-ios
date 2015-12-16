@@ -7,14 +7,15 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <collectionReusableView opaque="NO" multipleTouchEnabled="YES" contentMode="center" id="orl-q2-Iy5" customClass="HomeHeaderCollectionReusableView" customModule="XebiaTV" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="1920" height="130"/>
+            <rect key="frame" x="0.0" y="0.0" width="1920" height="110"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo_xebia_tv" translatesAutoresizingMaskIntoConstraints="NO" id="jMl-B1-34k">
-                    <rect key="frame" x="1501" y="30" width="369" height="100"/>
+                    <rect key="frame" x="1642" y="30" width="228" height="55"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="100" id="84Y-PA-vIU"/>
-                        <constraint firstAttribute="width" constant="369" id="OYI-Ts-bAV"/>
+                        <constraint firstAttribute="height" constant="55" id="84Y-PA-vIU"/>
+                        <constraint firstAttribute="width" constant="228" id="OYI-Ts-bAV"/>
                     </constraints>
                 </imageView>
             </subviews>
@@ -25,6 +26,6 @@
         </collectionReusableView>
     </objects>
     <resources>
-        <image name="logo_xebia_tv" width="369" height="100"/>
+        <image name="logo_xebia_tv" width="228" height="55"/>
     </resources>
 </document>
