@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol CategoryProtocol: JSONJoy  {
+protocol CategoryProtocol: JSONJoy {
     
     var id:String?  { get set }
     var name:String?  { get set }

@@ -13,7 +13,6 @@ class HomeViewController: UIViewController {
 
     // MARK: - Variables
     
-    internal var collectionViews:[UICollectionView] = []
     internal var menuDataSource:[CategoryProtocol] = []
     internal var selectedIndex:NSInteger = NSIntegerMax
     internal var selectedBackgroundImage:UIImage?
@@ -21,11 +20,21 @@ class HomeViewController: UIViewController {
     internal var selectedVideo:Video?
     
     let spaceBetweenCells:CGFloat = 100
+    let minimumEdgePadding = CGFloat(90.0)
     
     // MARK: - LifeCycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let view = self.view as! HomeView
+        guard let collectionView = view.collectionView, layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout else { return }
+        
+        collectionView.registerNib(HomeCell.nib(), forCellWithReuseIdentifier: HomeCell.reuseIdentifier())
+        collectionView.delegate = self
+        collectionView.dataSource = self
+        collectionView.contentInset.top = self.minimumEdgePadding - layout.sectionInset.top
+        collectionView.contentInset.bottom = self.minimumEdgePadding - layout.sectionInset.bottom
         
         self.loadData()
     }
@@ -48,79 +57,19 @@ class HomeViewController: UIViewController {
     private func populateData(categories:[CategoryProtocol]) {
         Async.main {
             self.menuDataSource = categories
-            
             let view = self.view as! HomeView
-            var refView:UIView = view.logoImageView
-            view.scrollViewContent.translatesAutoresizingMaskIntoConstraints = false
+            view.collectionView.reloadData()
+
             var index = 0
             for category in categories {
-                // Label
-                let titleLabel = UILabel()
-                titleLabel.backgroundColor = UIColor.clearColor()
-                titleLabel.text = category.name
-                titleLabel.translatesAutoresizingMaskIntoConstraints = false
-                titleLabel.font = UIFont.fontLight(50)
-                titleLabel.textColor = UIColor.commonPurpleColor()
-                view.scrollViewContent.addSubview(titleLabel)
-                
-                if refView == view.logoImageView {
-                    constrain(titleLabel, refView, view.scrollViewContent) { titleLabel, refView, scrollViewContent in
-                        titleLabel.top == refView.bottom + 20
-                        titleLabel.leading == scrollViewContent.leading + 50
-                    }
-                } else {
-                    constrain(titleLabel, refView) { titleLabel, refView in
-                        titleLabel.top == refView.bottom + 50
-                        titleLabel.leading == refView.leading + 50
-                    }
-                }
-                
-                let collectionViewFlowLayout = UICollectionViewFlowLayout()
-                collectionViewFlowLayout.scrollDirection = .Horizontal
-                
-                let collectionView = UICollectionView(frame: CGRect.null, collectionViewLayout: collectionViewFlowLayout)
-                collectionView.contentInset = UIEdgeInsetsMake(50, self.spaceBetweenCells, self.spaceBetweenCells, self.spaceBetweenCells)
-                collectionView.translatesAutoresizingMaskIntoConstraints = false
-                collectionView.delegate = self
-                collectionView.dataSource = self
-                collectionView.clipsToBounds = false // Allows to see cell bottom shadow
-                collectionView.registerNib(VideoCell.nib(), forCellWithReuseIdentifier: VideoCell.reuseIdentifier())
-                collectionView.backgroundColor = UIColor.clearColor()
-                view.scrollViewContent.addSubview(collectionView)
-                
-                self.collectionViews.append(collectionView)
-                
-                constrain(collectionView, titleLabel, view) { collectionView, titleLabel, view in
-                    collectionView.top == titleLabel.bottom + 20
-                    collectionView.leading == titleLabel.leading - 50
-                    collectionView.trailing == view.trailing
-                    collectionView.height == 350
-                }
-                
                 self.videosDataSource.append([])
                 
                 if index == 0 {
                     self.loadPlaylistData(index, playlistId: category.idString)
                 }
-                
-                refView = collectionView
+
                 index++
-            }
-            
-            /*let bottomView = UIView()
-            bottomView.backgroundColor = UIColor.greenColor()
-            view.scrollViewContent.addSubview(bottomView)
-            
-            constrain(bottomView, refView) { bottomView, refView in
-                bottomView.top == refView.bottom + 20
-                bottomView.leading == bottomView.superview!.leading
-                bottomView.trailing == bottomView.superview!.trailing
-                bottomView.bottom == bottomView.superview!.bottom
-            }*/
-            
-            view.layoutIfNeeded()
-            
-            print("Content Size : \(view.scrollView.contentSize)   \(view.scrollViewContent.bounds)")
+            }            
         }
     }
     
@@ -145,7 +94,15 @@ class HomeViewController: UIViewController {
                     strongSelf.loadPlaylistData(nextIndex, playlistId: category.idString)
                 }
             }
-            .failure { /*[weak self]*/ (error, isCancelled) -> Void in
+            .failure { [weak self] (error, isCancelled) -> Void in
+                guard let strongSelf = self else { return }
+                
+                let nextIndex = index + 1
+                if strongSelf.menuDataSource.count > nextIndex {
+                    let category = strongSelf.menuDataSource[nextIndex]
+                    strongSelf.loadPlaylistData(nextIndex, playlistId: category.idString)
+                }
+                
                 //guard let strongSelf = self else { return }
                 //strongSelf.clearRefresh()
         }
@@ -154,7 +111,9 @@ class HomeViewController: UIViewController {
     private func populatePlaylistData(index:NSInteger, videos:[Video]) {
         Async.main {
             self.videosDataSource[index] = videos
-            self.collectionViews[index].reloadData()
+            
+            let view = self.view as! HomeView
+            view.collectionView.reloadSections(NSIndexSet(index: index))
         }
     }
     

@@ -118,6 +118,7 @@
 		5FB617F11C1092F900712F6E /* Size.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FB617DC1C1092F900712F6E /* Size.swift */; };
 		5FB617F21C1092F900712F6E /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FB617DD1C1092F900712F6E /* View.swift */; };
 		5FB617F31C1092F900712F6E /* ViewUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FB617DE1C1092F900712F6E /* ViewUtils.swift */; };
+		5FE84E0F1C20570A0047827C /* HomeCellExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FE84E0E1C20570A0047827C /* HomeCellExtensions.swift */; };
 		CBA3E0FC52E4F75AABF39C83 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E0BDC962CC754910151386D /* Pods.framework */; };
 /* End PBXBuildFile section */
 
@@ -241,6 +242,7 @@
 		5FB617DC1C1092F900712F6E /* Size.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Size.swift; sourceTree = "<group>"; };
 		5FB617DD1C1092F900712F6E /* View.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = View.swift; sourceTree = "<group>"; };
 		5FB617DE1C1092F900712F6E /* ViewUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewUtils.swift; sourceTree = "<group>"; };
+		5FE84E0E1C20570A0047827C /* HomeCellExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HomeCellExtensions.swift; path = Extensions/HomeCellExtensions.swift; sourceTree = "<group>"; };
 		6E0BDC962CC754910151386D /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CA238AAE215C73FBC961A30D /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		E7AC0F65E75D8202B8134A58 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
@@ -608,6 +610,7 @@
 			isa = PBXGroup;
 			children = (
 				5F97A5C81BFCBDBC004A753B /* HomeViewControllersExtensions.swift */,
+				5FE84E0E1C20570A0047827C /* HomeCellExtensions.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -890,6 +893,7 @@
 				5F97A5B51BFCB08E004A753B /* Video.swift in Sources */,
 				5F109CD41C0491A900DC76B2 /* CategoriesDataAccess.swift in Sources */,
 				5F109CC91C048EC300DC76B2 /* _Atomic.swift in Sources */,
+				5FE84E0F1C20570A0047827C /* HomeCellExtensions.swift in Sources */,
 				5F4A923B1C07746A00C1B516 /* UIFont+Design.swift in Sources */,
 				5F109CBC1C048DBE00DC76B2 /* Deserializer.swift in Sources */,
 				5F109CCC1C048EC300DC76B2 /* Cancellable.swift in Sources */,
@@ -1037,6 +1041,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.xebia.xebiatv;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
@@ -1053,6 +1058,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.xebia.xebiatv;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 			};
 			name = Release;
 		};

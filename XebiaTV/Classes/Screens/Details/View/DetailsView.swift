@@ -45,9 +45,9 @@ class DetailsView: UIView {
      
         // Buttons
         self.playButton.setImage(UIImage(named: "IconPlay"), forState: UIControlState.Normal)
-        self.playButton.setDescriptiveText("PLAY_BUTTON".localized.uppercaseString)
+        self.playButton.setDescriptiveText("PLAY_BUTTON".localized)
         self.moreInfoButton.setImage(UIImage(named: "IconDots"), forState: UIControlState.Normal)
-        self.moreInfoButton.setDescriptiveText("MORE_INFORMATIONS_BUTTON".localized.uppercaseString)
+        self.moreInfoButton.setDescriptiveText("MORE_INFORMATIONS_BUTTON".localized)
     }
     
     // MARK: - Focus

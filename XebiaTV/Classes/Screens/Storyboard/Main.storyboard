@@ -105,47 +105,25 @@
                         <rect key="frame" x="0.0" y="0.0" width="1920" height="1080"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cDA-Lv-LTm">
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="dsg-XF-3Od">
                                 <rect key="frame" x="0.0" y="0.0" width="1920" height="1080"/>
-                                <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7ja-Ld-ljx" userLabel="Content View">
-                                        <rect key="frame" x="0.0" y="0.0" width="1920" height="1080"/>
-                                        <subviews>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo_xebia_tv" translatesAutoresizingMaskIntoConstraints="NO" id="7A4-Jo-BNQ">
-                                                <rect key="frame" x="1501" y="50" width="369" height="100"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="100" id="RK0-Ka-CR8"/>
-                                                    <constraint firstAttribute="width" constant="369" id="axN-zE-pci"/>
-                                                </constraints>
-                                            </imageView>
-                                        </subviews>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        <constraints>
-                                            <constraint firstAttribute="trailing" secondItem="7A4-Jo-BNQ" secondAttribute="trailing" constant="50" id="6R8-bw-KGg"/>
-                                            <constraint firstItem="7A4-Jo-BNQ" firstAttribute="top" secondItem="7ja-Ld-ljx" secondAttribute="top" constant="50" id="rSa-Qz-dD4"/>
-                                        </constraints>
-                                    </view>
-                                </subviews>
-                                <constraints>
-                                    <constraint firstItem="7ja-Ld-ljx" firstAttribute="top" secondItem="cDA-Lv-LTm" secondAttribute="top" id="8Q9-ka-M6I"/>
-                                    <constraint firstItem="7ja-Ld-ljx" firstAttribute="centerX" secondItem="cDA-Lv-LTm" secondAttribute="centerX" id="N5v-dq-QKa"/>
-                                    <constraint firstItem="7ja-Ld-ljx" firstAttribute="leading" secondItem="cDA-Lv-LTm" secondAttribute="leading" id="eeZ-Ot-4mB"/>
-                                    <constraint firstItem="7ja-Ld-ljx" firstAttribute="centerY" secondItem="cDA-Lv-LTm" secondAttribute="centerY" id="fVc-IO-Idx"/>
-                                    <constraint firstAttribute="trailing" secondItem="7ja-Ld-ljx" secondAttribute="trailing" id="pBf-0e-YHy"/>
-                                    <constraint firstAttribute="bottom" secondItem="7ja-Ld-ljx" secondAttribute="bottom" id="sb4-tr-e17"/>
-                                </constraints>
-                            </scrollView>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="h8t-8x-Sfp">
+                                    <size key="itemSize" width="50" height="50"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells/>
+                            </collectionView>
                         </subviews>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="cDA-Lv-LTm" secondAttribute="trailing" id="B07-Uu-wo9"/>
-                            <constraint firstItem="cDA-Lv-LTm" firstAttribute="top" secondItem="ati-Mr-UlG" secondAttribute="bottom" id="WVH-4l-oFc"/>
-                            <constraint firstItem="Pgt-zY-a1e" firstAttribute="top" secondItem="cDA-Lv-LTm" secondAttribute="bottom" id="Wr3-KK-fHe"/>
-                            <constraint firstItem="cDA-Lv-LTm" firstAttribute="leading" secondItem="uft-wy-QKd" secondAttribute="leading" id="rbT-vW-Thn"/>
+                            <constraint firstItem="dsg-XF-3Od" firstAttribute="top" secondItem="ati-Mr-UlG" secondAttribute="bottom" id="M87-fo-xVd"/>
+                            <constraint firstItem="Pgt-zY-a1e" firstAttribute="top" secondItem="dsg-XF-3Od" secondAttribute="bottom" id="fl1-Ll-OeL"/>
+                            <constraint firstAttribute="trailing" secondItem="dsg-XF-3Od" secondAttribute="trailing" id="xJS-R3-lXz"/>
+                            <constraint firstItem="dsg-XF-3Od" firstAttribute="leading" secondItem="uft-wy-QKd" secondAttribute="leading" id="zef-jW-N4l"/>
                         </constraints>
                         <connections>
-                            <outlet property="logoImageView" destination="7A4-Jo-BNQ" id="JVy-Ce-1AI"/>
-                            <outlet property="scrollView" destination="cDA-Lv-LTm" id="asA-XV-AI1"/>
-                            <outlet property="scrollViewContent" destination="7ja-Ld-ljx" id="miO-wW-UWv"/>
+                            <outlet property="collectionView" destination="dsg-XF-3Od" id="4kq-wt-IZy"/>
                         </connections>
                     </view>
                     <connections>
@@ -370,7 +348,4 @@
             <point key="canvasLocation" x="1092" y="451"/>
         </scene>
     </scenes>
-    <resources>
-        <image name="logo_xebia_tv" width="369" height="100"/>
-    </resources>
 </document>
