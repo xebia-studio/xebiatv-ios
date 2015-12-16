@@ -10,6 +10,10 @@ import UIKit
 
 class HomeCell: AbstractCollectionViewCell {
 
+    // MARK: - Variables
+    
+    typealias SelectedVideo = (backgroundImage: UIImage?, video: Video)
+    
     @IBOutlet weak var titleLabel:UILabel!
     @IBOutlet weak var collectionView:UICollectionView!
  
@@ -19,7 +23,11 @@ class HomeCell: AbstractCollectionViewCell {
         }
     }
     
+    internal var onSelectCallback: (SelectedVideo -> Void)?
+    
     let spaceBetweenCells:CGFloat = 100
+    
+    // MARK: - LifeCycle
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -46,15 +54,19 @@ class HomeCell: AbstractCollectionViewCell {
         self.collectionView.reloadData()
     }
     
+    // MARK: - Callbacks
+    
+    func onSelect(onSelectCallback: SelectedVideo -> Void) {
+        self.onSelectCallback = onSelectCallback
+    }
+    
+    // MARK: - Setters
+    
     var category:CategoryProtocol? = nil {
         didSet {
             guard let category = category else { return }
             self.titleLabel.text = category.name
         }
-    }
-    
-    override func didUpdateFocusInContext(context: UIFocusUpdateContext, withAnimationCoordinator coordinator: UIFocusAnimationCoordinator) {
-        
     }
     
 }

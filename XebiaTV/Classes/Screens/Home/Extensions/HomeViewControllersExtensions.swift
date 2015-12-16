@@ -38,6 +38,12 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
         let sectionDataItems = self.videosDataSource[indexPath.section]
         cell.videosDataSource = sectionDataItems
         cell.category = self.menuDataSource[indexPath.section]
+        cell.onSelect({ selectedVideo in
+            self.selectedIndex = indexPath.section
+            self.selectedBackgroundImage = selectedVideo.backgroundImage
+            self.selectedVideo = selectedVideo.video
+            self.performSegueWithIdentifier(Constants.Segues.ShowDetails, sender: nil)
+        })
     }
     
     func collectionView(collectionView: UICollectionView, canFocusItemAtIndexPath indexPath: NSIndexPath) -> Bool {
