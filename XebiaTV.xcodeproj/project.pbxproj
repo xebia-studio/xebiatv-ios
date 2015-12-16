@@ -119,6 +119,8 @@
 		5FB617F21C1092F900712F6E /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FB617DD1C1092F900712F6E /* View.swift */; };
 		5FB617F31C1092F900712F6E /* ViewUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FB617DE1C1092F900712F6E /* ViewUtils.swift */; };
 		5FE84E0F1C20570A0047827C /* HomeCellExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FE84E0E1C20570A0047827C /* HomeCellExtensions.swift */; };
+		5FE84E1C1C218C5F0047827C /* HomeHeaderCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FE84E1A1C218C5F0047827C /* HomeHeaderCollectionReusableView.swift */; };
+		5FE84E1F1C218D920047827C /* HomeHeaderCollectionReusableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5FE84E1E1C218D920047827C /* HomeHeaderCollectionReusableView.xib */; };
 		CBA3E0FC52E4F75AABF39C83 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E0BDC962CC754910151386D /* Pods.framework */; };
 /* End PBXBuildFile section */
 
@@ -243,6 +245,8 @@
 		5FB617DD1C1092F900712F6E /* View.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = View.swift; sourceTree = "<group>"; };
 		5FB617DE1C1092F900712F6E /* ViewUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewUtils.swift; sourceTree = "<group>"; };
 		5FE84E0E1C20570A0047827C /* HomeCellExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HomeCellExtensions.swift; path = Extensions/HomeCellExtensions.swift; sourceTree = "<group>"; };
+		5FE84E1A1C218C5F0047827C /* HomeHeaderCollectionReusableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HomeHeaderCollectionReusableView.swift; path = View/Cells/HomeHeaderCollectionReusableView.swift; sourceTree = "<group>"; };
+		5FE84E1E1C218D920047827C /* HomeHeaderCollectionReusableView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = HomeHeaderCollectionReusableView.xib; path = View/Cells/HomeHeaderCollectionReusableView.xib; sourceTree = "<group>"; };
 		6E0BDC962CC754910151386D /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CA238AAE215C73FBC961A30D /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		E7AC0F65E75D8202B8134A58 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
@@ -653,6 +657,8 @@
 			children = (
 				5F97A5E11BFDD297004A753B /* HomeCell.swift */,
 				5F97A5E21BFDD297004A753B /* HomeCell.xib */,
+				5FE84E1A1C218C5F0047827C /* HomeHeaderCollectionReusableView.swift */,
+				5FE84E1E1C218D920047827C /* HomeHeaderCollectionReusableView.xib */,
 				5F97A5D91BFCD63F004A753B /* VideoCell.swift */,
 				5F97A5DA1BFCD63F004A753B /* VideoCell.xib */,
 			);
@@ -769,6 +775,7 @@
 				5F97A5B71BFCB08E004A753B /* Main.storyboard in Resources */,
 				5FB617EC1C1092F900712F6E /* Info.plist in Resources */,
 				5F109CCD1C048EC300DC76B2 /* Info.plist in Resources */,
+				5FE84E1F1C218D920047827C /* HomeHeaderCollectionReusableView.xib in Resources */,
 				5F4A92371C0773C600C1B516 /* Lato-Regular.ttf in Resources */,
 				5F97A5E41BFDD297004A753B /* HomeCell.xib in Resources */,
 				5F576A821C2012D200DEF22D /* Info.plist in Resources */,
@@ -899,6 +906,7 @@
 				5F109CCC1C048EC300DC76B2 /* Cancellable.swift in Sources */,
 				5F109CCA1C048EC300DC76B2 /* _RecursiveLock.swift in Sources */,
 				5F97A5CF1BFCC7CA004A753B /* Constants.swift in Sources */,
+				5FE84E1C1C218C5F0047827C /* HomeHeaderCollectionReusableView.swift in Sources */,
 				5FB617DF1C1092F900712F6E /* Align.swift in Sources */,
 				5F97A5BE1BFCB106004A753B /* HomeView.swift in Sources */,
 				5F576A641C2012D200DEF22D /* NVActivityIndicatorAnimationBallBeat.swift in Sources */,

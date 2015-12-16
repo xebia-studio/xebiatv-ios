@@ -31,9 +31,9 @@ class HomeViewController: UIViewController {
         guard let collectionView = view.collectionView, layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout else { return }
         
         collectionView.registerNib(HomeCell.nib(), forCellWithReuseIdentifier: HomeCell.reuseIdentifier())
+        collectionView.registerNib(HomeHeaderCollectionReusableView.nib(), forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: HomeHeaderCollectionReusableView.reuseIdentifier())
         collectionView.delegate = self
         collectionView.dataSource = self
-        collectionView.contentInset.top = self.minimumEdgePadding - layout.sectionInset.top
         collectionView.contentInset.bottom = self.minimumEdgePadding - layout.sectionInset.bottom
         
         self.loadData()

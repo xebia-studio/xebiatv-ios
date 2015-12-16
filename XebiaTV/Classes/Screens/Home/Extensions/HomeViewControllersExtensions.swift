@@ -8,7 +8,7 @@
 
 import UIKit
 
-extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelegate {
+extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     
     // MARK: UICollectionViewDataSource
     
@@ -47,6 +47,29 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
         should become focused.
         */
         return false
+    }
+    
+    func collectionView(collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, atIndexPath indexPath: NSIndexPath) -> UICollectionReusableView {
+        
+        let reusableview:UICollectionReusableView
+        if (kind == UICollectionElementKindSectionHeader && indexPath.section == 0) {
+            let headerView = collectionView.dequeueReusableSupplementaryViewOfKind(kind, withReuseIdentifier: HomeHeaderCollectionReusableView.reuseIdentifier(), forIndexPath: indexPath)
+            reusableview = headerView;
+        }  else {
+           reusableview = UICollectionReusableView()
+        }
+        
+        return reusableview
+    }
+    
+    // MARK: - UICollectionViewFlowLayout Delegate
+    
+    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+        if (section == 0) {
+            return CGSizeMake(collectionView.bounds.size.width, 130)
+        } else {
+            return CGSizeZero
+        }
     }
     
     // MARK: - UICollectionView Delegate
