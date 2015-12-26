@@ -27,23 +27,6 @@ class VideoPlayerViewController: AVPlayerViewController {
         }
     }
     
-    // MARK: - LifeCycle
-    
-    override func viewDidAppear(animated: Bool) {
-        super.viewDidAppear(animated)
-        
-        // Watermark
-        /*self.watermarkView = UIImageView(image: UIImage(named: "logo_xebia"))
-        self.watermarkView?.alpha = 0
-        
-        guard let watermarkView = self.watermarkView, contentOverlayView = self.contentOverlayView else { return }
-        self.contentOverlayView?.addSubview(watermarkView)
-        watermarkView.frame = CGRectMake(self.watermarkOffset, contentOverlayView.frame.height - watermarkView.bounds.height - self.watermarkOffset, watermarkView.bounds.width, watermarkView.bounds.height)
-        UIView.animateWithDuration(0.25, animations: {
-            watermarkView.alpha = 0.75
-        })*/
-    }
-    
     // MARK: - Data
     
     private func loadData() {
@@ -56,10 +39,7 @@ class VideoPlayerViewController: AVPlayerViewController {
                 strongSelf.selectedVideo?.urls = response
                 strongSelf.playVideo()
             }
-            .failure { /*[weak self]*/ (error, isCancelled) -> Void in
-                //guard let strongSelf = self else { return }
-                //strongSelf.clearRefresh()
-        }
+            .failure { (error, isCancelled) -> Void in }
     }
     
     // MARK: - Video Player
