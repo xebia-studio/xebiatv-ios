@@ -7,6 +7,8 @@
 */
 
 // Home
+"NO_INTERNET_CONNECTION" = "Impossible to download application content.\nPlease check your internet connection.";
+"NO_DATA_ERROR" = "There is no content available.\nPlease come back later.";
 "EMPTY_CATEGORY" = "The category \"%@\" doesn't have any video. Please come back later :)";
 
 // Details

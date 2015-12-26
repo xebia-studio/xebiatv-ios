@@ -16,9 +16,11 @@ class HomeCell: AbstractCollectionViewCell {
     
     @IBOutlet weak var titleLabel:UILabel!
     @IBOutlet weak var collectionView:UICollectionView!
+    @IBOutlet weak var loaderView:NVActivityIndicatorView!
  
-    var videosDataSource:[Video] = [] {
+    var videosDataSource:[Video]? = nil {
         didSet {
+            self.loaderView.stopAnimation()
             self.collectionView.reloadData()
         }
     }
@@ -36,6 +38,12 @@ class HomeCell: AbstractCollectionViewCell {
         self.titleLabel.font = UIFont.fontLight(60)
         self.titleLabel.textColor = UIColor.commonPurpleColor()
         
+        // Loader
+        self.loaderView.type = .LineScaleParty
+        self.loaderView.color = UIColor.commonPurpleColor()
+        self.loaderView.size = CGSize(width: 80, height: 80)
+        self.loaderView.startAnimation()
+        
         // Collection View
         guard let collectionView = self.collectionView, layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout else { return }
         
@@ -51,7 +59,8 @@ class HomeCell: AbstractCollectionViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
         
-        self.videosDataSource.removeAll()
+        self.loaderView.startAnimation()
+        self.videosDataSource?.removeAll()
         self.collectionView.reloadData()
     }
     

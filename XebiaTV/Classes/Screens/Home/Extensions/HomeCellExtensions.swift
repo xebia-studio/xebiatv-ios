@@ -16,8 +16,8 @@ extension HomeCell: UICollectionViewDelegate, UICollectionViewDataSource {
         let effectiveWidth = collectionView.frame.width - collectionView.contentInset.left - collectionView.contentInset.right - (CGFloat(Constants.Configuration.NumCellsVisible - 1) * self.spaceBetweenCells)
         let width = effectiveWidth / CGFloat(Constants.Configuration.NumCellsVisible)
         
-        if self.videosDataSource.count == 0 {
-            return CGSizeMake(collectionView.bounds.width, width * 9 / 16)
+        if self.videosDataSource?.count == 0 {
+            return CGSizeMake(effectiveWidth, width * 9 / 16)
         }
         
         return CGSizeMake(width, width * 9 / 16)
@@ -28,11 +28,11 @@ extension HomeCell: UICollectionViewDelegate, UICollectionViewDataSource {
     }
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return max(self.videosDataSource.count, 1)
+        return max(self.videosDataSource?.count ?? 0, 1)
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        if self.videosDataSource.count == 0 {
+        if let videosDataSource = self.videosDataSource where videosDataSource.count == 0 {
             return collectionView.dequeueReusableCellWithReuseIdentifier(HomeEmptyCell.reuseIdentifier(), forIndexPath: indexPath)
         }
         
@@ -42,8 +42,7 @@ extension HomeCell: UICollectionViewDelegate, UICollectionViewDataSource {
     // MARK: UICollectionViewDelegate
     
     func collectionView(collectionView: UICollectionView, willDisplayCell cell: UICollectionViewCell, forItemAtIndexPath indexPath: NSIndexPath) {
-        if let cell = cell as? VideoCell {
-            let item = self.videosDataSource[indexPath.row]
+        if let cell = cell as? VideoCell, item = self.videosDataSource?[indexPath.row] {
             cell.setup(item)
         } else if let cell = cell as? HomeEmptyCell {
             cell.category = self.category?.name
@@ -54,9 +53,10 @@ extension HomeCell: UICollectionViewDelegate, UICollectionViewDataSource {
         collectionView.remembersLastFocusedIndexPath = true
         guard let cell = collectionView.cellForItemAtIndexPath(indexPath) as? VideoCell else { return }
         let image = cell.videoImageView.image
-        let video = self.videosDataSource[indexPath.item]
-        let selectedVideo = SelectedVideo(backgroundImage:image, video:video)
-        self.onSelectCallback?(selectedVideo)
+        if let video = self.videosDataSource?[indexPath.item] {
+            let selectedVideo = SelectedVideo(backgroundImage:image, video:video)
+            self.onSelectCallback?(selectedVideo)
+        }
     }
     
 }

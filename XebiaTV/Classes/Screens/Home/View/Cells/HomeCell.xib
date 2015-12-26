@@ -28,6 +28,14 @@
                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         </collectionViewFlowLayout>
                     </collectionView>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uBi-7G-McL" customClass="NVActivityIndicatorView" customModule="XebiaTV" customModuleProvider="target">
+                        <rect key="frame" x="910" y="155" width="100" height="100"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="100" id="mFE-LI-j3p"/>
+                            <constraint firstAttribute="height" constant="100" id="ugg-VQ-jnq"/>
+                        </constraints>
+                    </view>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             </view>
@@ -36,12 +44,15 @@
                 <constraint firstItem="W2J-JZ-70D" firstAttribute="top" secondItem="1If-nJ-vi2" secondAttribute="top" constant="120" id="3qw-d2-jJv"/>
                 <constraint firstItem="W2J-JZ-70D" firstAttribute="leading" secondItem="1If-nJ-vi2" secondAttribute="leading" id="A9v-MK-62P"/>
                 <constraint firstItem="erh-nE-xWw" firstAttribute="leading" secondItem="1If-nJ-vi2" secondAttribute="leading" constant="60" id="GMz-ov-NwJ"/>
+                <constraint firstItem="uBi-7G-McL" firstAttribute="centerY" secondItem="W2J-JZ-70D" secondAttribute="centerY" id="Nfc-jm-lgO"/>
                 <constraint firstAttribute="bottom" secondItem="W2J-JZ-70D" secondAttribute="bottom" constant="10" id="eC3-52-jCf"/>
                 <constraint firstAttribute="trailing" secondItem="erh-nE-xWw" secondAttribute="trailing" constant="50" id="iSb-J8-N97"/>
+                <constraint firstItem="uBi-7G-McL" firstAttribute="centerX" secondItem="W2J-JZ-70D" secondAttribute="centerX" id="lQH-oV-Vro"/>
                 <constraint firstAttribute="trailing" secondItem="W2J-JZ-70D" secondAttribute="trailing" id="tRI-Oj-kSK"/>
             </constraints>
             <connections>
                 <outlet property="collectionView" destination="W2J-JZ-70D" id="nGp-Kg-WWm"/>
+                <outlet property="loaderView" destination="uBi-7G-McL" id="qEa-ei-2gd"/>
                 <outlet property="titleLabel" destination="erh-nE-xWw" id="xnN-D6-H5G"/>
             </connections>
         </collectionViewCell>

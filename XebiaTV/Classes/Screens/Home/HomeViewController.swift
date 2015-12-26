@@ -36,7 +36,25 @@ class HomeViewController: UIViewController {
         collectionView.dataSource = self
         collectionView.contentInset.bottom = self.minimumEdgePadding - layout.sectionInset.bottom
         
-        self.loadData()
+        self.checkReachability()
+    }
+    
+    // MARK: - Reachability
+    
+    private func checkReachability() {
+        // Reachability
+        let reachability: Reachability
+        do {
+            reachability = try Reachability.reachabilityForInternetConnection()
+            if reachability.isReachable() {
+                self.loadData()
+            } else {
+                self.clearRefresh(true)
+            }
+        } catch {
+            self.clearRefresh(true)
+            return
+        }
     }
     
     // MARK: - Categories Data
@@ -47,11 +65,12 @@ class HomeViewController: UIViewController {
             .success { [weak self] response -> Void in // Populate
                 guard let strongSelf = self else { return }
                 strongSelf.populateData(response.categories)
+                strongSelf.showContent()
             }
             .failure { [weak self] (error, isCancelled) -> Void in
                 guard let strongSelf = self else { return }
                 strongSelf.clearRefresh()
-        }
+            }
     }
     
     private func populateData(categories:[CategoryProtocol]) {
@@ -62,8 +81,6 @@ class HomeViewController: UIViewController {
 
             var index = 0
             for category in categories {
-                self.videosDataSource.append([])
-                
                 if index == 0 {
                     self.loadPlaylistData(index, playlistId: category.idString)
                 }
@@ -87,30 +104,24 @@ class HomeViewController: UIViewController {
             .success { [weak self] response -> Void in // Populate
                 guard let strongSelf = self else { return }
                 strongSelf.populatePlaylistData(index, videos: response)
-                
+            }
+            .failure { [weak self] (error, isCancelled) -> Void in
+                guard let strongSelf = self else { return }
+                strongSelf.populatePlaylistData(index, videos: [])
+            }
+            .then { [weak self] _ in
+                guard let strongSelf = self else { return }
                 let nextIndex = index + 1
                 if strongSelf.menuDataSource.count > nextIndex {
                     let category = strongSelf.menuDataSource[nextIndex]
                     strongSelf.loadPlaylistData(nextIndex, playlistId: category.idString)
                 }
             }
-            .failure { [weak self] (error, isCancelled) -> Void in
-                guard let strongSelf = self else { return }
-                
-                let nextIndex = index + 1
-                if strongSelf.menuDataSource.count > nextIndex {
-                    let category = strongSelf.menuDataSource[nextIndex]
-                    strongSelf.loadPlaylistData(nextIndex, playlistId: category.idString)
-                }
-                
-                //guard let strongSelf = self else { return }
-                //strongSelf.clearRefresh()
-        }
     }
     
     private func populatePlaylistData(index:NSInteger, videos:[Video]) {
         Async.main {
-            self.videosDataSource[index] = videos
+            self.videosDataSource.insert(videos, atIndex: index)
             
             let view = self.view as! HomeView
             view.collectionView.reloadSections(NSIndexSet(index: index))
@@ -119,9 +130,18 @@ class HomeViewController: UIViewController {
     
     // MARK: - Display
     
-    private func clearRefresh() {
-        //let view = self.view as! HomeView
-        //view.showErrorMessage()
+    private func showContent() {
+        Async.main {
+            let view = self.view as! HomeView
+            view.showContent()
+        }
+    }
+    
+    private func clearRefresh(noInternetConnection:Bool = false) {
+        Async.main {
+            let view = self.view as! HomeView
+            view.showErrorMessage(noInternetConnection)
+        }
     }
     
     // MARK: - Segues

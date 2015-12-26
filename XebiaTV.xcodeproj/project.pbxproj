@@ -96,6 +96,7 @@
 		5F97BA891BFF4A4C0029D242 /* UIColor+Design.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F97BA881BFF4A4C0029D242 /* UIColor+Design.swift */; };
 		5FB236621C2C452400A6BBD7 /* HomeEmptyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FB236611C2C452400A6BBD7 /* HomeEmptyCell.swift */; };
 		5FB236641C2C461E00A6BBD7 /* HomeEmptyCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5FB236631C2C461E00A6BBD7 /* HomeEmptyCell.xib */; };
+		5FB236671C2F10BC00A6BBD7 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FB236661C2F10BC00A6BBD7 /* Reachability.swift */; };
 		5FB617C11C10528C00712F6E /* Array+Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FB617C01C10528C00712F6E /* Array+Utilities.swift */; };
 		5FB617C31C10768600712F6E /* DetailsAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FB617C21C10768600712F6E /* DetailsAlertView.swift */; };
 		5FB617C71C107BD200712F6E /* DetailsAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FB617C61C107BD200712F6E /* DetailsAlertViewController.swift */; };
@@ -223,6 +224,7 @@
 		5F97BA881BFF4A4C0029D242 /* UIColor+Design.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Design.swift"; sourceTree = "<group>"; };
 		5FB236611C2C452400A6BBD7 /* HomeEmptyCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HomeEmptyCell.swift; path = View/Cells/HomeEmptyCell.swift; sourceTree = "<group>"; };
 		5FB236631C2C461E00A6BBD7 /* HomeEmptyCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = HomeEmptyCell.xib; path = View/Cells/HomeEmptyCell.xib; sourceTree = "<group>"; };
+		5FB236661C2F10BC00A6BBD7 /* Reachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		5FB617C01C10528C00712F6E /* Array+Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Array+Utilities.swift"; sourceTree = "<group>"; };
 		5FB617C21C10768600712F6E /* DetailsAlertView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DetailsAlertView.swift; path = Details/View/DetailsAlertView.swift; sourceTree = "<group>"; };
 		5FB617C61C107BD200712F6E /* DetailsAlertViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DetailsAlertViewController.swift; path = Details/DetailsAlertViewController.swift; sourceTree = "<group>"; };
@@ -651,6 +653,7 @@
 				5FB617C81C1092F900712F6E /* Cartography */,
 				5F109CD91C049E0D00DC76B2 /* JSONJoy */,
 				5F576A3F1C2012D200DEF22D /* NVActivityIndicatorView */,
+				5FB236651C2F10BC00A6BBD7 /* Reachability */,
 				5F109CC11C048EC300DC76B2 /* SwiftTask */,
 			);
 			name = Libraries;
@@ -669,6 +672,15 @@
 				5F97A5DA1BFCD63F004A753B /* VideoCell.xib */,
 			);
 			name = Cells;
+			sourceTree = "<group>";
+		};
+		5FB236651C2F10BC00A6BBD7 /* Reachability */ = {
+			isa = PBXGroup;
+			children = (
+				5FB236661C2F10BC00A6BBD7 /* Reachability.swift */,
+			);
+			name = Reachability;
+			path = Libraries/Reachability;
 			sourceTree = "<group>";
 		};
 		5FB617C81C1092F900712F6E /* Cartography */ = {
@@ -918,6 +930,7 @@
 				5FB617DF1C1092F900712F6E /* Align.swift in Sources */,
 				5F97A5BE1BFCB106004A753B /* HomeView.swift in Sources */,
 				5F576A641C2012D200DEF22D /* NVActivityIndicatorAnimationBallBeat.swift in Sources */,
+				5FB236671C2F10BC00A6BBD7 /* Reachability.swift in Sources */,
 				5F97A5BB1BFCB0F4004A753B /* HomeViewController.swift in Sources */,
 				5F4A92061C06F4E500C1B516 /* DetailsView.swift in Sources */,
 				5F576A7A1C2012D200DEF22D /* NVActivityIndicatorAnimationLineScaleParty.swift in Sources */,
