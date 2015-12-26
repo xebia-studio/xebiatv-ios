@@ -26,7 +26,7 @@ struct Constants {
     struct Configuration {
         static let YoutubeAPIKey = "AIzaSyD6Q8VDZwz8KrJXQvKJ6n9_X5hoL34vkJg"
         static let PrivateVideoKey = "Private video"
-        static let NumCellsPerLine = 3
+        static let NumCellsVisible = 3
     }
     
     struct Endpoints {

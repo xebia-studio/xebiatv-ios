@@ -42,6 +42,7 @@ class HomeCell: AbstractCollectionViewCell {
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.registerNib(VideoCell.nib(), forCellWithReuseIdentifier: VideoCell.reuseIdentifier())
+        collectionView.registerNib(HomeEmptyCell.nib(), forCellWithReuseIdentifier: HomeEmptyCell.reuseIdentifier())
         collectionView.clipsToBounds = false
         layout.sectionInset = UIEdgeInsetsMake(0, self.spaceBetweenCells, 0, self.spaceBetweenCells)
         layout.minimumLineSpacing = self.spaceBetweenCells

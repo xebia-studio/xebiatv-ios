@@ -6,6 +6,9 @@
   Copyright © 2015 Xebia. All rights reserved.
 */
 
+// Home
+"EMPTY_CATEGORY" = "La catégorie \"%@\" ne contient aucune vidéo. Revenez plus tard :)";
+
 // Details
 "CLOSE" = "Fermer";
 "PLAY_TITLE" = "Lire";

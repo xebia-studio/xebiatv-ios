@@ -94,6 +94,8 @@
 		5F97A5E31BFDD297004A753B /* HomeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F97A5E11BFDD297004A753B /* HomeCell.swift */; };
 		5F97A5E41BFDD297004A753B /* HomeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5F97A5E21BFDD297004A753B /* HomeCell.xib */; };
 		5F97BA891BFF4A4C0029D242 /* UIColor+Design.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F97BA881BFF4A4C0029D242 /* UIColor+Design.swift */; };
+		5FB236621C2C452400A6BBD7 /* HomeEmptyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FB236611C2C452400A6BBD7 /* HomeEmptyCell.swift */; };
+		5FB236641C2C461E00A6BBD7 /* HomeEmptyCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5FB236631C2C461E00A6BBD7 /* HomeEmptyCell.xib */; };
 		5FB617C11C10528C00712F6E /* Array+Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FB617C01C10528C00712F6E /* Array+Utilities.swift */; };
 		5FB617C31C10768600712F6E /* DetailsAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FB617C21C10768600712F6E /* DetailsAlertView.swift */; };
 		5FB617C71C107BD200712F6E /* DetailsAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FB617C61C107BD200712F6E /* DetailsAlertViewController.swift */; };
@@ -219,6 +221,8 @@
 		5F97A5E11BFDD297004A753B /* HomeCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HomeCell.swift; path = View/Cells/HomeCell.swift; sourceTree = "<group>"; };
 		5F97A5E21BFDD297004A753B /* HomeCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = HomeCell.xib; path = View/Cells/HomeCell.xib; sourceTree = "<group>"; };
 		5F97BA881BFF4A4C0029D242 /* UIColor+Design.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Design.swift"; sourceTree = "<group>"; };
+		5FB236611C2C452400A6BBD7 /* HomeEmptyCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HomeEmptyCell.swift; path = View/Cells/HomeEmptyCell.swift; sourceTree = "<group>"; };
+		5FB236631C2C461E00A6BBD7 /* HomeEmptyCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = HomeEmptyCell.xib; path = View/Cells/HomeEmptyCell.xib; sourceTree = "<group>"; };
 		5FB617C01C10528C00712F6E /* Array+Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Array+Utilities.swift"; sourceTree = "<group>"; };
 		5FB617C21C10768600712F6E /* DetailsAlertView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DetailsAlertView.swift; path = Details/View/DetailsAlertView.swift; sourceTree = "<group>"; };
 		5FB617C61C107BD200712F6E /* DetailsAlertViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DetailsAlertViewController.swift; path = Details/DetailsAlertViewController.swift; sourceTree = "<group>"; };
@@ -657,6 +661,8 @@
 			children = (
 				5F97A5E11BFDD297004A753B /* HomeCell.swift */,
 				5F97A5E21BFDD297004A753B /* HomeCell.xib */,
+				5FB236611C2C452400A6BBD7 /* HomeEmptyCell.swift */,
+				5FB236631C2C461E00A6BBD7 /* HomeEmptyCell.xib */,
 				5FE84E1A1C218C5F0047827C /* HomeHeaderCollectionReusableView.swift */,
 				5FE84E1E1C218D920047827C /* HomeHeaderCollectionReusableView.xib */,
 				5F97A5D91BFCD63F004A753B /* VideoCell.swift */,
@@ -779,6 +785,7 @@
 				5F4A92371C0773C600C1B516 /* Lato-Regular.ttf in Resources */,
 				5F97A5E41BFDD297004A753B /* HomeCell.xib in Resources */,
 				5F576A821C2012D200DEF22D /* Info.plist in Resources */,
+				5FB236641C2C461E00A6BBD7 /* HomeEmptyCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -897,6 +904,7 @@
 				5FB617C71C107BD200712F6E /* DetailsAlertViewController.swift in Sources */,
 				5F576A6A1C2012D200DEF22D /* NVActivityIndicatorAnimationBallPulse.swift in Sources */,
 				5FB617E11C1092F900712F6E /* Compound.swift in Sources */,
+				5FB236621C2C452400A6BBD7 /* HomeEmptyCell.swift in Sources */,
 				5F97A5B51BFCB08E004A753B /* Video.swift in Sources */,
 				5F109CD41C0491A900DC76B2 /* CategoriesDataAccess.swift in Sources */,
 				5F109CC91C048EC300DC76B2 /* _Atomic.swift in Sources */,

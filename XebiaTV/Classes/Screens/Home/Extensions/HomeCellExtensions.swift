@@ -13,8 +13,13 @@ extension HomeCell: UICollectionViewDelegate, UICollectionViewDataSource {
     // MARK: UICollectionViewDataSource
     
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-        let effectiveWidth = collectionView.frame.width - collectionView.contentInset.left - collectionView.contentInset.right - (CGFloat(Constants.Configuration.NumCellsPerLine - 1) * self.spaceBetweenCells)
-        let width = effectiveWidth / CGFloat(Constants.Configuration.NumCellsPerLine)
+        let effectiveWidth = collectionView.frame.width - collectionView.contentInset.left - collectionView.contentInset.right - (CGFloat(Constants.Configuration.NumCellsVisible - 1) * self.spaceBetweenCells)
+        let width = effectiveWidth / CGFloat(Constants.Configuration.NumCellsVisible)
+        
+        if self.videosDataSource.count == 0 {
+            return CGSizeMake(collectionView.bounds.width, width * 9 / 16)
+        }
+        
         return CGSizeMake(width, width * 9 / 16)
     }
     
@@ -23,25 +28,31 @@ extension HomeCell: UICollectionViewDelegate, UICollectionViewDataSource {
     }
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return self.videosDataSource.count
+        return max(self.videosDataSource.count, 1)
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+        if self.videosDataSource.count == 0 {
+            return collectionView.dequeueReusableCellWithReuseIdentifier(HomeEmptyCell.reuseIdentifier(), forIndexPath: indexPath)
+        }
+        
         return collectionView.dequeueReusableCellWithReuseIdentifier(VideoCell.reuseIdentifier(), forIndexPath: indexPath)
     }
     
     // MARK: UICollectionViewDelegate
     
     func collectionView(collectionView: UICollectionView, willDisplayCell cell: UICollectionViewCell, forItemAtIndexPath indexPath: NSIndexPath) {
-        guard let cell = cell as? VideoCell else { fatalError("Expected to display a VideoCell") }
-        let item = self.videosDataSource[indexPath.row]
-        cell.setup(item)
+        if let cell = cell as? VideoCell {
+            let item = self.videosDataSource[indexPath.row]
+            cell.setup(item)
+        } else if let cell = cell as? HomeEmptyCell {
+            cell.category = self.category?.name
+        }
     }
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         collectionView.remembersLastFocusedIndexPath = true
-
-        let cell = collectionView.cellForItemAtIndexPath(indexPath) as! VideoCell
+        guard let cell = collectionView.cellForItemAtIndexPath(indexPath) as? VideoCell else { return }
         let image = cell.videoImageView.image
         let video = self.videosDataSource[indexPath.item]
         let selectedVideo = SelectedVideo(backgroundImage:image, video:video)
