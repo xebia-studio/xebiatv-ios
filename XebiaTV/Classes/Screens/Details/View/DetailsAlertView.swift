@@ -13,8 +13,8 @@ class DetailsAlertView: UIView {
     // MARK: - IBOutlets
     
     @IBOutlet weak var titleLabel:UILabel!
-    @IBOutlet weak var contentLabel:UILabel!
-    @IBOutlet weak var scrollView:UIScrollView!
+    @IBOutlet weak var contentView:UITextView!
+    @IBOutlet weak var closeButton:CommonButton!
     
     // MARK: - LifeCycle
     
@@ -24,15 +24,21 @@ class DetailsAlertView: UIView {
         // Labels
         self.titleLabel.font = UIFont.fontLight(70)
         self.titleLabel.textColor = UIColor.commonPurpleColor()
-        self.contentLabel.font = UIFont.fontRegular(30)
-        self.contentLabel.textColor = UIColor.commonPurpleColor()
+        self.contentView.selectable = true
+        self.contentView.scrollEnabled = true
+        self.contentView.font = UIFont.fontRegular(30)
+        self.contentView.textColor = UIColor.commonPurpleColor()
+        //self.contentView.panGestureRecognizer.allowedTouchTypes = [NSNumber(integer: UITouchType.Indirect.rawValue)]
+
+        // Button
+        self.closeButton.setTitle("CLOSE".localized, forState: .Normal)
     }
     
     // MARK: - Setters
     
     func setVideo(video:Video?) {
         self.titleLabel.text = video?.snippet?.title
-        self.contentLabel.text = video?.snippet?.description
+        self.contentView.text = video?.snippet?.description
     }
     
 }
