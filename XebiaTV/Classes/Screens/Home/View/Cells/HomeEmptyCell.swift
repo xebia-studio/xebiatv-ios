@@ -12,6 +12,8 @@ class HomeEmptyCell: AbstractCollectionViewCell {
 
     @IBOutlet weak var titleLabel:UILabel!
     
+    // MARK: - LifeCycle
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         
