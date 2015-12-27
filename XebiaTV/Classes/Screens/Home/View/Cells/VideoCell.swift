@@ -7,12 +7,14 @@
 //
 
 import UIKit
+import Async
 
 class VideoCell: AbstractCollectionViewCell {
     
     // MARK: - Variables
     
     private var video:Video?
+    private var fetcher:NetworkFetcher<UIImage>?
     
     @IBOutlet weak var videoTitle:UILabel!
     @IBOutlet weak var videoContainer:UIView!
@@ -47,6 +49,8 @@ class VideoCell: AbstractCollectionViewCell {
         self.video = nil
         self.videoTitle.text = nil
         self.videoImageView.image = nil
+        self.videoImageView.layer.removeAllAnimations()
+        self.fetcher?.cancelFetch()
     }
     
     override func didUpdateFocusInContext(context: UIFocusUpdateContext, withAnimationCoordinator coordinator: UIFocusAnimationCoordinator) {
@@ -65,7 +69,7 @@ class VideoCell: AbstractCollectionViewCell {
             return
         }
         
-        UIView.animateWithDuration(0.35, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 14.0, options: UIViewAnimationOptions.CurveEaseInOut, animations: {
+        UIView.animateWithDuration(0.35, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 14.0, options: .CurveEaseInOut, animations: {
             self.videoContainer.alpha = self.focused ? 1 : 0
             self.videoVisualEffectView.alpha = self.focused ? 1 : 0
             self.videoContainerBottomConstraint.constant = self.focused ? 0 : -self.videoContainer.frame.height
@@ -91,19 +95,26 @@ class VideoCell: AbstractCollectionViewCell {
         self.layoutIfNeeded()
         
         // Load Picture
+        let cache = Shared.imageCache
+        let URL = NSURL(string: thumbnail.urlString)!
+        self.fetcher = NetworkFetcher<UIImage>(URL: URL)
         self.videoLoader.startAnimation()
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), { () -> Void in
-            if let data = NSData(contentsOfURL: NSURL(string: thumbnail.urlString)!) {
-                dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                    self.videoLoader.stopAnimation()
-                    UIView.transitionWithView(self.videoImageView, duration: 0.25, options: UIViewAnimationOptions.TransitionCrossDissolve, animations: {
-                            self.videoImageView.image = UIImage(data: data)
+        
+        guard let fetcher = self.fetcher else { return }
+        cache.fetch(fetcher: fetcher)
+             .onSuccess { [weak self] image in
+                Async.main {
+                    guard let strongSelf = self where fetcher.URL.absoluteString == thumbnail.urlString  else { return }
+                    strongSelf.videoLoader.stopAnimation()
+                    UIView.transitionWithView(strongSelf.videoImageView, duration: 0.25, options: [.TransitionCrossDissolve], animations: {
+                        strongSelf.videoImageView.image = image
                         }, completion: nil)
-                })
-            } else {
-                self.videoLoader.stopAnimation()
-            }
-        })
+                }
+             }
+             .onFailure() { [weak self] error in
+                guard let strongSelf = self else { return }
+                strongSelf.videoImageView.image = nil
+             }
     }
     
 }

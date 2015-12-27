@@ -18,11 +18,5 @@ class DetailsAlertViewController: UIViewController {
             view.setVideo(video)
         }
     }
-    
-    // MARK: - Actions
-    
-    @IBAction func handleClose() {
-        self.dismissViewControllerAnimated(true, completion: nil)
-    }
 
 }

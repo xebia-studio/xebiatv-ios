@@ -22,8 +22,8 @@ extension DetailsViewController: UICollectionViewDataSource, UICollectionViewDel
         // Reload data with this video
         let video = self.filteredDataSource[indexPath.item]
         let cell = collectionView.cellForItemAtIndexPath(indexPath) as! VideoCell
-        self.selectedVideoImage = cell.videoImageView.image
         self.selectedVideo = video
+        self.selectedVideoImage = cell.videoImageView.image
         self.filterDataSource()
     }
     

@@ -14,7 +14,6 @@ class DetailsAlertView: UIView {
     
     @IBOutlet weak var titleLabel:UILabel!
     @IBOutlet weak var contentView:UITextView!
-    @IBOutlet weak var closeButton:CommonButton!
     
     // MARK: - LifeCycle
     
@@ -28,10 +27,7 @@ class DetailsAlertView: UIView {
         self.contentView.scrollEnabled = true
         self.contentView.font = UIFont.fontRegular(30)
         self.contentView.textColor = UIColor.commonPurpleColor()
-        //self.contentView.panGestureRecognizer.allowedTouchTypes = [NSNumber(integer: UITouchType.Indirect.rawValue)]
-
-        // Button
-        self.closeButton.setTitle("CLOSE".localized, forState: .Normal)
+        self.contentView.panGestureRecognizer.allowedTouchTypes = [NSNumber(integer: UITouchType.Indirect.rawValue)]
     }
     
     // MARK: - Setters

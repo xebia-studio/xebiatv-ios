@@ -12,7 +12,6 @@
 "EMPTY_CATEGORY" = "La catégorie \"%@\" ne contient aucune vidéo. Revenez plus tard :)";
 
 // Details
-"CLOSE" = "Fermer";
 "PLAY_TITLE" = "Lire";
 "RELATED_VIDEOS" = "Vidéos associées";
 "PLAY_BUTTON" = "Lire";

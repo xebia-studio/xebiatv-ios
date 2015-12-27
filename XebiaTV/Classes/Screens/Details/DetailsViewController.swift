@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Async
 
 class DetailsViewController: UIViewController {
 
@@ -58,14 +59,20 @@ class DetailsViewController: UIViewController {
     // MARK: - Load Picture
     
     private func loadPicture() {
+        // Load Picture
+        let cache = Shared.imageCache
         if let pictureUrl = self.selectedVideo?.snippet?.bestThumbnail?.urlString {
-            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), { () -> Void in
-                if let data = NSData(contentsOfURL: NSURL(string: pictureUrl)!) {
-                    dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                        self.selectedVideoImage = UIImage(data: data)
-                    })
-                }
-            })
+            let fetcher = NetworkFetcher<UIImage>(URL: NSURL(string: pictureUrl)!)
+            
+            cache.fetch(fetcher: fetcher)
+                .onSuccess { [weak self] image in
+                    Async.main {
+                        guard let strongSelf = self where fetcher.URL.absoluteString == pictureUrl else {
+                            return
+                        }
+                        strongSelf.selectedVideoImage = image
+                    }
+            }
         }
     }
     
