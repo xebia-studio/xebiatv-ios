@@ -24,7 +24,7 @@ struct Constants {
     }
     
     struct Configuration {
-        static let YoutubeAPIKey = "AIzaSyD6Q8VDZwz8KrJXQvKJ6n9_X5hoL34vkJg"
+        static let YoutubeAPIKey = "AIzaSyBYP5QWmQAEJxva6dD55jDbJSJGfMX2Row"
         static let PrivateVideoKey = "Private video"
         static let NumCellsVisible = 3
     }
