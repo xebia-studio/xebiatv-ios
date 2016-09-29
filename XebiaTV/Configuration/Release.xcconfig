@@ -6,7 +6,7 @@
 //  Copyright © 2015 Xebia. All rights reserved.
 //
 
-#include "Pods/Target Support Files/Pods/Pods.release.xcconfig"
+#include "Pods/Target Support Files/Pods-XebiaTV/Pods-XebiaTV.release.xcconfig"
 
 PRODUCT_IDENTIFIER = fr.xebia.xebiatv
 PRODUCT_NAME = Xebia TV

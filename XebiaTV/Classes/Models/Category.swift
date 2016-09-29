@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Unbox
 
 struct Category: CategoryProtocol {
     
@@ -17,9 +18,9 @@ struct Category: CategoryProtocol {
         
     }
     
-    internal init(_ decoder: JSONDecoder) {
-        id = decoder["id"].string
-        name = decoder["name"].string
+    internal init(unboxer: Unboxer) {
+        self.id = unboxer.unbox("id")
+        self.name = unboxer.unbox("name")
     }
     
 }

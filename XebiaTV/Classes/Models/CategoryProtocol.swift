@@ -7,8 +7,9 @@
 //
 
 import Foundation
+import Unbox
 
-protocol CategoryProtocol: JSONJoy {
+protocol CategoryProtocol: Unboxable {
     
     var id:String?  { get set }
     var name:String?  { get set }

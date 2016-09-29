@@ -7,6 +7,8 @@
 //
 
 import Foundation
+import SwiftTask
+import Unbox
 
 typealias PlaylistRetrieveTask = Task<Progress, [Video], ErrorType>
 
@@ -41,16 +43,18 @@ class PlaylistDataAccess {
         
         for videoData in videos {
             
-            let decodedObject:Video? = Video(JSONDecoder(videoData as! NSDictionary))
+            let decodedObject:Video? = Unbox(videoData as! UnboxableDictionary)
+            
             guard let video = decodedObject, snippet = video.snippet where snippet.title != Constants.Configuration.PrivateVideoKey else {
                 XBLog("Error with data : \(videoData)")
                 continue
             }
             
             list.append(video)
+            
         }
         
         return list
     }
-    
+
 }

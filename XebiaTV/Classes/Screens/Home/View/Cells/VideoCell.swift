@@ -8,6 +8,7 @@
 
 import UIKit
 import Async
+import Haneke
 
 class VideoCell: AbstractCollectionViewCell {
     
@@ -81,7 +82,6 @@ class VideoCell: AbstractCollectionViewCell {
     
     func setup(video: Video) {
         self.video = video
-        guard let thumbnail = video.snippet?.bestThumbnail else { return }
         
         if self.focused {
             self.updateDisplay()
@@ -95,6 +95,7 @@ class VideoCell: AbstractCollectionViewCell {
         self.layoutIfNeeded()
         
         // Load Picture
+        guard let thumbnail = video.snippet?.bestThumbnail else { return }
         let cache = Shared.imageCache
         let URL = NSURL(string: thumbnail.urlString)!
         self.fetcher = NetworkFetcher<UIImage>(URL: URL)
@@ -104,7 +105,7 @@ class VideoCell: AbstractCollectionViewCell {
         cache.fetch(fetcher: fetcher)
              .onSuccess { [weak self] image in
                 Async.main {
-                    guard let strongSelf = self where fetcher.URL.absoluteString == thumbnail.urlString  else { return }
+                    guard let strongSelf = self /*where fetcher.URL.absoluteString == thumbnail.urlString*/ else { return }
                     strongSelf.videoLoader.stopAnimation()
                     UIView.transitionWithView(strongSelf.videoImageView, duration: 0.25, options: [.TransitionCrossDissolve], animations: {
                         strongSelf.videoImageView.image = image

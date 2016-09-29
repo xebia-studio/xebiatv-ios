@@ -7,6 +7,8 @@
 //
 
 import Foundation
+import SwiftTask
+import Unbox
 
 typealias CategoriesResult = (categories:[CategoryProtocol], fundations:[CategoryProtocol])
 typealias CategoriesRetrieveTask = Task<Progress, CategoriesResult, ErrorType>
@@ -67,27 +69,28 @@ class CategoriesDataAccess {
         
         for categoryData in dataList {
             if categoryData.isKindOfClass(NSDictionary) {
-                var decodedObject:CategoryProtocol? = nil
                 
                 switch key {
                     case Constants.MenuKeys.CategoriesKey:
-                        decodedObject = Category(JSONDecoder(categoryData as! NSDictionary))
+                        if let category:Category = Unbox(categoryData as! UnboxableDictionary) {
+                            list.append(category)
+                        } else {
+                            XBLog("Error while unboxing category : \(categoryData)");
+                        }
                         break
                     
                     case Constants.MenuKeys.FundationsKey:
-                        decodedObject = Fundation(JSONDecoder(categoryData as! NSDictionary))
+                        if let fundation:Fundation = Unbox(categoryData as! UnboxableDictionary) {
+                            list.append(fundation)
+                        } else {
+                            XBLog("Error while unboxing fundation : \(categoryData)");
+                        }
                         break
                     
                     default:
+                        XBLog("Key type is unknown : \(key)")
                         break
                 }
-                
-                guard let category: CategoryProtocol = decodedObject else {
-                    XBLog("Error with data : \(categoryData)")
-                    continue
-                }
-                
-                list.append(category)
             }
         }
         

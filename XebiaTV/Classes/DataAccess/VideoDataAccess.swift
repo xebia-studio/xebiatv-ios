@@ -7,6 +7,8 @@
 //
 
 import Foundation
+import SwiftTask
+import Unbox
 
 typealias VideoRetrieveTask = Task<Progress, [VideoResource], ErrorType>
 
@@ -41,7 +43,7 @@ class VideoDataAccess {
         
         for urlData in urls {
             
-            let decodedObject:VideoResource? = VideoResource(JSONDecoder(urlData as! NSDictionary))
+            let decodedObject:VideoResource? = Unbox(urlData as! UnboxableDictionary)
             guard let url = decodedObject else {
                 XBLog("Error with data : \(urlData)")
                 continue

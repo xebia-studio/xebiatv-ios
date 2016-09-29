@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Unbox
 
 struct Fundation: CategoryProtocol {
     
@@ -24,10 +25,10 @@ struct Fundation: CategoryProtocol {
         color = parameters["color"] as? String
     }
     
-    internal init(_ decoder: JSONDecoder) {
-        id = decoder["id"].string
-        name = decoder["name"].string
-        color = decoder["color"].string
+    internal init(unboxer: Unboxer) {
+        self.id = unboxer.unbox("id")
+        self.name = unboxer.unbox("name")
+        self.color = unboxer.unbox("color")
     }
     
 }

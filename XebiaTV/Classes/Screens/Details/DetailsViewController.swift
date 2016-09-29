@@ -8,6 +8,7 @@
 
 import UIKit
 import Async
+import Haneke
 
 class DetailsViewController: UIViewController {
 
@@ -67,7 +68,7 @@ class DetailsViewController: UIViewController {
             cache.fetch(fetcher: fetcher)
                 .onSuccess { [weak self] image in
                     Async.main {
-                        guard let strongSelf = self where fetcher.URL.absoluteString == pictureUrl else {
+                        guard let strongSelf = self /*where fetcher.URL.absoluteString == pictureUrl*/ else {
                             return
                         }
                         strongSelf.selectedVideoImage = image

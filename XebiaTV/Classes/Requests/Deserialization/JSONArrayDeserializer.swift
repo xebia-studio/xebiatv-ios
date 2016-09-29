@@ -7,6 +7,7 @@
 //
 
 import Async
+import SwiftTask
 
 public typealias JSONArrayDeserializerTask = Task<Progress, [GenericJSON], NSError>
 

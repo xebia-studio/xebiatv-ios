@@ -9,6 +9,6 @@
 import Foundation
 
 protocol Deserializer {
-    typealias TransformedData
+    associatedtype TransformedData
     static func deserialize(data: NSData) -> TransformedData
 }

@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Unbox
 
 enum ThumbnailType: String {
     case Default = "default"
@@ -25,7 +26,7 @@ enum QualityType: String {
     case Worst = "worst"
 }
 
-struct Thumbnail: JSONJoy {
+struct Thumbnail: Unboxable {
     
     var url:String?
     var width:NSInteger?
@@ -36,16 +37,16 @@ struct Thumbnail: JSONJoy {
         return (url != nil) ? String(url!) : ""
     }
     
-    internal init(_ decoder: JSONDecoder) {
+    internal init(unboxer: Unboxer) {
         
-        url = decoder["url"].string
-        width = decoder["width"].integer
-        height = decoder["height"].integer
+        url = unboxer.unbox("url")
+        width = unboxer.unbox("width")
+        height = unboxer.unbox("height")
         
     }
 }
 
-struct VideoResource: JSONJoy {
+struct VideoResource: Unboxable {
     
     var url:String?
     var type:String?
@@ -55,29 +56,27 @@ struct VideoResource: JSONJoy {
         return (url != nil) ? String(url!) : ""
     }
     
-    internal init(_ decoder: JSONDecoder) {
+    internal init(unboxer: Unboxer) {
         
-        url = decoder["url"].string
-        type = decoder["type"].string
-        quality = decoder["quality"].string
+        url = unboxer.unbox("url")
+        type = unboxer.unbox("type")
+        quality = unboxer.unbox("quality")
         
     }
 }
 
-struct Resource: JSONJoy {
+struct Resource: Unboxable {
     
     var kind:String?
     var videoId:String?
    
-    internal init(_ decoder: JSONDecoder) {
-        
-        kind = decoder["kind"].string
-        videoId = decoder["videoId"].string
-        
+    internal init(unboxer: Unboxer) {
+        self.kind = unboxer.unbox("kind")
+        self.videoId = unboxer.unbox("videoId")
     }
 }
 
-struct Snippet: JSONJoy {
+struct Snippet: Unboxable {
 
     var title:String?
     var channelId:String?
@@ -86,7 +85,7 @@ struct Snippet: JSONJoy {
     var publishedAt:String?
     var description:String?
     var channelTitle:String?
-    var resourceId:Resource?
+    var resource:Resource?
     var thumbnails:Array<Thumbnail> = []
     
     var bestThumbnail:Thumbnail? {
@@ -108,25 +107,25 @@ struct Snippet: JSONJoy {
         return selectedThumbnail
     }
     
-    internal init(_ decoder: JSONDecoder) {
-        title = decoder["title"].string
-        position = decoder["position"].integer
-        channelId = decoder["channelId"].string
-        playlistId = decoder["playlistId"].string
-        publishedAt = decoder["publishedAt"].string
-        description = decoder["description"].string
-        channelTitle = decoder["channelTitle"].string
-        channelId = decoder["channelId"].string
-        resourceId = Resource(decoder["resourceId"])
+    internal init(unboxer: Unboxer) {
+        self.title = unboxer.unbox("title")
+        self.position = unboxer.unbox("position")
+        self.channelId = unboxer.unbox("channelId")
+        self.playlistId = unboxer.unbox("playlistId")
+        self.publishedAt = unboxer.unbox("publishedAt")
+        self.description = unboxer.unbox("description")
+        self.channelTitle = unboxer.unbox("channelTitle")
+        self.channelId = unboxer.unbox("channelId")
+        self.resource = unboxer.unbox("resourceId")
         
         // Thumbnails
-        guard let thumbs = decoder["thumbnails"].dictionary else {
+        guard let thumbs:UnboxableDictionary = unboxer.unbox("thumbnails") else {
             return
         }
         
         thumbnails = Array<Thumbnail>()
         for thumbnailDecoder in thumbs {
-            var thumbnail = Thumbnail(thumbnailDecoder.1)
+            var thumbnail:Thumbnail = unboxer.unbox("thumbnails.\(thumbnailDecoder.0)", isKeyPath: true)
             thumbnail.type = ThumbnailType(rawValue: thumbnailDecoder.0)
             thumbnails.append(thumbnail)
         }
@@ -139,7 +138,7 @@ func ==(lhs: Video, rhs: Video) -> Bool {
     return lhs.id == rhs.id
 }
 
-struct Video: JSONJoy {
+struct Video: Unboxable {
 
     var id:String?
     var etag:String?
@@ -164,10 +163,10 @@ struct Video: JSONJoy {
         return selectedUrl
     }
 
-    internal init(_ decoder: JSONDecoder) {
-        id = decoder["id"].string
-        etag = decoder["etag"].string
-        snippet = Snippet(decoder["snippet"])
+    internal init(unboxer: Unboxer) {
+        self.id = unboxer.unbox("id")
+        self.etag = unboxer.unbox("etag")
+        self.snippet = unboxer.unbox("snippet")
     }
     
 }

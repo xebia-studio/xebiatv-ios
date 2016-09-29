@@ -1,0 +1,6 @@
+framework module Pods_XebiaTV {
+  umbrella header "Pods-XebiaTV-umbrella.h"
+
+  export *
+  module * { export * }
+}

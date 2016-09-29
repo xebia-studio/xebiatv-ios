@@ -8,6 +8,7 @@
 
 import Foundation
 import Alamofire
+import SwiftTask
 
 typealias WSRequestTask = Task<Progress, NSData, ErrorType>
 

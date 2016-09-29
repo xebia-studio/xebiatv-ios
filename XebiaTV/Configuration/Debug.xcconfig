@@ -6,7 +6,7 @@
 //  Copyright © 2015 Xebia. All rights reserved.
 //
 
-#include "Pods/Target Support Files/Pods/Pods.debug.xcconfig"
+#include "Pods/Target Support Files/Pods-XebiaTV/Pods-XebiaTV.debug.xcconfig"
 
 OTHER_SWIFT_FLAGS = $(inherited) -DDEBUG
 PRODUCT_IDENTIFIER = fr.xebia.xebiatvdebug

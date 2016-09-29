@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import SwiftTask
 
 public typealias Progress = (bytesWritten: Int64, totalBytesWritten: Int64, totalBytesExpectedToWrite: Int64)
 public typealias RequestBuildTask = Task<Progress, NSMutableURLRequest, NSError>

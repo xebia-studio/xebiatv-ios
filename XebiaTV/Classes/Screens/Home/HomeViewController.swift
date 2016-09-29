@@ -8,6 +8,7 @@
 
 import UIKit
 import Async
+import ReachabilitySwift
 
 class HomeViewController: UIViewController {
 
@@ -85,7 +86,7 @@ class HomeViewController: UIViewController {
                     self.loadPlaylistData(index, playlistId: category.idString)
                 }
 
-                index++
+                index += 1
             }            
         }
     }
