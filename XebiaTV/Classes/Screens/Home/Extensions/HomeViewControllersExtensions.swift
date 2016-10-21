@@ -17,7 +17,7 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
     }
     
     func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
-        return self.menuDataSource.count
+        return self.menuDataSource.count + 1
     }
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {

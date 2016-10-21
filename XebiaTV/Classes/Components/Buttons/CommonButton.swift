@@ -28,15 +28,16 @@ class CommonButton: UIButton {
         self.bottomTitle.backgroundColor = UIColor.clearColor()
         self.bottomTitle.textColor = UIColor.whiteColor()
         self.bottomTitle.textAlignment = .Center
+        self.bottomTitle.alpha = 0.6
         self.bottomTitle.font = UIFont.fontRegular(30)
         self.addSubview(self.bottomTitle)
     }
 
     override func didUpdateFocusInContext(context: UIFocusUpdateContext, withAnimationCoordinator coordinator: UIFocusAnimationCoordinator) {
         
-        UIView.transitionWithView(self.bottomTitle, duration: 0.25, options: UIViewAnimationOptions.TransitionCrossDissolve, animations: {
-                self.bottomTitle.textColor = self.focused ? UIColor.blackColor() : UIColor.whiteColor()
-            }, completion: nil)
+        UIView.animateWithDuration(0.25, animations: {
+            self.bottomTitle.alpha = self.focused ? 1.0 : 0.6
+        })
     }
     
     // MARK: - Setters

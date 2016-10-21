@@ -14,6 +14,7 @@ class HomeViewController: UIViewController {
 
     // MARK: - Variables
     
+    internal var fundationsDataSource:[CategoryProtocol] = []
     internal var menuDataSource:[CategoryProtocol] = []
     internal var selectedIndex:NSInteger = NSIntegerMax
     internal var selectedBackgroundImage:UIImage?
@@ -65,7 +66,7 @@ class HomeViewController: UIViewController {
         CategoriesDataAccess.retrieveCategories()
             .success { [weak self] response -> Void in // Populate
                 guard let strongSelf = self else { return }
-                strongSelf.populateData(response.categories)
+                strongSelf.populateData(response.fundations, categories: response.categories)
                 strongSelf.showContent()
             }
             .failure { [weak self] (error, isCancelled) -> Void in
@@ -74,8 +75,9 @@ class HomeViewController: UIViewController {
             }
     }
     
-    private func populateData(categories:[CategoryProtocol]) {
+    private func populateData(fundations:[CategoryProtocol], categories:[CategoryProtocol]) {
         Async.main {
+            self.fundationsDataSource = fundations
             self.menuDataSource = categories
             let view = self.view as! HomeView
             view.collectionView.reloadData()

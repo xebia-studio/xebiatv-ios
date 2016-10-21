@@ -26,7 +26,7 @@
                         <subviews>
                             <view alpha="0.59999999999999998" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="E2g-d9-jZl" userLabel="Overlay">
                                 <rect key="frame" x="-37" y="-32" width="39" height="22"/>
-                                <color key="backgroundColor" red="0.33124876019999999" green="0.053373105820000002" blue="0.37232911590000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
                             <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="V1L-PC-Z67">
                                 <rect key="frame" x="0.0" y="0.0" width="1920" height="1080"/>
@@ -34,7 +34,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="1920" height="1080"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 </view>
-                                <blurEffect style="extraLight"/>
+                                <blurEffect style="dark"/>
                             </visualEffectView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a42-hc-imY">
                                 <rect key="frame" x="50" y="50" width="1820" height="21"/>
@@ -176,7 +176,7 @@
                             </imageView>
                             <view alpha="0.59999999999999998" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9E6-Pu-cV8" userLabel="Overlay">
                                 <rect key="frame" x="0.0" y="0.0" width="1920" height="1080"/>
-                                <color key="backgroundColor" red="0.33124876022338867" green="0.053373105823993683" blue="0.37232911586761475" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
                             <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Sf0-QU-hJA">
                                 <rect key="frame" x="0.0" y="0.0" width="1920" height="1080"/>

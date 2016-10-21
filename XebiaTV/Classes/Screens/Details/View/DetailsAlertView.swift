@@ -22,11 +22,11 @@ class DetailsAlertView: UIView {
         
         // Labels
         self.titleLabel.font = UIFont.fontLight(70)
-        self.titleLabel.textColor = UIColor.commonPurpleColor()
+        self.titleLabel.textColor = UIColor.whiteColor()
         self.contentView.selectable = true
         self.contentView.scrollEnabled = true
         self.contentView.font = UIFont.fontRegular(30)
-        self.contentView.textColor = UIColor.commonPurpleColor()
+        self.contentView.textColor = UIColor.whiteColor()
         self.contentView.panGestureRecognizer.allowedTouchTypes = [NSNumber(integer: UITouchType.Indirect.rawValue)]
     }
     

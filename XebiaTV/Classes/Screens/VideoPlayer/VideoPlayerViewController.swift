@@ -30,7 +30,7 @@ class VideoPlayerViewController: AVPlayerViewController {
     // MARK: - Data
     
     private func loadData() {
-        guard let videoId = self.selectedVideo?.snippet?.resourceId?.videoId else { return }
+        guard let videoId = self.selectedVideo?.snippet?.resource?.videoId else { return }
         
         // Categories request
         VideoDataAccess.retrieveVideoUrls(videoId)

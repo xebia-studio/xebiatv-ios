@@ -34,11 +34,11 @@ class DetailsView: UIView {
         self.setupFocusGuide()
         
         // Labels
-        self.titleLabel.font = UIFont.fontLight(60)
-        self.titleLabel.textColor = UIColor.commonPurpleColor()
+        self.titleLabel.font = UIFont.fontLight(70)
+        self.titleLabel.textColor = UIColor.whiteColor()
         self.descriptionLabel.font = UIFont.fontRegular(30)
         self.categoryLabel.font = UIFont.fontLight(30)
-        self.categoryLabel.textColor = UIColor.commonPurpleColor()
+        self.categoryLabel.textColor = UIColor.whiteColor()
         self.relatedVideosLabel.font = UIFont.fontRegular(30)
         self.relatedVideosLabel.text = "RELATED_VIDEOS".localized
         self.relatedVideosLabel.textColor = UIColor.commonPurpleColor()
