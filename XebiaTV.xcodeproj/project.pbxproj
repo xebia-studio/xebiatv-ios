@@ -92,6 +92,8 @@
 		5FB617C11C10528C00712F6E /* Array+Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FB617C01C10528C00712F6E /* Array+Utilities.swift */; };
 		5FB617C31C10768600712F6E /* DetailsAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FB617C21C10768600712F6E /* DetailsAlertView.swift */; };
 		5FB617C71C107BD200712F6E /* DetailsAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FB617C61C107BD200712F6E /* DetailsAlertViewController.swift */; };
+		5FD197331DB524B80012862F /* FundationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FD197311DB524B80012862F /* FundationCell.swift */; };
+		5FD197341DB524B80012862F /* FundationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5FD197321DB524B80012862F /* FundationCell.xib */; };
 		5FE84E0F1C20570A0047827C /* HomeCellExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FE84E0E1C20570A0047827C /* HomeCellExtensions.swift */; };
 		5FE84E1C1C218C5F0047827C /* HomeHeaderCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FE84E1A1C218C5F0047827C /* HomeHeaderCollectionReusableView.swift */; };
 		5FE84E1F1C218D920047827C /* HomeHeaderCollectionReusableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5FE84E1E1C218D920047827C /* HomeHeaderCollectionReusableView.xib */; };
@@ -190,6 +192,8 @@
 		5FB617C01C10528C00712F6E /* Array+Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Array+Utilities.swift"; sourceTree = "<group>"; };
 		5FB617C21C10768600712F6E /* DetailsAlertView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DetailsAlertView.swift; path = Details/View/DetailsAlertView.swift; sourceTree = "<group>"; };
 		5FB617C61C107BD200712F6E /* DetailsAlertViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DetailsAlertViewController.swift; path = Details/DetailsAlertViewController.swift; sourceTree = "<group>"; };
+		5FD197311DB524B80012862F /* FundationCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FundationCell.swift; path = View/Cells/FundationCell.swift; sourceTree = "<group>"; };
+		5FD197321DB524B80012862F /* FundationCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = FundationCell.xib; path = View/Cells/FundationCell.xib; sourceTree = "<group>"; };
 		5FE84E0E1C20570A0047827C /* HomeCellExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HomeCellExtensions.swift; path = Extensions/HomeCellExtensions.swift; sourceTree = "<group>"; };
 		5FE84E1A1C218C5F0047827C /* HomeHeaderCollectionReusableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HomeHeaderCollectionReusableView.swift; path = View/Cells/HomeHeaderCollectionReusableView.swift; sourceTree = "<group>"; };
 		5FE84E1E1C218D920047827C /* HomeHeaderCollectionReusableView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = HomeHeaderCollectionReusableView.xib; path = View/Cells/HomeHeaderCollectionReusableView.xib; sourceTree = "<group>"; };
@@ -571,6 +575,8 @@
 		5F97A5D81BFCD62B004A753B /* Cells */ = {
 			isa = PBXGroup;
 			children = (
+				5FD197311DB524B80012862F /* FundationCell.swift */,
+				5FD197321DB524B80012862F /* FundationCell.xib */,
 				5F97A5E11BFDD297004A753B /* HomeCell.swift */,
 				5F97A5E21BFDD297004A753B /* HomeCell.xib */,
 				5FB236611C2C452400A6BBD7 /* HomeEmptyCell.swift */,
@@ -654,6 +660,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5FD197341DB524B80012862F /* FundationCell.xib in Resources */,
 				5F4A92361C0773C600C1B516 /* Lato-Medium.ttf in Resources */,
 				5F97A5B41BFCB08E004A753B /* Assets.xcassets in Resources */,
 				5F4A92351C0773C600C1B516 /* Lato-Light.ttf in Resources */,
@@ -783,6 +790,7 @@
 				5F576A7A1C2012D200DEF22D /* NVActivityIndicatorAnimationLineScaleParty.swift in Sources */,
 				5F109CDD1C049E8300DC76B2 /* CategoryProtocol.swift in Sources */,
 				5F576A7F1C2012D200DEF22D /* NVActivityIndicatorAnimationSemiCircleSpin.swift in Sources */,
+				5FD197331DB524B80012862F /* FundationCell.swift in Sources */,
 				5F576A681C2012D200DEF22D /* NVActivityIndicatorAnimationBallGridBeat.swift in Sources */,
 				5F576A751C2012D200DEF22D /* NVActivityIndicatorAnimationBallZigZag.swift in Sources */,
 				5F109CBB1C048DBE00DC76B2 /* AbstractRequest.swift in Sources */,

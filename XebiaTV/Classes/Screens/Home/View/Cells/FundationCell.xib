@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder.AppleTV.XIB" version="3.0" toolsVersion="10116" systemVersion="15G31" targetRuntime="AppleTV" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" multipleTouchEnabled="YES" contentMode="center" id="1If-nJ-vi2" customClass="FundationCell">
+            <rect key="frame" x="0.0" y="0.0" width="1920" height="300"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="1920" height="300"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="erh-nE-xWw">
+                        <rect key="frame" x="60" y="30" width="1810" height="46"/>
+                        <fontDescription key="fontDescription" type="system" weight="ultraLight" pointSize="38"/>
+                        <color key="textColor" red="0.42786523700000001" green="0.1027388647" blue="0.3845236897" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="W2J-JZ-70D">
+                        <rect key="frame" x="0.0" y="120" width="1920" height="170"/>
+                        <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="4PV-MH-X8x">
+                            <size key="itemSize" width="50" height="50"/>
+                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                        </collectionViewFlowLayout>
+                    </collectionView>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uBi-7G-McL" customClass="NVActivityIndicatorView" customModule="XebiaTV" customModuleProvider="target">
+                        <rect key="frame" x="910" y="155" width="100" height="100"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="100" id="mFE-LI-j3p"/>
+                            <constraint firstAttribute="height" constant="100" id="ugg-VQ-jnq"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            </view>
+            <constraints>
+                <constraint firstItem="erh-nE-xWw" firstAttribute="top" secondItem="1If-nJ-vi2" secondAttribute="top" constant="30" id="2Tv-G5-b8m"/>
+                <constraint firstItem="W2J-JZ-70D" firstAttribute="top" secondItem="1If-nJ-vi2" secondAttribute="top" constant="120" id="3qw-d2-jJv"/>
+                <constraint firstItem="W2J-JZ-70D" firstAttribute="leading" secondItem="1If-nJ-vi2" secondAttribute="leading" id="A9v-MK-62P"/>
+                <constraint firstItem="erh-nE-xWw" firstAttribute="leading" secondItem="1If-nJ-vi2" secondAttribute="leading" constant="60" id="GMz-ov-NwJ"/>
+                <constraint firstItem="uBi-7G-McL" firstAttribute="centerY" secondItem="W2J-JZ-70D" secondAttribute="centerY" id="Nfc-jm-lgO"/>
+                <constraint firstAttribute="bottom" secondItem="W2J-JZ-70D" secondAttribute="bottom" constant="10" id="eC3-52-jCf"/>
+                <constraint firstAttribute="trailing" secondItem="erh-nE-xWw" secondAttribute="trailing" constant="50" id="iSb-J8-N97"/>
+                <constraint firstItem="uBi-7G-McL" firstAttribute="centerX" secondItem="W2J-JZ-70D" secondAttribute="centerX" id="lQH-oV-Vro"/>
+                <constraint firstAttribute="trailing" secondItem="W2J-JZ-70D" secondAttribute="trailing" id="tRI-Oj-kSK"/>
+            </constraints>
+            <connections>
+                <outlet property="collectionView" destination="W2J-JZ-70D" id="nGp-Kg-WWm"/>
+                <outlet property="loaderView" destination="uBi-7G-McL" id="qEa-ei-2gd"/>
+                <outlet property="titleLabel" destination="erh-nE-xWw" id="xnN-D6-H5G"/>
+            </connections>
+        </collectionViewCell>
+    </objects>
+</document>
