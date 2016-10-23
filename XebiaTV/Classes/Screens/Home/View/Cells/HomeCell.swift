@@ -12,7 +12,7 @@ class HomeCell: AbstractCollectionViewCell {
 
     // MARK: - Variables
     
-    typealias SelectedVideo = (backgroundImage: UIImage?, video: Video)
+    typealias SelectedVideo = (backgroundImage: UIImage?, video: Video, videos: [Video]?)
     
     @IBOutlet weak var titleLabel:UILabel!
     @IBOutlet weak var collectionView:UICollectionView!

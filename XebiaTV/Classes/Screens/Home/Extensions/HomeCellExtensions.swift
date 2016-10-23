@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Async
 
 extension HomeCell: UICollectionViewDelegate, UICollectionViewDataSource {
     
@@ -52,19 +53,50 @@ extension HomeCell: UICollectionViewDelegate, UICollectionViewDataSource {
             cell.setup(item)
         } else if let cell = cell as? FundationCell, item = self.fundationsDataSource?[indexPath.row] as? Fundation {
             cell.setup(item)
-        }
-        else if let cell = cell as? HomeEmptyCell {
+        } else if let cell = cell as? HomeEmptyCell {
             cell.category = self.category?.name
         }
     }
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         collectionView.remembersLastFocusedIndexPath = true
+        
+        if let category = self.category where category.isFundation {
+            if let fundation = self.fundationsDataSource?[indexPath.item], playlistId = fundation.id {
+                self.loadPlaylistData(playlistId)
+                return
+            }
+        }
+        
         guard let cell = collectionView.cellForItemAtIndexPath(indexPath) as? VideoCell else { return }
         let image = cell.videoImageView.image
         if let video = self.videosDataSource?[indexPath.item] {
-            let selectedVideo = SelectedVideo(backgroundImage:image, video:video)
+            let selectedVideo = SelectedVideo(backgroundImage:image, video:video, self.videosDataSource)
             self.onSelectCallback?(selectedVideo)
+        }
+    }
+    
+    private func loadPlaylistData(playlistId:String) {
+        // Playlist request
+        var parameters = GenericJSON()
+        parameters["part"] = "snippet"
+        parameters["key"] = Constants.Configuration.YoutubeAPIKey
+        parameters["playlistId"] = playlistId
+        parameters["maxResults"] = 50
+        
+        PlaylistDataAccess.retrieveVideos(parameters)
+            .success { [weak self] response -> Void in // Populate
+                guard let strongSelf = self else { return }
+                if response.count > 0 {
+                    let selectedVideo = SelectedVideo(backgroundImage:nil, video:response.first!, response)
+                    Async.main {
+                        strongSelf.onSelectCallback?(selectedVideo)
+                    }
+                }
+            }
+            .failure { [weak self] (error, isCancelled) -> Void in
+                guard let strongSelf = self else { return }
+                print("Error \(error)  \(parameters)")
         }
     }
     

@@ -54,6 +54,7 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
             self.selectedIndex = indexPath.section
             self.selectedBackgroundImage = selectedVideo.backgroundImage
             self.selectedVideo = selectedVideo.video
+            self.allVideos = selectedVideo.videos
             self.performSegueWithIdentifier(Constants.Segues.ShowDetails, sender: nil)
         })
     }

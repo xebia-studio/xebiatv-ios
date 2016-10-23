@@ -79,7 +79,8 @@ class DetailsView: UIView {
             return
         }
         
-        self.categoryLabel.text = "#\(category.capitalizedString.removeWhitespace())"
+        self.categoryLabel.text = nil
+        //self.categoryLabel.text = "#\(category.capitalizedString.removeWhitespace())"
     }
     
     func setImage(image:UIImage?) {

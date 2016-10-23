@@ -20,6 +20,7 @@ class HomeViewController: UIViewController {
     internal var selectedBackgroundImage:UIImage?
     internal var videosDataSource:[[Video]] = []
     internal var selectedVideo:Video?
+    internal var allVideos:[Video]?
     
     private var currentLoadingIndex:Int = 0
     
@@ -161,8 +162,9 @@ class HomeViewController: UIViewController {
         viewController.selectedVideoImage = self.selectedBackgroundImage
         
         if self.menuDataSource.count > self.selectedIndex {
-            viewController.dataSource = self.videosDataSource[self.selectedIndex]
-            viewController.selectedCategory = self.menuDataSource[self.selectedIndex]
+            let category = self.menuDataSource[self.selectedIndex]
+            viewController.dataSource = self.allVideos ?? []
+            viewController.selectedCategory = category
         }
     }
     
