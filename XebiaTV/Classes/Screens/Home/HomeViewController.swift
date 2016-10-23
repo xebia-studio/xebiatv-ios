@@ -21,6 +21,8 @@ class HomeViewController: UIViewController {
     internal var videosDataSource:[[Video]] = []
     internal var selectedVideo:Video?
     
+    private var currentLoadingIndex:Int = 0
+    
     let spaceBetweenCells:CGFloat = 100
     let minimumEdgePadding = CGFloat(90.0)
     
@@ -81,21 +83,17 @@ class HomeViewController: UIViewController {
             self.menuDataSource = categories
             let view = self.view as! HomeView
             view.collectionView.reloadData()
-
-            var index = 0
-            for category in categories {
-                if index == 0 {
-                    self.loadPlaylistData(index, playlistId: category.idString)
-                }
-
-                index += 1
-            }            
+            print("Got \(categories.count) categories")
+            if categories.count > 0 {
+                self.currentLoadingIndex = 0
+                self.loadPlaylistData(categories[0].idString)
+            }
         }
     }
     
     // MARK: - Playlist Data
     
-    internal func loadPlaylistData(index:NSInteger, playlistId:String) {
+    internal func loadPlaylistData(playlistId:String) {
         // Playlist request
         var parameters = GenericJSON()
         parameters["part"] = "snippet"
@@ -106,28 +104,30 @@ class HomeViewController: UIViewController {
         PlaylistDataAccess.retrieveVideos(parameters)
             .success { [weak self] response -> Void in // Populate
                 guard let strongSelf = self else { return }
-                strongSelf.populatePlaylistData(index, videos: response)
+                strongSelf.populatePlaylistData(response)
             }
             .failure { [weak self] (error, isCancelled) -> Void in
                 guard let strongSelf = self else { return }
-                strongSelf.populatePlaylistData(index, videos: [])
-            }
-            .then { [weak self] _ in
-                guard let strongSelf = self else { return }
-                let nextIndex = index + 1
-                if strongSelf.menuDataSource.count > nextIndex {
-                    let category = strongSelf.menuDataSource[nextIndex]
-                    strongSelf.loadPlaylistData(nextIndex, playlistId: category.idString)
-                }
+                strongSelf.populatePlaylistData([])
             }
     }
     
-    private func populatePlaylistData(index:NSInteger, videos:[Video]) {
+    private func populatePlaylistData(videos:[Video]) {
         Async.main {
-            self.videosDataSource.insert(videos, atIndex: index)
-            
             let view = self.view as! HomeView
-            view.collectionView.reloadSections(NSIndexSet(index: index))
+            if videos.count == 0 {
+                self.menuDataSource.removeAtIndex(self.currentLoadingIndex)
+                view.collectionView.deleteSections(NSIndexSet(index: self.currentLoadingIndex))
+            } else {
+                self.videosDataSource.insert(videos, atIndex: self.currentLoadingIndex)
+                view.collectionView.reloadSections(NSIndexSet(index: self.currentLoadingIndex))
+                self.currentLoadingIndex += 1
+            }
+            
+            if self.menuDataSource.count > self.currentLoadingIndex {
+                let category = self.menuDataSource[self.currentLoadingIndex]
+                self.loadPlaylistData(category.idString)
+            }
         }
     }
     

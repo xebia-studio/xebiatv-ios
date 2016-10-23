@@ -6,6 +6,9 @@
   Copyright © 2015 Xebia. All rights reserved.
 */
 
+// Categories
+"FUNDATIONS" = "Fondations";
+
 // Home
 "NO_INTERNET_CONNECTION" = "Impossible de télécharger le contenu.\nVeuillez vérifier votre connexion internet.";
 "NO_DATA_ERROR" = "Il n'y a pas de contenu disponible pour le moment.\nVeuillez revenir plus tard.";

@@ -6,6 +6,9 @@
   Copyright © 2015 Xebia. All rights reserved.
 */
 
+// Categories
+"FUNDATIONS" = "Fundations";
+
 // Home
 "NO_INTERNET_CONNECTION" = "Impossible to download application content.\nPlease check your internet connection.";
 "NO_DATA_ERROR" = "There is no content available.\nPlease come back later.";
