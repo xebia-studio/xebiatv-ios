@@ -74,10 +74,10 @@ class DetailsView: UIView {
     }
     
     func setCategory(category:String?) {
-        guard let category = category else {
-            self.categoryLabel.text = nil
-            return
-        }
+//        guard let category = category else {
+//            self.categoryLabel.text = nil
+//            return
+//        }
         
         self.categoryLabel.text = nil
         //self.categoryLabel.text = "#\(category.capitalizedString.removeWhitespace())"
