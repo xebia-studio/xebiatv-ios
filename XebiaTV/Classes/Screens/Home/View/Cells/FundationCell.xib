@@ -13,7 +13,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="400" height="250"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="9JG-u3-GKJ">
+                    <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="9JG-u3-GKJ">
                         <rect key="frame" x="0.0" y="0.0" width="400" height="250"/>
                         <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                     </imageView>
@@ -43,14 +43,6 @@
                             <constraint firstItem="uyN-LX-fCx" firstAttribute="leading" secondItem="kol-Sp-JFC" secondAttribute="leading" constant="4" id="vkn-M7-D15"/>
                         </constraints>
                     </view>
-                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EBa-rT-9O6" userLabel="Loader" customClass="NVActivityIndicatorView" customModule="XebiaTV" customModuleProvider="target">
-                        <rect key="frame" x="200" y="125" width="0.0" height="0.0"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstAttribute="height" id="4UM-Qk-Vk0"/>
-                            <constraint firstAttribute="width" id="6El-1E-I6G"/>
-                        </constraints>
-                    </view>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             </view>
@@ -61,21 +53,18 @@
                 <constraint firstItem="kol-Sp-JFC" firstAttribute="leading" secondItem="4mj-wV-egK" secondAttribute="leading" id="YPb-e9-gFz"/>
                 <constraint firstAttribute="bottom" secondItem="kol-Sp-JFC" secondAttribute="bottom" constant="4" id="bfq-u1-lFU"/>
                 <constraint firstItem="9JG-u3-GKJ" firstAttribute="top" secondItem="4mj-wV-egK" secondAttribute="top" id="fUT-J2-3tG"/>
-                <constraint firstItem="EBa-rT-9O6" firstAttribute="centerY" secondItem="4mj-wV-egK" secondAttribute="centerY" id="g4Y-aH-rs9"/>
                 <constraint firstAttribute="bottom" secondItem="9JG-u3-GKJ" secondAttribute="bottom" id="gQf-gN-9GP"/>
                 <constraint firstAttribute="trailing" secondItem="kol-Sp-JFC" secondAttribute="trailing" id="kPF-tf-Ja6"/>
                 <constraint firstItem="O7S-4N-gQt" firstAttribute="trailing" secondItem="kol-Sp-JFC" secondAttribute="trailing" id="ocj-1U-wjH"/>
-                <constraint firstItem="EBa-rT-9O6" firstAttribute="centerX" secondItem="4mj-wV-egK" secondAttribute="centerX" id="q0P-r4-eX6"/>
                 <constraint firstItem="O7S-4N-gQt" firstAttribute="bottom" secondItem="kol-Sp-JFC" secondAttribute="bottom" id="xee-qC-lKo"/>
                 <constraint firstItem="O7S-4N-gQt" firstAttribute="leading" secondItem="kol-Sp-JFC" secondAttribute="leading" id="xlT-y6-9gO"/>
             </constraints>
             <connections>
-                <outlet property="videoContainer" destination="kol-Sp-JFC" id="Zzz-9c-EZL"/>
-                <outlet property="videoContainerBottomConstraint" destination="bfq-u1-lFU" id="rud-xA-VgL"/>
-                <outlet property="videoImageView" destination="9JG-u3-GKJ" id="4nC-dv-FGs"/>
-                <outlet property="videoLoader" destination="EBa-rT-9O6" id="DQN-FT-hml"/>
-                <outlet property="videoTitle" destination="uyN-LX-fCx" id="74i-FH-qAg"/>
-                <outlet property="videoVisualEffectView" destination="O7S-4N-gQt" id="scx-EJ-Dah"/>
+                <outlet property="fundationContainer" destination="kol-Sp-JFC" id="7oG-I8-0cS"/>
+                <outlet property="fundationContainerBottomConstraint" destination="bfq-u1-lFU" id="FKs-8t-Yat"/>
+                <outlet property="fundationIconView" destination="9JG-u3-GKJ" id="vie-ED-2A0"/>
+                <outlet property="fundationTitle" destination="uyN-LX-fCx" id="R7i-R7-9Q4"/>
+                <outlet property="fundationVisualEffectView" destination="O7S-4N-gQt" id="tRt-O6-GHa"/>
             </connections>
         </collectionViewCell>
     </objects>

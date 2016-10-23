@@ -10,53 +10,81 @@ import UIKit
 import Async
 import Haneke
 
+enum FundationType:String {
+    case Agile = "IconAgile"
+    case Back = "IconBack"
+    case Cloud = "IconCloud"
+    case Craft = "IconCraft"
+    case Data  = "IconData"
+    case DevOps = "IconDevOps"
+    case Front = "IconFront"
+    case IoT = "IconIoT"
+    case Mobile = "IconMobile"
+    
+    static func imageNameForType(typeName: String?) -> FundationType? {
+        if typeName == "Agile" {
+            return .Agile
+        } else if typeName == "Back" {
+            return .Back
+        } else if typeName == "Cloud" {
+            return .Cloud
+        } else if typeName == "Craft" {
+            return .Craft
+        } else if typeName == "Data" {
+            return .Data
+        } else if typeName == "DevOps" {
+            return .DevOps
+        } else if typeName == "Front" {
+            return .Front
+        } else if typeName == "IoT" {
+            return .IoT
+        } else if typeName == "Mobile" {
+            return .Mobile
+        }
+        
+        return nil
+    }
+}
+
 class FundationCell: AbstractCollectionViewCell {
     
     // MARK: - Variables
     
-    private var video:Video?
-    private var fetcher:NetworkFetcher<UIImage>?
+    private var fundation:Fundation?
     
-    @IBOutlet weak var videoTitle:UILabel!
-    @IBOutlet weak var videoContainer:UIView!
-    @IBOutlet weak var videoImageView:UIImageView!
-    @IBOutlet weak var videoLoader:NVActivityIndicatorView!
-    @IBOutlet weak var videoVisualEffectView:UIVisualEffectView!
-    @IBOutlet weak var videoContainerBottomConstraint:NSLayoutConstraint!
+    @IBOutlet weak var fundationTitle:UILabel!
+    @IBOutlet weak var fundationContainer:UIView!
+    @IBOutlet weak var fundationIconView:UIImageView!
+    @IBOutlet weak var fundationVisualEffectView:UIVisualEffectView!
+    @IBOutlet weak var fundationContainerBottomConstraint:NSLayoutConstraint!
     
     // MARK: - LifeCycle
     
     override func awakeFromNib() {
         // Enable parallax effect on the UIImageView when user has the focus on the cell
-        self.videoImageView.adjustsImageWhenAncestorFocused = true
+        self.fundationIconView.adjustsImageWhenAncestorFocused = false
         
         // Label
-        self.videoTitle.font = UIFont.fontRegular(26)
-        
-        // Loader
-        self.videoLoader.size = CGSizeMake(100, 100)
-        self.videoLoader.type = NVActivityIndicatorType.BallScaleMultiple
-        self.videoLoader.color = UIColor.commonPurpleColor()
+        self.fundationTitle.font = UIFont.fontRegular(32)
         
         // Container
-        self.videoContainer.backgroundColor = UIColor.commonPurpleColor(0.75)
-        self.videoVisualEffectView.alpha = 0
-        self.videoContainer.alpha = 0
+        self.fundationContainer.backgroundColor = UIColor.commonPurpleColor(0.75)
+        self.fundationVisualEffectView.alpha = 0
+        self.fundationContainer.alpha = 0
     }
     
     override func prepareForReuse() {
         super.prepareForReuse()
         
-        self.video = nil
-        self.videoTitle.text = nil
-        self.videoImageView.image = nil
-        self.videoImageView.layer.removeAllAnimations()
-        self.fetcher?.cancelFetch()
+        self.fundation = nil
+        self.fundationTitle.text = nil
+        self.fundationIconView.image = nil
+        self.fundationIconView.layer.removeAllAnimations()
     }
     
     override func didUpdateFocusInContext(context: UIFocusUpdateContext, withAnimationCoordinator coordinator: UIFocusAnimationCoordinator) {
         
-        if self.video == nil && self.focused {
+        if self.fundation == nil && self.focused {
             return
         }
         
@@ -66,56 +94,42 @@ class FundationCell: AbstractCollectionViewCell {
     // MARK: - Display
     
     private func updateDisplay() {
-        if self.focused && self.videoContainer.alpha != 0 {
+        if self.focused && self.fundationContainer.alpha != 0 {
             return
         }
         
         UIView.animateWithDuration(0.35, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 14.0, options: .CurveEaseInOut, animations: {
-            self.videoContainer.alpha = self.focused ? 1 : 0
-            self.videoVisualEffectView.alpha = self.focused ? 1 : 0
-            self.videoContainerBottomConstraint.constant = self.focused ? 0 : -self.videoContainer.frame.height
+            self.fundationContainer.alpha = self.focused ? 1 : 0
+            self.fundationVisualEffectView.alpha = self.focused ? 1 : 0
+            self.fundationContainerBottomConstraint.constant = self.focused ? 0 : -self.fundationContainer.frame.height
             self.layoutIfNeeded()
             }, completion: nil)
     }
     
     // MARK: - Data
     
-    func setup(video: Video) {
-        self.video = video
+    func setup(fundation: Fundation) {
+        self.fundation = fundation
+        
+        if let backgroundColor = fundation.color {
+            self.fundationIconView.backgroundColor = UIColor(rgba: backgroundColor)
+        }
         
         if self.focused {
             self.updateDisplay()
         }
         
         // Title
-        self.videoTitle.text = video.snippet?.title
+        self.fundationTitle.text = fundation.name
+        
+        // Icon
+        if let fundationType = FundationType.imageNameForType(fundation.name) {
+            self.fundationIconView.image = UIImage(named: fundationType.rawValue)
+        }
         
         // Container
-        self.videoContainerBottomConstraint.constant = -self.videoContainer.frame.height
+        self.fundationContainerBottomConstraint.constant = -self.fundationContainer.frame.height
         self.layoutIfNeeded()
-        
-        // Load Picture
-        guard let thumbnail = video.snippet?.bestThumbnail else { return }
-        let cache = Shared.imageCache
-        let URL = NSURL(string: thumbnail.urlString)!
-        self.fetcher = NetworkFetcher<UIImage>(URL: URL)
-        self.videoLoader.startAnimation()
-        
-        guard let fetcher = self.fetcher else { return }
-        cache.fetch(fetcher: fetcher)
-            .onSuccess { [weak self] image in
-                Async.main {
-                    guard let strongSelf = self /*where fetcher.URL.absoluteString == thumbnail.urlString*/ else { return }
-                    strongSelf.videoLoader.stopAnimation()
-                    UIView.transitionWithView(strongSelf.videoImageView, duration: 0.25, options: [.TransitionCrossDissolve], animations: {
-                        strongSelf.videoImageView.image = image
-                        }, completion: nil)
-                }
-            }
-            .onFailure() { [weak self] error in
-                guard let strongSelf = self else { return }
-                strongSelf.videoImageView.image = nil
-        }
     }
     
 }

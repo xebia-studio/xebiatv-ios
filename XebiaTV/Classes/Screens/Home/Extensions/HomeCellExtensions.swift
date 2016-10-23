@@ -16,7 +16,7 @@ extension HomeCell: UICollectionViewDelegate, UICollectionViewDataSource {
         let effectiveWidth = collectionView.frame.width - collectionView.contentInset.left - collectionView.contentInset.right - (CGFloat(Constants.Configuration.NumCellsVisible - 1) * self.spaceBetweenCells)
         let width = effectiveWidth / CGFloat(Constants.Configuration.NumCellsVisible)
         
-        if self.videosDataSource?.count == 0 {
+        if self.videosDataSource?.count == 0 && self.fundationsDataSource?.count == 0 {
             return CGSizeMake(effectiveWidth, width * 9 / 16)
         }
         
@@ -28,15 +28,21 @@ extension HomeCell: UICollectionViewDelegate, UICollectionViewDataSource {
     }
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return max(self.videosDataSource?.count ?? 0, 1)
+        if self.videosDataSource?.count == 0 && self.fundationsDataSource?.count == 0 {
+            return 1
+        }
+        
+        return max(self.videosDataSource?.count ?? 0, self.fundationsDataSource?.count ?? 0)
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        if let videosDataSource = self.videosDataSource where videosDataSource.count == 0 {
-            return collectionView.dequeueReusableCellWithReuseIdentifier(HomeEmptyCell.reuseIdentifier(), forIndexPath: indexPath)
+        if let videosDataSource = self.videosDataSource where videosDataSource.count > 0 {
+            return collectionView.dequeueReusableCellWithReuseIdentifier(VideoCell.reuseIdentifier(), forIndexPath: indexPath)
+        } else if let fundationsDataSource = self.fundationsDataSource where fundationsDataSource.count > 0 {
+            return collectionView.dequeueReusableCellWithReuseIdentifier(FundationCell.reuseIdentifier(), forIndexPath: indexPath)
         }
         
-        return collectionView.dequeueReusableCellWithReuseIdentifier(VideoCell.reuseIdentifier(), forIndexPath: indexPath)
+        return collectionView.dequeueReusableCellWithReuseIdentifier(HomeEmptyCell.reuseIdentifier(), forIndexPath: indexPath)
     }
     
     // MARK: UICollectionViewDelegate
@@ -44,7 +50,10 @@ extension HomeCell: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(collectionView: UICollectionView, willDisplayCell cell: UICollectionViewCell, forItemAtIndexPath indexPath: NSIndexPath) {
         if let cell = cell as? VideoCell, item = self.videosDataSource?[indexPath.row] {
             cell.setup(item)
-        } else if let cell = cell as? HomeEmptyCell {
+        } else if let cell = cell as? FundationCell, item = self.fundationsDataSource?[indexPath.row] as? Fundation {
+            cell.setup(item)
+        }
+        else if let cell = cell as? HomeEmptyCell {
             cell.category = self.category?.name
         }
     }

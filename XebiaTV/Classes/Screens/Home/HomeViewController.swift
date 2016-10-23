@@ -83,10 +83,15 @@ class HomeViewController: UIViewController {
             self.menuDataSource = categories
             let view = self.view as! HomeView
             view.collectionView.reloadData()
-            print("Got \(categories.count) categories")
+            
             if categories.count > 0 {
                 self.currentLoadingIndex = 0
-                self.loadPlaylistData(categories[0].idString)
+                let category = categories[0]
+                if category.isFundation {
+                    self.populatePlaylistData([], addAnyway: true)
+                } else {
+                    self.loadPlaylistData(category.idString)
+                }
             }
         }
     }
@@ -112,10 +117,10 @@ class HomeViewController: UIViewController {
             }
     }
     
-    private func populatePlaylistData(videos:[Video]) {
+    private func populatePlaylistData(videos:[Video], addAnyway:Bool = false) {
         Async.main {
             let view = self.view as! HomeView
-            if videos.count == 0 {
+            if videos.count == 0 && !addAnyway {
                 self.menuDataSource.removeAtIndex(self.currentLoadingIndex)
                 view.collectionView.deleteSections(NSIndexSet(index: self.currentLoadingIndex))
             } else {

@@ -33,16 +33,23 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
     
     func collectionView(collectionView: UICollectionView, willDisplayCell cell: UICollectionViewCell, forItemAtIndexPath indexPath: NSIndexPath) {
         guard let cell = cell as? HomeCell else { fatalError("Expected to display a `HomeCell`.") }
-        cell.category = self.menuDataSource[indexPath.section]
+        let category = self.menuDataSource[indexPath.section]
+        cell.category = category
         
         // Data still not loaded
-        if self.videosDataSource.count <= indexPath.section {
+        if category.isFundation && self.fundationsDataSource.count <= indexPath.section {
+            return
+        } else if !category.isFundation && self.videosDataSource.count <= indexPath.section {
             return
         }
 
         // Configure the cell.
-        let sectionDataItems = self.videosDataSource[indexPath.section]
-        cell.videosDataSource = sectionDataItems
+        if category.isFundation {
+            cell.fundationsDataSource = self.fundationsDataSource
+        } else {
+            let sectionDataItems = self.videosDataSource[indexPath.section]
+            cell.videosDataSource = sectionDataItems
+        }
         cell.onSelect({ selectedVideo in
             self.selectedIndex = indexPath.section
             self.selectedBackgroundImage = selectedVideo.backgroundImage

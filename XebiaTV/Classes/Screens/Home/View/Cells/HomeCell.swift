@@ -20,8 +20,13 @@ class HomeCell: AbstractCollectionViewCell {
  
     var videosDataSource:[Video]? = nil {
         didSet {
-            self.loaderView.stopAnimation()
-            self.collectionView.reloadData()
+            self.refreshCollectionView()
+        }
+    }
+    
+    var fundationsDataSource:[CategoryProtocol]? = nil {
+        didSet {
+            self.refreshCollectionView()
         }
     }
     
@@ -51,6 +56,7 @@ class HomeCell: AbstractCollectionViewCell {
         collectionView.dataSource = self
         collectionView.registerNib(VideoCell.nib(), forCellWithReuseIdentifier: VideoCell.reuseIdentifier())
         collectionView.registerNib(HomeEmptyCell.nib(), forCellWithReuseIdentifier: HomeEmptyCell.reuseIdentifier())
+        collectionView.registerNib(FundationCell.nib(), forCellWithReuseIdentifier: FundationCell.reuseIdentifier())
         collectionView.clipsToBounds = false
         layout.sectionInset = UIEdgeInsetsMake(0, self.spaceBetweenCells, 0, self.spaceBetweenCells)
         layout.minimumLineSpacing = self.spaceBetweenCells
@@ -61,6 +67,13 @@ class HomeCell: AbstractCollectionViewCell {
         
         self.loaderView.startAnimation()
         self.videosDataSource?.removeAll()
+        self.collectionView.reloadData()
+    }
+    
+    // MARK: - Display
+    
+    func refreshCollectionView() {
+        self.loaderView.stopAnimation()
         self.collectionView.reloadData()
     }
     

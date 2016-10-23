@@ -31,7 +31,7 @@ class VideoCell: AbstractCollectionViewCell {
         self.videoImageView.adjustsImageWhenAncestorFocused = true
         
         // Label
-        self.videoTitle.font = UIFont.fontRegular(26)
+        self.videoTitle.font = UIFont.fontRegular(32)
         
         // Loader
         self.videoLoader.size = CGSizeMake(100, 100)

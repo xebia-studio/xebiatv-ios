@@ -61,7 +61,7 @@ class CategoriesDataAccess {
         
         if fundations.count > 0 {
             let fundationCategory:Category = Unbox(["name": "FUNDATIONS".localized])!
-            //categories.insert(fundationCategory, atIndex: 0)
+            categories.insert(fundationCategory, atIndex: 0)
         }
         
         return (categories, fundations)

@@ -22,4 +22,8 @@ extension CategoryProtocol {
         return (id != nil) ? String(id!) : ""
     }
     
+    var isFundation:Bool {
+        return self.name == "FUNDATIONS".localized
+    }
+    
 }
