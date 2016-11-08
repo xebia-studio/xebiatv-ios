@@ -42,6 +42,12 @@ class VideoPlayerViewController: AVPlayerViewController {
             .failure { (error, isCancelled) -> Void in }
     }
     
+    // MARK: - Notifications
+    
+    func notificationEndPlaying(notification: NSNotification) {
+        self.navigationController?.popViewControllerAnimated(true)
+    }
+    
     // MARK: - Video Player
     
     private func playVideo() {
@@ -63,6 +69,9 @@ class VideoPlayerViewController: AVPlayerViewController {
             let mediaItem = AVPlayerItem(URL: NSURL(string: url)!)
             mediaItem.externalMetadata.append(titleMetadataItem)
             mediaItem.externalMetadata.append(descriptionMetadataItem)
+            
+            // Subscribe to the AVPlayerItem's DidPlayToEndTime notification.
+            NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(self.notificationEndPlaying), name: AVPlayerItemDidPlayToEndTimeNotification, object: mediaItem)
             
             self.player = AVPlayer(playerItem: mediaItem)
             self.player?.play()
