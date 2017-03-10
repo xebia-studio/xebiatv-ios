@@ -10,13 +10,13 @@ import Foundation
 import SwiftTask
 import Unbox
 
-typealias VideoRetrieveTask = Task<Progress, [VideoResource], ErrorType>
+typealias VideoRetrieveTask = Task<Progress, [VideoResource], Error>
 
 class VideoDataAccess {
     
     // MARK: Get video urls
     
-    static func retrieveVideoUrls(videoId:String, client:WSClientProtocol.Type? = WSClient.self) -> VideoRetrieveTask {
+    static func retrieveVideoUrls(_ videoId:String, client:WSClientProtocol.Type? = WSClient.self) -> VideoRetrieveTask {
         return VideoRequest.listVideoUrls(videoId, client: client!)
             .success { data in
                 return JSONDictionaryDeserializer.deserialize(data)
@@ -37,7 +37,7 @@ class VideoDataAccess {
             }
     }
     
-    static func buildVideoUrls(playlistData: GenericJSON) -> [VideoResource] {
+    static func buildVideoUrls(_ playlistData: GenericJSON) -> [VideoResource] {
         var list = [VideoResource]()
         guard let urls = playlistData["urls"] as? Array<AnyObject> else { return list }
         

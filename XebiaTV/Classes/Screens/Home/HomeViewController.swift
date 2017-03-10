@@ -22,7 +22,7 @@ class HomeViewController: UIViewController {
     internal var selectedVideo:Video?
     internal var allVideos:[Video]?
     
-    private var currentLoadingIndex:Int = 0
+    fileprivate var currentLoadingIndex:Int = 0
     
     let spaceBetweenCells:CGFloat = 100
     let minimumEdgePadding = CGFloat(90.0)
@@ -33,10 +33,10 @@ class HomeViewController: UIViewController {
         super.viewDidLoad()
         
         let view = self.view as! HomeView
-        guard let collectionView = view.collectionView, layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout else { return }
+        guard let collectionView = view.collectionView, let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout else { return }
         
-        collectionView.registerNib(HomeCell.nib(), forCellWithReuseIdentifier: HomeCell.reuseIdentifier())
-        collectionView.registerNib(HomeHeaderCollectionReusableView.nib(), forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: HomeHeaderCollectionReusableView.reuseIdentifier())
+        collectionView.register(HomeCell.nib(), forCellWithReuseIdentifier: HomeCell.reuseIdentifier())
+        collectionView.register(HomeHeaderCollectionReusableView.nib(), forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: HomeHeaderCollectionReusableView.reuseIdentifier())
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.contentInset.bottom = self.minimumEdgePadding - layout.sectionInset.bottom
@@ -46,7 +46,7 @@ class HomeViewController: UIViewController {
     
     // MARK: - Reachability
     
-    private func checkReachability() {
+    fileprivate func checkReachability() {
         // Reachability
         let reachability: Reachability
         do {
@@ -64,7 +64,7 @@ class HomeViewController: UIViewController {
     
     // MARK: - Categories Data
     
-    private func loadData() {
+    fileprivate func loadData() {
         // Categories request
         CategoriesDataAccess.retrieveCategories()
             .success { [weak self] response -> Void in // Populate
@@ -78,7 +78,7 @@ class HomeViewController: UIViewController {
             }
     }
     
-    private func populateData(fundations:[CategoryProtocol], categories:[CategoryProtocol]) {
+    fileprivate func populateData(_ fundations:[CategoryProtocol], categories:[CategoryProtocol]) {
         Async.main {
             self.fundationsDataSource = fundations
             self.menuDataSource = categories
@@ -99,13 +99,13 @@ class HomeViewController: UIViewController {
     
     // MARK: - Playlist Data
     
-    internal func loadPlaylistData(playlistId:String) {
+    internal func loadPlaylistData(_ playlistId:String) {
         // Playlist request
         var parameters = GenericJSON()
-        parameters["part"] = "snippet"
-        parameters["key"] = Constants.Configuration.YoutubeAPIKey
-        parameters["playlistId"] = playlistId
-        parameters["maxResults"] = 50
+        parameters["part"] = "snippet" as AnyObject?
+        parameters["key"] = Constants.Configuration.YoutubeAPIKey as AnyObject?
+        parameters["playlistId"] = playlistId as AnyObject?
+        parameters["maxResults"] = 50 as AnyObject?
         
         PlaylistDataAccess.retrieveVideos(parameters)
             .success { [weak self] response -> Void in // Populate
@@ -118,14 +118,14 @@ class HomeViewController: UIViewController {
             }
     }
     
-    private func populatePlaylistData(videos:[Video], addAnyway:Bool = false) {
+    fileprivate func populatePlaylistData(_ videos:[Video], addAnyway:Bool = false) {
         Async.main {
             let view = self.view as! HomeView
             if videos.count == 0 && !addAnyway {
-                self.menuDataSource.removeAtIndex(self.currentLoadingIndex)
+                self.menuDataSource.remove(at: self.currentLoadingIndex)
                 view.collectionView.deleteSections(NSIndexSet(index: self.currentLoadingIndex))
             } else {
-                self.videosDataSource.insert(videos, atIndex: self.currentLoadingIndex)
+                self.videosDataSource.insert(videos, at: self.currentLoadingIndex)
                 view.collectionView.reloadSections(NSIndexSet(index: self.currentLoadingIndex))
                 self.currentLoadingIndex += 1
             }
@@ -139,14 +139,14 @@ class HomeViewController: UIViewController {
     
     // MARK: - Display
     
-    private func showContent() {
+    fileprivate func showContent() {
         Async.main {
             let view = self.view as! HomeView
             view.showContent()
         }
     }
     
-    private func clearRefresh(noInternetConnection:Bool = false) {
+    fileprivate func clearRefresh(_ noInternetConnection:Bool = false) {
         Async.main {
             let view = self.view as! HomeView
             view.showErrorMessage(noInternetConnection)
@@ -155,8 +155,8 @@ class HomeViewController: UIViewController {
     
     // MARK: - Segues
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        guard let viewController = segue.destinationViewController as? DetailsViewController where segue.identifier == Constants.Segues.ShowDetails else { return }
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard let viewController = segue.destination as? DetailsViewController, segue.identifier == Constants.Segues.ShowDetails else { return }
         
         viewController.selectedVideo = self.selectedVideo
         viewController.selectedVideoImage = self.selectedBackgroundImage

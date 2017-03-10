@@ -14,8 +14,8 @@ class VideoCell: AbstractCollectionViewCell {
     
     // MARK: - Variables
     
-    private var video:Video?
-    private var fetcher:NetworkFetcher<UIImage>?
+    fileprivate var video:Video?
+    fileprivate var fetcher:NetworkFetcher<UIImage>?
     
     @IBOutlet weak var videoTitle:UILabel!
     @IBOutlet weak var videoContainer:UIView!
@@ -34,8 +34,8 @@ class VideoCell: AbstractCollectionViewCell {
         self.videoTitle.font = UIFont.fontRegular(32)
         
         // Loader
-        self.videoLoader.size = CGSizeMake(100, 100)
-        self.videoLoader.type = NVActivityIndicatorType.BallScaleMultiple
+        self.videoLoader.size = CGSize(width: 100, height: 100)
+        self.videoLoader.type = NVActivityIndicatorType.ballScaleMultiple
         self.videoLoader.color = UIColor.commonPurpleColor()
         
         // Container
@@ -54,9 +54,9 @@ class VideoCell: AbstractCollectionViewCell {
         self.fetcher?.cancelFetch()
     }
     
-    override func didUpdateFocusInContext(context: UIFocusUpdateContext, withAnimationCoordinator coordinator: UIFocusAnimationCoordinator) {
+    override func didUpdateFocus(in context: UIFocusUpdateContext, with coordinator: UIFocusAnimationCoordinator) {
         
-        if self.video == nil && self.focused {
+        if self.video == nil && self.isFocused {
             return
         }
         
@@ -65,25 +65,25 @@ class VideoCell: AbstractCollectionViewCell {
     
     // MARK: - Display
     
-    private func updateDisplay() {
-        if self.focused && self.videoContainer.alpha != 0 {
+    fileprivate func updateDisplay() {
+        if self.isFocused && self.videoContainer.alpha != 0 {
             return
         }
         
-        UIView.animateWithDuration(0.35, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 14.0, options: .CurveEaseInOut, animations: {
-            self.videoContainer.alpha = self.focused ? 1 : 0
-            self.videoVisualEffectView.alpha = self.focused ? 1 : 0
-            self.videoContainerBottomConstraint.constant = self.focused ? 0 : -self.videoContainer.frame.height
+        UIView.animate(withDuration: 0.35, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 14.0, options: UIViewAnimationOptions(), animations: {
+            self.videoContainer.alpha = self.isFocused ? 1 : 0
+            self.videoVisualEffectView.alpha = self.isFocused ? 1 : 0
+            self.videoContainerBottomConstraint.constant = self.isFocused ? 0 : -self.videoContainer.frame.height
             self.layoutIfNeeded()
         }, completion: nil)
     }
     
     // MARK: - Data
     
-    func setup(video: Video) {
+    func setup(_ video: Video) {
         self.video = video
         
-        if self.focused {
+        if self.isFocused {
             self.updateDisplay()
         }
         
@@ -97,7 +97,7 @@ class VideoCell: AbstractCollectionViewCell {
         // Load Picture
         guard let thumbnail = video.snippet?.bestThumbnail else { return }
         let cache = Shared.imageCache
-        let URL = NSURL(string: thumbnail.urlString)!
+        let URL = Foundation.URL(string: thumbnail.urlString)!
         self.fetcher = NetworkFetcher<UIImage>(URL: URL)
         self.videoLoader.startAnimation()
         
@@ -107,7 +107,7 @@ class VideoCell: AbstractCollectionViewCell {
                 Async.main {
                     guard let strongSelf = self /*where fetcher.URL.absoluteString == thumbnail.urlString*/ else { return }
                     strongSelf.videoLoader.stopAnimation()
-                    UIView.transitionWithView(strongSelf.videoImageView, duration: 0.25, options: [.TransitionCrossDissolve], animations: {
+                    UIView.transition(with: strongSelf.videoImageView, duration: 0.25, options: [.transitionCrossDissolve], animations: {
                         strongSelf.videoImageView.image = image
                         }, completion: nil)
                 }

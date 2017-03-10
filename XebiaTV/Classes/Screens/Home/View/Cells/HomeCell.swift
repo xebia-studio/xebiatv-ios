@@ -30,7 +30,7 @@ class HomeCell: AbstractCollectionViewCell {
         }
     }
     
-    internal var onSelectCallback: (SelectedVideo -> Void)?
+    internal var onSelectCallback: ((SelectedVideo) -> Void)?
     
     let spaceBetweenCells:CGFloat = 100
     
@@ -44,19 +44,19 @@ class HomeCell: AbstractCollectionViewCell {
         self.titleLabel.textColor = UIColor.commonPurpleColor()
         
         // Loader
-        self.loaderView.type = .LineScaleParty
+        self.loaderView.type = .lineScaleParty
         self.loaderView.color = UIColor.commonPurpleColor()
         self.loaderView.size = CGSize(width: 80, height: 80)
         self.loaderView.startAnimation()
         
         // Collection View
-        guard let collectionView = self.collectionView, layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout else { return }
+        guard let collectionView = self.collectionView, let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout else { return }
         
         collectionView.delegate = self
         collectionView.dataSource = self
-        collectionView.registerNib(VideoCell.nib(), forCellWithReuseIdentifier: VideoCell.reuseIdentifier())
-        collectionView.registerNib(HomeEmptyCell.nib(), forCellWithReuseIdentifier: HomeEmptyCell.reuseIdentifier())
-        collectionView.registerNib(FundationCell.nib(), forCellWithReuseIdentifier: FundationCell.reuseIdentifier())
+        collectionView.register(VideoCell.nib(), forCellWithReuseIdentifier: VideoCell.reuseIdentifier())
+        collectionView.register(HomeEmptyCell.nib(), forCellWithReuseIdentifier: HomeEmptyCell.reuseIdentifier())
+        collectionView.register(FundationCell.nib(), forCellWithReuseIdentifier: FundationCell.reuseIdentifier())
         collectionView.clipsToBounds = false
         layout.sectionInset = UIEdgeInsetsMake(0, self.spaceBetweenCells, 0, self.spaceBetweenCells)
         layout.minimumLineSpacing = self.spaceBetweenCells
@@ -79,7 +79,7 @@ class HomeCell: AbstractCollectionViewCell {
     
     // MARK: - Callbacks
     
-    func onSelect(onSelectCallback: SelectedVideo -> Void) {
+    func onSelect(_ onSelectCallback: @escaping (SelectedVideo) -> Void) {
         self.onSelectCallback = onSelectCallback
     }
     

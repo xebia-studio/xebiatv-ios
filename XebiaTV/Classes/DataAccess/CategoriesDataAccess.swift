@@ -11,13 +11,13 @@ import SwiftTask
 import Unbox
 
 typealias CategoriesResult = (categories:[CategoryProtocol], fundations:[CategoryProtocol])
-typealias CategoriesRetrieveTask = Task<Progress, CategoriesResult, ErrorType>
+typealias CategoriesRetrieveTask = Task<Progress, CategoriesResult, Error>
 
 class CategoriesDataAccess {
 
     // MARK: Listing
     
-    static func retrieveCategories(parameters:GenericJSON = GenericJSON(), client:WSClientProtocol.Type? = WSClient.self) -> CategoriesRetrieveTask {
+    static func retrieveCategories(_ parameters:GenericJSON = GenericJSON(), client:WSClientProtocol.Type? = WSClient.self) -> CategoriesRetrieveTask {
         return CategoriesRequest.listCategories(parameters, client:client!)
             .success { data in
                 return JSONDictionaryDeserializer.deserialize(data)
@@ -38,7 +38,7 @@ class CategoriesDataAccess {
         }
     }
 
-    static func buildCategories(categoriesData: GenericJSON) -> CategoriesResult {
+    static func buildCategories(_ categoriesData: GenericJSON) -> CategoriesResult {
         var categories = [CategoryProtocol]()
         var fundations = [CategoryProtocol]()
         
@@ -61,19 +61,19 @@ class CategoriesDataAccess {
         
         if fundations.count > 0 {
             let fundationCategory:Category = Unbox(["name": "FUNDATIONS".localized])!
-            categories.insert(fundationCategory, atIndex: 0)
+            categories.insert(fundationCategory, at: 0)
         }
         
         return (categories, fundations)
     }
     
-    private static func buildFilters(key:String, categoryList: AnyObject?) -> [CategoryProtocol] {
+    fileprivate static func buildFilters(_ key:String, categoryList: AnyObject?) -> [CategoryProtocol] {
         var list = [CategoryProtocol]()
         
         guard let dataList = categoryList as? Array<AnyObject> else { return list }
         
         for categoryData in dataList {
-            if categoryData.isKindOfClass(NSDictionary) {
+            if categoryData.isKind(of: NSDictionary) {
                 
                 switch key {
                     case Constants.MenuKeys.CategoriesKey:

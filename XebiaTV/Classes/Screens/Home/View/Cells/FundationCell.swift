@@ -21,7 +21,7 @@ enum FundationType:String {
     case IoT = "IconIoT"
     case Mobile = "IconMobile"
     
-    static func imageNameForType(typeName: String?) -> FundationType? {
+    static func imageNameForType(_ typeName: String?) -> FundationType? {
         if typeName == "Agile" {
             return .Agile
         } else if typeName == "Back" {
@@ -50,7 +50,7 @@ class FundationCell: AbstractCollectionViewCell {
     
     // MARK: - Variables
     
-    private var fundation:Fundation?
+    fileprivate var fundation:Fundation?
     
     @IBOutlet weak var fundationTitle:UILabel!
     @IBOutlet weak var fundationContainer:UIView!
@@ -82,9 +82,9 @@ class FundationCell: AbstractCollectionViewCell {
         self.fundationIconView.layer.removeAllAnimations()
     }
     
-    override func didUpdateFocusInContext(context: UIFocusUpdateContext, withAnimationCoordinator coordinator: UIFocusAnimationCoordinator) {
+    override func didUpdateFocus(in context: UIFocusUpdateContext, with coordinator: UIFocusAnimationCoordinator) {
         
-        if self.fundation == nil && self.focused {
+        if self.fundation == nil && self.isFocused {
             return
         }
         
@@ -93,29 +93,29 @@ class FundationCell: AbstractCollectionViewCell {
     
     // MARK: - Display
     
-    private func updateDisplay() {
-        if self.focused && self.fundationContainer.alpha != 0 {
+    fileprivate func updateDisplay() {
+        if self.isFocused && self.fundationContainer.alpha != 0 {
             return
         }
         
-        UIView.animateWithDuration(0.35, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 14.0, options: .CurveEaseInOut, animations: {
-            self.fundationContainer.alpha = self.focused ? 1 : 0
-            self.fundationVisualEffectView.alpha = self.focused ? 1 : 0
-            self.fundationContainerBottomConstraint.constant = self.focused ? 0 : -self.fundationContainer.frame.height
+        UIView.animate(withDuration: 0.35, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 14.0, options: UIViewAnimationOptions(), animations: {
+            self.fundationContainer.alpha = self.isFocused ? 1 : 0
+            self.fundationVisualEffectView.alpha = self.isFocused ? 1 : 0
+            self.fundationContainerBottomConstraint.constant = self.isFocused ? 0 : -self.fundationContainer.frame.height
             self.layoutIfNeeded()
             }, completion: nil)
     }
     
     // MARK: - Data
     
-    func setup(fundation: Fundation) {
+    func setup(_ fundation: Fundation) {
         self.fundation = fundation
         
         if let backgroundColor = fundation.color {
             self.fundationIconView.backgroundColor = UIColor(rgba: backgroundColor)
         }
         
-        if self.focused {
+        if self.isFocused {
             self.updateDisplay()
         }
         

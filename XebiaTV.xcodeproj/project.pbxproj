@@ -605,12 +605,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 5F97A59B1BFCA37B004A753B /* Build configuration list for PBXNativeTarget "XebiaTV" */;
 			buildPhases = (
-				E1E4AD6667E0EC5DA501F5DD /* 📦 Check Pods Manifest.lock */,
+				E1E4AD6667E0EC5DA501F5DD /* [CP] Check Pods Manifest.lock */,
 				5F97A5881BFCA37A004A753B /* Sources */,
 				5F97A5891BFCA37A004A753B /* Frameworks */,
 				5F97A58A1BFCA37A004A753B /* Resources */,
-				E083739E00E6073667FB4D6E /* 📦 Embed Pods Frameworks */,
-				8A1F5CE4D47D4B35FD01897E /* 📦 Copy Pods Resources */,
+				E083739E00E6073667FB4D6E /* [CP] Embed Pods Frameworks */,
+				8A1F5CE4D47D4B35FD01897E /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -633,6 +633,7 @@
 					5F97A58B1BFCA37A004A753B = {
 						CreatedOnToolsVersion = 7.1;
 						DevelopmentTeam = U238JHJ7N4;
+						LastSwiftMigration = 0820;
 					};
 				};
 			};
@@ -680,14 +681,14 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		8A1F5CE4D47D4B35FD01897E /* 📦 Copy Pods Resources */ = {
+		8A1F5CE4D47D4B35FD01897E /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "📦 Copy Pods Resources";
+			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -695,14 +696,14 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-XebiaTV/Pods-XebiaTV-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		E083739E00E6073667FB4D6E /* 📦 Embed Pods Frameworks */ = {
+		E083739E00E6073667FB4D6E /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "📦 Embed Pods Frameworks";
+			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -710,19 +711,19 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-XebiaTV/Pods-XebiaTV-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		E1E4AD6667E0EC5DA501F5DD /* 📦 Check Pods Manifest.lock */ = {
+		E1E4AD6667E0EC5DA501F5DD /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "📦 Check Pods Manifest.lock";
+			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -922,6 +923,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
 				TVOS_DEPLOYMENT_TARGET = 9.1;
 			};
 			name = Debug;
@@ -939,6 +941,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.xebia.xebiatv;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
+				SWIFT_VERSION = 3.0;
 				TVOS_DEPLOYMENT_TARGET = 9.1;
 			};
 			name = Release;

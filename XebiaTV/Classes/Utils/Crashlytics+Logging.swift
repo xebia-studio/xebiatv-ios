@@ -9,7 +9,7 @@
 import Foundation
 import Crashlytics
 
-func XBLog(object: NSObject?) {
+func XBLog(_ object: NSObject?) {
     guard let object = object else { return }
     #if DEBUG
         CLSNSLogv("%@", getVaList([object]))
@@ -18,7 +18,7 @@ func XBLog(object: NSObject?) {
     #endif
 }
 
-func XBLog(string: String) {
+func XBLog(_ string: String) {
     #if DEBUG
         CLSNSLogv(string, getVaList([]))
     #else

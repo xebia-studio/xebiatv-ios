@@ -22,17 +22,17 @@ class DetailsAlertView: UIView {
         
         // Labels
         self.titleLabel.font = UIFont.fontLight(70)
-        self.titleLabel.textColor = UIColor.whiteColor()
-        self.contentView.selectable = true
-        self.contentView.scrollEnabled = true
+        self.titleLabel.textColor = UIColor.white
+        self.contentView.isSelectable = true
+        self.contentView.isScrollEnabled = true
         self.contentView.font = UIFont.fontRegular(30)
-        self.contentView.textColor = UIColor.whiteColor()
-        self.contentView.panGestureRecognizer.allowedTouchTypes = [NSNumber(integer: UITouchType.Indirect.rawValue)]
+        self.contentView.textColor = UIColor.white
+        self.contentView.panGestureRecognizer.allowedTouchTypes = [NSNumber(value: UITouchType.indirect.rawValue as Int)]
     }
     
     // MARK: - Setters
     
-    func setVideo(video:Video?) {
+    func setVideo(_ video:Video?) {
         self.titleLabel.text = video?.snippet?.title
         self.contentView.text = video?.snippet?.description
     }

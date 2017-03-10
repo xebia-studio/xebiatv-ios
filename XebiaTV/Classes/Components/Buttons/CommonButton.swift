@@ -10,7 +10,7 @@ import UIKit
 
 class CommonButton: UIButton {
 
-    private var bottomTitle:UILabel = UILabel()
+    fileprivate var bottomTitle:UILabel = UILabel()
     
     // MARK: - LifeCycle
     
@@ -24,28 +24,28 @@ class CommonButton: UIButton {
         self.commonInit()
     }
     
-    private func commonInit() {
-        self.bottomTitle.backgroundColor = UIColor.clearColor()
-        self.bottomTitle.textColor = UIColor.whiteColor()
-        self.bottomTitle.textAlignment = .Center
+    fileprivate func commonInit() {
+        self.bottomTitle.backgroundColor = UIColor.clear
+        self.bottomTitle.textColor = UIColor.white
+        self.bottomTitle.textAlignment = .center
         self.bottomTitle.alpha = 0.6
         self.bottomTitle.font = UIFont.fontRegular(30)
         self.addSubview(self.bottomTitle)
     }
 
-    override func didUpdateFocusInContext(context: UIFocusUpdateContext, withAnimationCoordinator coordinator: UIFocusAnimationCoordinator) {
+    override func didUpdateFocus(in context: UIFocusUpdateContext, with coordinator: UIFocusAnimationCoordinator) {
         
-        UIView.animateWithDuration(0.25, animations: {
-            self.bottomTitle.alpha = self.focused ? 1.0 : 0.6
+        UIView.animate(withDuration: 0.25, animations: {
+            self.bottomTitle.alpha = self.isFocused ? 1.0 : 0.6
         })
     }
     
     // MARK: - Setters
     
-    func setDescriptiveText(content:String) {
+    func setDescriptiveText(_ content:String) {
         self.bottomTitle.text = content
         self.bottomTitle.sizeToFit()
-        self.bottomTitle.frame = CGRectMake(0, self.bounds.height + 14, self.bounds.width, self.bottomTitle.bounds.height)
+        self.bottomTitle.frame = CGRect(x: 0, y: self.bounds.height + 14, width: self.bounds.width, height: self.bottomTitle.bounds.height)
         
         self.accessibilityLabel = content
     }

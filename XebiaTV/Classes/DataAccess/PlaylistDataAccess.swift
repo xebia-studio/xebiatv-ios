@@ -10,13 +10,13 @@ import Foundation
 import SwiftTask
 import Unbox
 
-typealias PlaylistRetrieveTask = Task<Progress, [Video], ErrorType>
+typealias PlaylistRetrieveTask = Task<Progress, [Video], Error>
 
 class PlaylistDataAccess {
     
     // MARK: Listing
     
-    static func retrieveVideos(parameters:GenericJSON = GenericJSON(), client:WSClientProtocol.Type? = WSClient.self) -> PlaylistRetrieveTask {
+    static func retrieveVideos(_ parameters:GenericJSON = GenericJSON(), client:WSClientProtocol.Type? = WSClient.self) -> PlaylistRetrieveTask {
         return PlaylistRequest.listVideos(parameters, client:client!)
             .success { data in
                 return JSONDictionaryDeserializer.deserialize(data)
@@ -37,7 +37,7 @@ class PlaylistDataAccess {
         }
     }
     
-    static func buildPlaylist(playlistData: GenericJSON) -> [Video] {
+    static func buildPlaylist(_ playlistData: GenericJSON) -> [Video] {
         var list = [Video]()
         guard let videos = playlistData["items"] as? Array<AnyObject> else { return list }
         
@@ -45,7 +45,7 @@ class PlaylistDataAccess {
             
             let decodedObject:Video? = Unbox(videoData as! UnboxableDictionary)
             
-            guard let video = decodedObject, snippet = video.snippet where snippet.title != Constants.Configuration.PrivateVideoKey else {
+            guard let video = decodedObject, let snippet = video.snippet, snippet.title != Constants.Configuration.PrivateVideoKey else {
                 XBLog("Error with data : \(videoData)")
                 continue
             }

@@ -23,7 +23,7 @@ class HomeView: UIView {
         
         // Loader
         self.loaderView.hidesWhenStopped = true
-        self.loaderView.type = .LineScaleParty
+        self.loaderView.type = .lineScaleParty
         self.loaderView.color = UIColor.commonPurpleColor()
         self.loaderView.size = CGSize(width: 80, height: 80)
         self.loaderView.startAnimation()        
@@ -43,17 +43,17 @@ class HomeView: UIView {
     func showContent() {
         self.loaderView.stopAnimation()
         
-        UIView.animateWithDuration(0.25, animations: {
+        UIView.animate(withDuration: 0.25, animations: {
             self.collectionView.alpha = 1.0
         })
     }
     
-    func showErrorMessage(noInternetConnection:Bool) {
+    func showErrorMessage(_ noInternetConnection:Bool) {
         self.errorLabel.text = noInternetConnection ? "NO_INTERNET_CONNECTION".localized : "NO_DATA_ERROR".localized
         
         self.loaderView.stopAnimation()
         
-        UIView.animateWithDuration(0.25, animations: {
+        UIView.animate(withDuration: 0.25, animations: {
             self.errorView.alpha = 1.0
         })
     }

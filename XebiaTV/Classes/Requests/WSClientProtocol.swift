@@ -10,11 +10,11 @@ import Foundation
 import Alamofire
 import SwiftTask
 
-typealias WSRequestTask = Task<Progress, NSData, ErrorType>
+typealias WSRequestTask = Task<Progress, NSData, Error>
 
 protocol WSClientProtocol  {
     
-    static func requestContent(method:Alamofire.Method, urlRequest: NSMutableURLRequest, parameters: GenericJSON?, encoding: ParameterEncoding) -> WSRequestTask
+    static func requestContent(_ method:Alamofire.Method, urlRequest: NSMutableURLRequest, parameters: GenericJSON?, encoding: ParameterEncoding) -> WSRequestTask
     
 }
 
@@ -22,7 +22,7 @@ extension WSClientProtocol {
     
     // MARK: Forward Errors
     
-    static func forwardContentErrorTask(error: NSError?, isCancelled: Bool?) -> WSRequestTask {
+    static func forwardContentErrorTask(_ error: NSError?, isCancelled: Bool?) -> WSRequestTask {
         return WSRequestTask { progress, fulfill, reject, configure in
             guard let error = error else {
                 let error = NSError(domain: "WSClient", code: 0, userInfo: ["errorDescription": "Task cancelled"])

@@ -12,18 +12,18 @@ class PlaylistRequest: AbstractRequest {
 
     // MARK: Listing
     
-    static private func buildListRequest() -> NSMutableURLRequest {
+    static fileprivate func buildListRequest() -> NSMutableURLRequest {
         let urlString = Constants.Endpoints.YoutubeBaseURL + Constants.Endpoints.PlaylistItemsEndpoint
         return super.buildRequest(urlString)
     }
     
-    static private func buildListRequest() -> RequestBuildTask {
+    static fileprivate func buildListRequest() -> RequestBuildTask {
         return RequestBuildTask { (progress, fulfill, reject, configure) in
             fulfill(self.buildListRequest())
         }
     }
     
-    static func listVideos(parameters:GenericJSON, client:WSClientProtocol.Type) -> WSRequestTask {
+    static func listVideos(_ parameters:GenericJSON, client:WSClientProtocol.Type) -> WSRequestTask {
         return self.buildListRequest()
             .success { mutableRequest in
                 return client.requestContent(.GET, urlRequest: mutableRequest, parameters:parameters, encoding:.URL)

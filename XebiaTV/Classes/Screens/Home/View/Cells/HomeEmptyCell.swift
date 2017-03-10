@@ -21,21 +21,21 @@ class HomeEmptyCell: AbstractCollectionViewCell {
         self.titleLabel.font = UIFont.fontLight(38)
     }
 
-    override func didUpdateFocusInContext(context: UIFocusUpdateContext, withAnimationCoordinator coordinator: UIFocusAnimationCoordinator) {
+    override func didUpdateFocus(in context: UIFocusUpdateContext, with coordinator: UIFocusAnimationCoordinator) {
         
         let scale:CGFloat = 1.2
         
         if context.nextFocusedView == self {
             coordinator.addCoordinatedAnimations({ () -> Void in
                 
-                self.transform = CGAffineTransformMakeScale(scale, scale)
+                self.transform = CGAffineTransform(scaleX: scale, y: scale)
                 
                 }, completion: nil)
         }
         else {
             coordinator.addCoordinatedAnimations({ () -> Void in
                 
-                self.transform = CGAffineTransformIdentity
+                self.transform = CGAffineTransform.identity
                 
                 }, completion: nil)
         }

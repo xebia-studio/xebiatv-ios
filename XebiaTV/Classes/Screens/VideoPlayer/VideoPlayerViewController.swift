@@ -18,7 +18,7 @@ class VideoPlayerViewController: AVPlayerViewController {
     
     // MARK: - Variables
     
-    private var watermarkView:UIImageView?
+    fileprivate var watermarkView:UIImageView?
     var selectedVideo:Video? {
         didSet {
             if selectedVideo?.urls.count == 0 {
@@ -29,7 +29,7 @@ class VideoPlayerViewController: AVPlayerViewController {
     
     // MARK: - Data
     
-    private func loadData() {
+    fileprivate func loadData() {
         guard let videoId = self.selectedVideo?.snippet?.resource?.videoId else { return }
         
         // Categories request
@@ -44,34 +44,34 @@ class VideoPlayerViewController: AVPlayerViewController {
     
     // MARK: - Notifications
     
-    func notificationEndPlaying(notification: NSNotification) {
-        self.navigationController?.popViewControllerAnimated(true)
+    func notificationEndPlaying(_ notification: Notification) {
+        _ = self.navigationController?.popViewController(animated: true)
     }
     
     // MARK: - Video Player
     
-    private func playVideo() {
+    fileprivate func playVideo() {
         Async.main {
             guard let url = self.selectedVideo?.bestUrl?.url else { return }
 
             let titleMetadataItem = AVMutableMetadataItem()
-            titleMetadataItem.locale = NSLocale.currentLocale()
+            titleMetadataItem.locale = NSLocale.current
             titleMetadataItem.key = AVMetadataCommonKeyTitle
             titleMetadataItem.keySpace = AVMetadataKeySpaceCommon
             titleMetadataItem.value = self.selectedVideo?.snippet?.title
             
             let descriptionMetadataItem = AVMutableMetadataItem()
-            descriptionMetadataItem.locale = NSLocale.currentLocale()
+            descriptionMetadataItem.locale = NSLocale.current
             descriptionMetadataItem.key = AVMetadataCommonKeyDescription
             descriptionMetadataItem.keySpace = AVMetadataKeySpaceCommon
             descriptionMetadataItem.value = self.selectedVideo?.snippet?.description
             
-            let mediaItem = AVPlayerItem(URL: NSURL(string: url)!)
+            let mediaItem = AVPlayerItem(url: URL(string: url)!)
             mediaItem.externalMetadata.append(titleMetadataItem)
             mediaItem.externalMetadata.append(descriptionMetadataItem)
             
             // Subscribe to the AVPlayerItem's DidPlayToEndTime notification.
-            NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(self.notificationEndPlaying), name: AVPlayerItemDidPlayToEndTimeNotification, object: mediaItem)
+            NotificationCenter.default.addObserver(self, selector: #selector(self.notificationEndPlaying), name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: mediaItem)
             
             self.player = AVPlayer(playerItem: mediaItem)
             self.player?.play()

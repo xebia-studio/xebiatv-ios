@@ -8,6 +8,30 @@
 
 import Foundation
 import Unbox
+// FIXME: comparison operators with optionals were removed from the Swift Standard Libary.
+// Consider refactoring the code to use the non-optional operators.
+fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l < r
+  case (nil, _?):
+    return true
+  default:
+    return false
+  }
+}
+
+// FIXME: comparison operators with optionals were removed from the Swift Standard Libary.
+// Consider refactoring the code to use the non-optional operators.
+fileprivate func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l > r
+  default:
+    return rhs < lhs
+  }
+}
+
 
 enum ThumbnailType: String {
     case Default = "default"
@@ -39,9 +63,9 @@ struct Thumbnail: Unboxable {
     
     internal init(unboxer: Unboxer) {
         
-        url = unboxer.unbox("url")
-        width = unboxer.unbox("width")
-        height = unboxer.unbox("height")
+        url = unboxer.unbox(key: "url")
+        width = unboxer.unbox(key: "width")
+        height = unboxer.unbox(key: "height")
         
     }
 }
@@ -58,9 +82,9 @@ struct VideoResource: Unboxable {
     
     internal init(unboxer: Unboxer) {
         
-        url = unboxer.unbox("url")
-        type = unboxer.unbox("type")
-        quality = unboxer.unbox("quality")
+        url = unboxer.unbox(key: "url")
+        type = unboxer.unbox(key: "type")
+        quality = unboxer.unbox(key: "quality")
         
     }
 }
@@ -71,8 +95,8 @@ struct Resource: Unboxable {
     var videoId:String?
    
     internal init(unboxer: Unboxer) {
-        self.kind = unboxer.unbox("kind")
-        self.videoId = unboxer.unbox("videoId")
+        self.kind = unboxer.unbox(key: "kind")
+        self.videoId = unboxer.unbox(key: "videoId")
     }
 }
 
@@ -98,8 +122,8 @@ struct Snippet: Unboxable {
         let thumbnailsOrder:Array<ThumbnailType> = [.Default, .Medium, .High, .Standard, .MaxRes]
         
         for thumbnail in thumbnails {
-            guard let thumbType = thumbnail.type, currentThumbType = selectedThumbnail.type else { continue }
-            if thumbnailsOrder.indexOf(thumbType) > thumbnailsOrder.indexOf(currentThumbType) {
+            guard let thumbType = thumbnail.type, let currentThumbType = selectedThumbnail.type else { continue }
+            if thumbnailsOrder.index(of: thumbType) > thumbnailsOrder.index(of: currentThumbType) {
                 selectedThumbnail = thumbnail
             }
         }
@@ -108,24 +132,24 @@ struct Snippet: Unboxable {
     }
     
     internal init(unboxer: Unboxer) {
-        self.title = unboxer.unbox("title")
-        self.position = unboxer.unbox("position")
-        self.channelId = unboxer.unbox("channelId")
-        self.playlistId = unboxer.unbox("playlistId")
-        self.publishedAt = unboxer.unbox("publishedAt")
-        self.description = unboxer.unbox("description")
-        self.channelTitle = unboxer.unbox("channelTitle")
-        self.channelId = unboxer.unbox("channelId")
-        self.resource = unboxer.unbox("resourceId")
+        self.title = unboxer.unbox(key: "title")
+        self.position = unboxer.unbox(key: "position")
+        self.channelId = unboxer.unbox(key: "channelId")
+        self.playlistId = unboxer.unbox(key: "playlistId")
+        self.publishedAt = unboxer.unbox(key: "publishedAt")
+        self.description = unboxer.unbox(key: "description")
+        self.channelTitle = unboxer.unbox(key: "channelTitle")
+        self.channelId = unboxer.unbox(key: "channelId")
+        self.resource = unboxer.unbox(key: "resourceId")
         
         // Thumbnails
-        guard let thumbs:UnboxableDictionary = unboxer.unbox("thumbnails") else {
+        guard let thumbs:UnboxableDictionary = unboxer.unbox(key: "thumbnails") else {
             return
         }
         
         thumbnails = Array<Thumbnail>()
         for thumbnailDecoder in thumbs {
-            var thumbnail:Thumbnail = unboxer.unbox("thumbnails.\(thumbnailDecoder.0)", isKeyPath: true)
+            var thumbnail:Thumbnail = unboxer.unbox(keyPath: "thumbnails.\(thumbnailDecoder.0)")
             thumbnail.type = ThumbnailType(rawValue: thumbnailDecoder.0)
             thumbnails.append(thumbnail)
         }
@@ -154,8 +178,8 @@ struct Video: Unboxable {
         let urlsOrder:Array<QualityType> = [.Worst, .Low, .Small, .Medium, .HD720, .Best]
         
         for url in urls {
-            guard let urlType = QualityType(rawValue: url.quality!), currentUrlType = QualityType(rawValue: selectedUrl.quality!) else { continue }
-            if urlsOrder.indexOf(urlType) > urlsOrder.indexOf(currentUrlType) {
+            guard let urlType = QualityType(rawValue: url.quality!), let currentUrlType = QualityType(rawValue: selectedUrl.quality!) else { continue }
+            if urlsOrder.index(of: urlType) > urlsOrder.index(of: currentUrlType) {
                 selectedUrl = url
             }
         }
@@ -164,9 +188,9 @@ struct Video: Unboxable {
     }
 
     internal init(unboxer: Unboxer) {
-        self.id = unboxer.unbox("id")
-        self.etag = unboxer.unbox("etag")
-        self.snippet = unboxer.unbox("snippet")
+        self.id = unboxer.unbox(key: "id")
+        self.etag = unboxer.unbox(key: "etag")
+        self.snippet = unboxer.unbox(key: "snippet")
     }
     
 }

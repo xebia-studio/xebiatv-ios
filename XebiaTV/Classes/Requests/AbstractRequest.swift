@@ -12,10 +12,10 @@ import SwiftTask
 public typealias Progress = (bytesWritten: Int64, totalBytesWritten: Int64, totalBytesExpectedToWrite: Int64)
 public typealias RequestBuildTask = Task<Progress, NSMutableURLRequest, NSError>
 
-public class AbstractRequest {
+open class AbstractRequest {
     
-    public static func buildRequest(urlString: String) -> NSMutableURLRequest {
-        let mutableURLRequest = NSMutableURLRequest(URL: NSURL(string: urlString)!, cachePolicy: .UseProtocolCachePolicy, timeoutInterval: 30.0)
+    open static func buildRequest(_ urlString: String) -> NSMutableURLRequest {
+        let mutableURLRequest = NSMutableURLRequest(url: URL(string: urlString)!, cachePolicy: .useProtocolCachePolicy, timeoutInterval: 30.0)
         mutableURLRequest.setValue("application/json;charset=utf-8", forHTTPHeaderField: "Content-Type")
         mutableURLRequest.setValue("application/json,text/plain,*/*", forHTTPHeaderField: "Accept")
         mutableURLRequest.setValue("gzip,deflate", forHTTPHeaderField: "Accept-Encoding")

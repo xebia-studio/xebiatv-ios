@@ -11,13 +11,13 @@ import SwiftTask
 
 public typealias JSONDictionaryDeserializerTask = Task<Progress, GenericJSON, NSError>
 
-public class JSONDictionaryDeserializer: Deserializer {
+open class JSONDictionaryDeserializer: Deserializer {
     
-    static func deserialize(data: NSData) -> JSONDictionaryDeserializerTask {
+    static func deserialize(_ data: Data) -> JSONDictionaryDeserializerTask {
         return JSONDictionaryDeserializerTask { fulfill, reject in
             Async.background {
                 do {
-                    guard let object = try NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers) as? GenericJSON else { return }
+                    guard let object = try JSONSerialization.jsonObject(with: data, options: JSONSerialization.ReadingOptions.mutableContainers) as? GenericJSON else { return }
                     fulfill(object)
                 }
                 catch let error as NSError {

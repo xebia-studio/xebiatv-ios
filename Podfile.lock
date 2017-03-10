@@ -1,15 +1,15 @@
 PODS:
-  - Alamofire (3.1.2)
-  - AsyncSwift (1.6.4)
-  - Cartography (0.5.0)
-  - Crashlytics (3.4.1):
-    - Fabric (~> 1.6.0)
-  - Fabric (1.6.1)
+  - Alamofire (4.4.0)
+  - AsyncSwift (2.0.1)
+  - Cartography (1.0.1)
+  - Crashlytics (3.8.4):
+    - Fabric (~> 1.6.3)
+  - Fabric (1.6.11)
   - HanekeSwift (0.10.1)
-  - ReachabilitySwift (2.3.3)
+  - ReachabilitySwift (3)
   - Reveal-tvOS-SDK (1.6.2)
-  - SwiftTask (4.2.1)
-  - Unbox (1.4)
+  - SwiftTask (5.0.0)
+  - Unbox (2.4.0)
 
 DEPENDENCIES:
   - Alamofire
@@ -17,38 +17,45 @@ DEPENDENCIES:
   - Cartography (from `https://github.com/robb/Cartography.git`)
   - Crashlytics
   - Fabric
-  - HanekeSwift (from `https://github.com/Haneke/HanekeSwift.git`)
+  - HanekeSwift (from `https://github.com/Haneke/HanekeSwift.git`, branch `feature/swift-3`)
   - ReachabilitySwift
   - Reveal-tvOS-SDK
-  - SwiftTask
+  - SwiftTask (from `https://github.com/ReactKit/SwiftTask.git`, branch `swift/3.0`)
   - Unbox
 
 EXTERNAL SOURCES:
   Cartography:
     :git: https://github.com/robb/Cartography.git
   HanekeSwift:
+    :branch: feature/swift-3
     :git: https://github.com/Haneke/HanekeSwift.git
+  SwiftTask:
+    :branch: swift/3.0
+    :git: https://github.com/ReactKit/SwiftTask.git
 
 CHECKOUT OPTIONS:
   Cartography:
-    :commit: c73aa3bdcdf366a7648571e53075be8e8e10392b
+    :commit: ac3eb27bb6cb071aaddb6b38c70b8b7ef260617a
     :git: https://github.com/robb/Cartography.git
   HanekeSwift:
-    :commit: 694d6a9025ab9ef5e90705a338971f8d4683f425
+    :commit: 1157a124ec699f4ad926cb054f1d0bfce88ae7a9
     :git: https://github.com/Haneke/HanekeSwift.git
+  SwiftTask:
+    :commit: 98f89883509d27229d60ff3f2ececdd82a46d674
+    :git: https://github.com/ReactKit/SwiftTask.git
 
 SPEC CHECKSUMS:
-  Alamofire: 7c16ca65f3c7e681fd925fd7f2dec7747ff96855
-  AsyncSwift: 3c90beed237324f1b57e1f1c414dc5501985d208
-  Cartography: de3e85d2fc2d7288a2e7c89e1ac6cad08599d75e
-  Crashlytics: 41574a245bc6ae10c55d57f385ebd2004e5bee05
-  Fabric: bf0ceb04e7c924090efc5f8c55e4fbcca189e0a0
+  Alamofire: dc44b1600b800eb63da6a19039a0083d62a6a62d
+  AsyncSwift: 632138e42ead868b53c745fcde9bf733ce1527ad
+  Cartography: c1460e99395b824d9d75360b0382faeb0b33dcd7
+  Crashlytics: 79e236942ca1e7fc641df1feb9a275360a78ab6a
+  Fabric: 5911403591946b8228ab1c51d98f1d7137e863c6
   HanekeSwift: 4113367892828e7700d24a384027de6ebc79aad1
-  ReachabilitySwift: e0f6b6f280effb47731acfaaa2d5ffe223703793
+  ReachabilitySwift: f5b9bb30a0777fac8f09ce8b067e32faeb29bb64
   Reveal-tvOS-SDK: acb8ac785e0b1426b2f275fb67f12b54632540ee
-  SwiftTask: 30423c2499ac69e3fc20c001600ab7de46efeed1
-  Unbox: 34a7f7a978553a2b57f226251c70ada170fbb16b
+  SwiftTask: 7fcd92f8ac16876e82c0e4ced0cea7e028456b6b
+  Unbox: c8b2ab69d3337597b4a3f47a0538807dc12db670
 
-PODFILE CHECKSUM: 0343988da6b2699adc3fc430fa44146acb8279fa
+PODFILE CHECKSUM: c0bbe7e81cbdc6bbe13e6409f6a7f1de9354366a
 
-COCOAPODS: 1.0.0
+COCOAPODS: 1.2.0

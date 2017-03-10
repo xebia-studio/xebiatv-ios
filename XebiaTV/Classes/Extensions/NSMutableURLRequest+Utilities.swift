@@ -10,10 +10,10 @@ import Foundation
 
 extension NSMutableURLRequest {
     
-    override public var description: String {
-        let HTTPMethod = self.HTTPMethod
+    override open var description: String {
+        let HTTPMethod = self.httpMethod
         var s = "\nHTTP Request\nMethod: \(HTTPMethod)\n"
-        if let absoluteString = self.URL?.absoluteString {
+        if let absoluteString = self.url?.absoluteString {
             s += "\"\(absoluteString)\"\n"
         }
         
@@ -27,15 +27,15 @@ extension NSMutableURLRequest {
             }
             
             if HTTPMethod == "POST" {
-                if let HTTPBody = self.HTTPBody {
-                    if let sBody = NSString(data: HTTPBody, encoding: NSUTF8StringEncoding) {
+                if let httpBody = self.httpBody {
+                    if let sBody = String(data: httpBody, encoding: .utf8) {
                         s += "----------\nBody:\n\"\(sBody)\"\n----------\n"
                     }
                 }
             }
             
-            if let URL = self.URL {
-                if let cookies = NSHTTPCookieStorage.sharedHTTPCookieStorage().cookiesForURL(URL) { // or .cookies
+            if let url = self.url {
+                if let cookies = HTTPCookieStorage.shared.cookies(for: url) { // or .cookies
                     s += "Cookies:\n\(cookies)\n----------\n"
                 }
             }

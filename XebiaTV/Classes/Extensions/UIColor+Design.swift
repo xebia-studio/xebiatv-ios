@@ -24,11 +24,11 @@ public extension UIColor {
         var alpha: CGFloat = 1.0
         
         if rgba.hasPrefix("#") {
-            let index   = rgba.startIndex.advancedBy(1)
-            let hex     = rgba.substringFromIndex(index)
-            let scanner = NSScanner(string: hex)
+            let index   = rgba.characters.index(rgba.startIndex, offsetBy: 1)
+            let hex     = rgba.substring(from: index)
+            let scanner = Scanner(string: hex)
             var hexValue: CUnsignedLongLong = 0
-            if scanner.scanHexLongLong(&hexValue) {
+            if scanner.scanHexInt64(&hexValue) {
                 switch (hex.characters.count) {
                 case 3:
                     red   = CGFloat((hexValue & 0xF00) >> 8)       / 15.0
@@ -61,14 +61,14 @@ public extension UIColor {
         self.init(red:red, green:green, blue:blue, alpha:alpha)
     }
     
-    class func commonPurpleColor(alpha:CGFloat = 1.0) -> UIColor {
+    class func commonPurpleColor(_ alpha:CGFloat = 1.0) -> UIColor {
         let redColor:CGFloat = 108.0
         let greenColor:CGFloat = 30.0
         let blueColor:CGFloat = 97.0
         return UIColor(red: (redColor / 255.0), green: (greenColor / 255.0), blue: (blueColor / 255.0), alpha: alpha)
     }
     
-    class func commonOrangeColor(alpha:CGFloat = 1.0) -> UIColor {
+    class func commonOrangeColor(_ alpha:CGFloat = 1.0) -> UIColor {
         let redColor:CGFloat = 248.0
         let greenColor:CGFloat = 150.0
         let blueColor:CGFloat = 65.0
@@ -82,7 +82,7 @@ public extension UIColor {
         return UIColor(red: r, green: g, blue: b, alpha: 1.0)
     }
     
-    static private func randomCGFloat() -> CGFloat {
+    static fileprivate func randomCGFloat() -> CGFloat {
         return CGFloat(arc4random()) / CGFloat(UInt32.max)
     }
     

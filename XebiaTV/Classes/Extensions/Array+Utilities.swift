@@ -10,7 +10,7 @@ import Foundation
 
 extension Array where Element: Equatable {
     
-    func arrayRemovingObject(object: Element) -> [Element] {
+    func arrayRemovingObject(_ object: Element) -> [Element] {
         return filter { $0 != object }
     }
     

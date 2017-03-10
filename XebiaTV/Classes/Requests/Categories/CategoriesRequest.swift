@@ -12,18 +12,18 @@ class CategoriesRequest: AbstractRequest {
 
     // MARK: Listing
     
-    static private func buildListRequest() -> NSMutableURLRequest {
+    static fileprivate func buildListRequest() -> NSMutableURLRequest {
         let urlString = Constants.Endpoints.BaseURL + Constants.Endpoints.CategoriesListEndpoint
         return super.buildRequest(urlString)
     }
     
-    static private func buildListRequest() -> RequestBuildTask {
+    static fileprivate func buildListRequest() -> RequestBuildTask {
         return RequestBuildTask { (progress, fulfill, reject, configure) in
             fulfill(self.buildListRequest())
         }
     }
     
-    static func listCategories(parameters:GenericJSON, client:WSClientProtocol.Type) -> WSRequestTask {
+    static func listCategories(_ parameters:GenericJSON, client:WSClientProtocol.Type) -> WSRequestTask {
         return self.buildListRequest()
             .success { mutableRequest in
                 return client.requestContent(.GET, urlRequest: mutableRequest, parameters:parameters, encoding:.URL)

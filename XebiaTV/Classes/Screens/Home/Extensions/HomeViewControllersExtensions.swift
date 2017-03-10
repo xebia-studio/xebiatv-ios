@@ -12,26 +12,26 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
     
     // MARK: UICollectionViewDataSource
     
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-        return CGSizeMake(UIScreen.mainScreen().bounds.size.width, round(UIScreen.mainScreen().bounds.size.height / 2.2))
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: UIScreen.main.bounds.size.width, height: round(UIScreen.main.bounds.size.height / 2.2))
     }
     
-    func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
         return self.menuDataSource.count
     }
     
-    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 1
     }
     
-    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         // Dequeue a cell from the collection view.
-        return collectionView.dequeueReusableCellWithReuseIdentifier(HomeCell.reuseIdentifier(), forIndexPath: indexPath)
+        return collectionView.dequeueReusableCell(withReuseIdentifier: HomeCell.reuseIdentifier(), for: indexPath)
     }
     
     // MARK: UICollectionViewDelegate
     
-    func collectionView(collectionView: UICollectionView, willDisplayCell cell: UICollectionViewCell, forItemAtIndexPath indexPath: NSIndexPath) {
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         guard let cell = cell as? HomeCell else { fatalError("Expected to display a `HomeCell`.") }
         let category = self.menuDataSource[indexPath.section]
         cell.category = category
@@ -55,19 +55,19 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
             self.selectedBackgroundImage = selectedVideo.backgroundImage
             self.selectedVideo = selectedVideo.video
             self.allVideos = selectedVideo.videos
-            self.performSegueWithIdentifier(Constants.Segues.ShowDetails, sender: nil)
+            self.performSegue(withIdentifier: Constants.Segues.ShowDetails, sender: nil)
         })
     }
     
-    func collectionView(collectionView: UICollectionView, canFocusItemAtIndexPath indexPath: NSIndexPath) -> Bool {
+    func collectionView(_ collectionView: UICollectionView, canFocusItemAt indexPath: IndexPath) -> Bool {
         return false
     }
     
-    func collectionView(collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, atIndexPath indexPath: NSIndexPath) -> UICollectionReusableView {
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         
         let reusableview:UICollectionReusableView
         if (kind == UICollectionElementKindSectionHeader && indexPath.section == 0) {
-            let headerView = collectionView.dequeueReusableSupplementaryViewOfKind(kind, withReuseIdentifier: HomeHeaderCollectionReusableView.reuseIdentifier(), forIndexPath: indexPath)
+            let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: HomeHeaderCollectionReusableView.reuseIdentifier(), for: indexPath)
             reusableview = headerView;
         }  else {
            reusableview = UICollectionReusableView()
@@ -78,11 +78,11 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
     
     // MARK: - UICollectionViewFlowLayout Delegate
     
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
         if (section == 0) {
-            return CGSizeMake(collectionView.bounds.size.width, HomeHeaderCollectionReusableView.cellHeight())
+            return CGSize(width: collectionView.bounds.size.width, height: HomeHeaderCollectionReusableView.cellHeight())
         } else {
-            return CGSizeZero
+            return CGSize.zero
         }
     }
     

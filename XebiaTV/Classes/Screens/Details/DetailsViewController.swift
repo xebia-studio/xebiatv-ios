@@ -54,16 +54,16 @@ class DetailsViewController: UIViewController {
         view.collectionView.delegate = self
         view.collectionView.dataSource = self
         view.collectionView.contentInset = UIEdgeInsetsMake(100, 50, 50, 50)
-        view.collectionView.registerNib(VideoCell.nib(), forCellWithReuseIdentifier: VideoCell.reuseIdentifier())
+        view.collectionView.register(VideoCell.nib(), forCellWithReuseIdentifier: VideoCell.reuseIdentifier())
     }
     
     // MARK: - Load Picture
     
-    private func loadPicture() {
+    fileprivate func loadPicture() {
         // Load Picture
         let cache = Shared.imageCache
         if let pictureUrl = self.selectedVideo?.snippet?.bestThumbnail?.urlString {
-            let fetcher = NetworkFetcher<UIImage>(URL: NSURL(string: pictureUrl)!)
+            let fetcher = NetworkFetcher<UIImage>(URL: URL(string: pictureUrl)!)
             
             cache.fetch(fetcher: fetcher)
                 .onSuccess { [weak self] image in
@@ -85,18 +85,18 @@ class DetailsViewController: UIViewController {
         
         let view = self.view as! DetailsView
         UIView.performWithoutAnimation {
-            view.collectionView.reloadSections(NSIndexSet(index: 0))
+            view.collectionView.reloadSections(IndexSet(integer: 0))
         }
     }
     
     // MARK: - Segues
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if let viewController = segue.destinationViewController as? VideoPlayerViewController {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let viewController = segue.destination as? VideoPlayerViewController {
             viewController.selectedVideo = self.selectedVideo
         }
         
-        if let viewController = segue.destinationViewController as? DetailsAlertViewController {
+        if let viewController = segue.destination as? DetailsAlertViewController {
             viewController.video = self.selectedVideo
         }
     }

@@ -30,32 +30,32 @@ public extension UIFont {
         return "Lato-Thin"
     }
     
-    class func fontBold(size:CGFloat) -> UIFont {
+    class func fontBold(_ size:CGFloat) -> UIFont {
         return UIFont(name: UIFont.fontBoldName(), size: size)!
     }
     
-    class func fontMedium(size:CGFloat) -> UIFont {
+    class func fontMedium(_ size:CGFloat) -> UIFont {
         return UIFont(name: UIFont.fontMediumName(), size: size)!
     }
     
-    class func fontRegular(size:CGFloat) -> UIFont {
+    class func fontRegular(_ size:CGFloat) -> UIFont {
         return UIFont(name: UIFont.fontRegularName(), size: size)!
     }
     
-    class func fontLight(size:CGFloat) -> UIFont {
+    class func fontLight(_ size:CGFloat) -> UIFont {
         return UIFont(name: UIFont.fontLightName(), size: size)!
     }
     
-    class func fontThin(size:CGFloat) -> UIFont {
+    class func fontThin(_ size:CGFloat) -> UIFont {
         return UIFont(name: UIFont.fontThinName(), size: size)!
     }
     
     class func listAllAvailableFonts() {
-        let fontFamilyNames = UIFont.familyNames()
+        let fontFamilyNames = UIFont.familyNames
         for familyName in fontFamilyNames {
             print("------------------------------")
             print("Font Family Name = [\(familyName)]")
-            let names = UIFont.fontNamesForFamilyName(familyName)
+            let names = UIFont.fontNames(forFamilyName: familyName)
             print("Font Names = [\(names)]")
         }
     }
