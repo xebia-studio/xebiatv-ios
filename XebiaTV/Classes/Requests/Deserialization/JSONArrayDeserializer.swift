@@ -9,7 +9,7 @@
 import Async
 import SwiftTask
 
-public typealias JSONArrayDeserializerTask = Task<Progress, [GenericJSON], NSError>
+public typealias JSONArrayDeserializerTask = Task<Progress, [GenericJSON], Error>
 
 open class JSONArrayDeserializer: Deserializer {
 
@@ -20,14 +20,8 @@ open class JSONArrayDeserializer: Deserializer {
                     guard let list = try JSONSerialization.jsonObject(with: data, options: JSONSerialization.ReadingOptions.mutableContainers) as? [GenericJSON] else { return }
                     fulfill(list)
                 }
-                catch let error as NSError {
+                catch let error{
                     reject(error)
-                }
-                catch _ {
-                    let unknownError = NSError(domain: "JSONArrayDeserializer", code: 0, userInfo: ["errorDescription": "Cannot deserialize JSON"])
-                    Async.main {
-                        reject(unknownError)
-                    }
                 }
             }
         }

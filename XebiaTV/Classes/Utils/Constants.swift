@@ -31,6 +31,7 @@ struct Constants {
     
     struct Endpoints {
         static let BaseURL = "https://xebiatv.herokuapp.com/"
+        //static let BaseURL = "http://10.0.13.4:8080/"
         static let YoutubeBaseURL = "https://www.googleapis.com/youtube/v3/"
         static let CategoriesListEndpoint = "categories/"
         static let PlaylistItemsEndpoint = "playlistItems/"

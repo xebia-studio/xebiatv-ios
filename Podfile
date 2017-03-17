@@ -10,7 +10,6 @@ pod 'Crashlytics'
 pod 'Fabric'
 pod 'HanekeSwift', :git => 'https://github.com/Haneke/HanekeSwift.git', :branch => 'feature/swift-3'
 pod 'ReachabilitySwift'
-pod 'Reveal-tvOS-SDK', :configurations => ['Debug']
 pod 'SwiftTask', :git => 'https://github.com/ReactKit/SwiftTask.git', :branch => 'swift/3.0'
 pod 'Unbox'
 end

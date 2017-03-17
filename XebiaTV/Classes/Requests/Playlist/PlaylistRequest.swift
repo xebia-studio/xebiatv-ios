@@ -14,6 +14,7 @@ class PlaylistRequest: AbstractRequest {
     // MARK: Listing
     
     static fileprivate func buildListRequest() -> NSMutableURLRequest {
+        //let urlString = Constants.Endpoints.BaseURL + Constants.Endpoints.PlaylistItemsEndpoint
         let urlString = Constants.Endpoints.YoutubeBaseURL + Constants.Endpoints.PlaylistItemsEndpoint
         return super.buildRequest(urlString)
     }

@@ -9,7 +9,7 @@
 import Async
 import SwiftTask
 
-public typealias JSONDictionaryDeserializerTask = Task<Progress, GenericJSON, NSError>
+public typealias JSONDictionaryDeserializerTask = Task<Progress, GenericJSON, Error>
 
 open class JSONDictionaryDeserializer: Deserializer {
     
@@ -20,14 +20,8 @@ open class JSONDictionaryDeserializer: Deserializer {
                     guard let object = try JSONSerialization.jsonObject(with: data, options: JSONSerialization.ReadingOptions.mutableContainers) as? GenericJSON else { return }
                     fulfill(object)
                 }
-                catch let error as NSError {
+                catch let error {
                     reject(error)
-                }
-                catch _ {
-                    let unknownError = NSError(domain: "JSONDictionnaryDeserializer", code: 0, userInfo: ["errorDescription": "Cannot deserialize JSON"])
-                    Async.main {
-                        reject(unknownError)
-                    }
                 }
             }
         }

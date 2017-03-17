@@ -7,7 +7,6 @@ PODS:
   - Fabric (1.6.11)
   - HanekeSwift (0.10.1)
   - ReachabilitySwift (3)
-  - Reveal-tvOS-SDK (1.6.2)
   - SwiftTask (5.0.0)
   - Unbox (2.4.0)
 
@@ -19,7 +18,6 @@ DEPENDENCIES:
   - Fabric
   - HanekeSwift (from `https://github.com/Haneke/HanekeSwift.git`, branch `feature/swift-3`)
   - ReachabilitySwift
-  - Reveal-tvOS-SDK
   - SwiftTask (from `https://github.com/ReactKit/SwiftTask.git`, branch `swift/3.0`)
   - Unbox
 
@@ -52,10 +50,9 @@ SPEC CHECKSUMS:
   Fabric: 5911403591946b8228ab1c51d98f1d7137e863c6
   HanekeSwift: 4113367892828e7700d24a384027de6ebc79aad1
   ReachabilitySwift: f5b9bb30a0777fac8f09ce8b067e32faeb29bb64
-  Reveal-tvOS-SDK: acb8ac785e0b1426b2f275fb67f12b54632540ee
   SwiftTask: 7fcd92f8ac16876e82c0e4ced0cea7e028456b6b
   Unbox: c8b2ab69d3337597b4a3f47a0538807dc12db670
 
-PODFILE CHECKSUM: c0bbe7e81cbdc6bbe13e6409f6a7f1de9354366a
+PODFILE CHECKSUM: 1f795ba5fd09f7105bdd866c0eda59e9e8bc2695
 
 COCOAPODS: 1.2.0
