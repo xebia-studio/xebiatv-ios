@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Alamofire
 
 class PlaylistRequest: AbstractRequest {
 
@@ -26,7 +27,7 @@ class PlaylistRequest: AbstractRequest {
     static func listVideos(_ parameters:GenericJSON, client:WSClientProtocol.Type) -> WSRequestTask {
         return self.buildListRequest()
             .success { mutableRequest in
-                return client.requestContent(.GET, urlRequest: mutableRequest, parameters:parameters, encoding:.URL)
+                return client.requestContent(.get, urlRequest: mutableRequest, parameters:parameters, encoding: URLEncoding.default)
             }
             .failure { (error, isCancelled) -> WSRequestTask in
                 return client.forwardContentErrorTask(error, isCancelled: isCancelled)

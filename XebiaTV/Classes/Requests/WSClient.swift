@@ -16,21 +16,22 @@ open class WSClient: WSClientProtocol {
     
     // MARK: Content
     
-    static func requestContent(_ method:Alamofire.Method, urlRequest: NSMutableURLRequest, parameters: [String: AnyObject]? = nil, encoding: ParameterEncoding = JSONEncoding.default) -> WSRequestTask {
+    static func requestContent(_ method:Alamofire.HTTPMethod, urlRequest: NSMutableURLRequest, parameters: Parameters? = nil, encoding: ParameterEncoding = JSONEncoding.default) -> WSRequestTask {
         
         // Update Manager
         self.updateManager(urlRequest)
         
         let task = WSRequestTask { fulfill, reject in
-            self.manager?.request(urlRequest, method, parameters:parameters?.count > 0 ? parameters : nil, encoding:encoding)
+            
+            self.manager?.request("", method: method, parameters: parameters, encoding:encoding)
                 .validate()
-                .response { (request, response, data, error) in
-                    if let error = error {
+                .response { response in
+                    if let error = response.error {
                         reject(error)
                         return
                     }
                     
-                    guard let _ = response, let data = data else {
+                    guard let _ = response.response, let data = response.data else {
                         let error = NSError(domain: "WSClient", code: 0, userInfo: ["errorDescription": "No data"])
                         reject(error)
                         return

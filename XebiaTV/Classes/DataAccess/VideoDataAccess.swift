@@ -42,14 +42,11 @@ class VideoDataAccess {
         guard let urls = playlistData["urls"] as? Array<AnyObject> else { return list }
         
         for urlData in urls {
-            
-            let decodedObject:VideoResource? = unbox(dictionary: urlData as! UnboxableDictionary)
-            guard let url = decodedObject else {
+            if let urlData = urlData as? UnboxableDictionary, let decodedObject:VideoResource = try? unbox(dictionary: urlData) {
+                list.append(decodedObject)
+            } else {
                 XBLog("Error with data : \(urlData)")
-                continue
             }
-            
-            list.append(url)
         }
         
         return list

@@ -43,9 +43,7 @@ class PlaylistDataAccess {
         
         for videoData in videos {
             if let videoData = videoData as? UnboxableDictionary {
-                let decodedObject:Video? = unbox(dictionary: videoData)
-                
-                guard let video = decodedObject, let snippet = video.snippet, snippet.title != Constants.Configuration.PrivateVideoKey else {
+                guard let video:Video = try? unbox(dictionary: videoData), let snippet = video.snippet, snippet.title != Constants.Configuration.PrivateVideoKey else {
                     XBLog("Error with data : \(videoData)")
                     continue
                 }

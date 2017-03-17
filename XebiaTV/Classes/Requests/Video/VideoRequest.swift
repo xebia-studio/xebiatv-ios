@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Alamofire
 
 class VideoRequest: AbstractRequest {
     
@@ -26,7 +27,7 @@ class VideoRequest: AbstractRequest {
     static func listVideoUrls(_ videoId:String, client:WSClientProtocol.Type) -> WSRequestTask {
         return self.buildVideoRequest(videoId)
             .success { mutableRequest in
-                return client.requestContent(.GET, urlRequest: mutableRequest, parameters:GenericJSON(), encoding:.URL)
+                return client.requestContent(.get, urlRequest: mutableRequest, parameters:GenericJSON(), encoding: URLEncoding.default)
             }
             .failure { (error, isCancelled) -> WSRequestTask in
                 return client.forwardContentErrorTask(error, isCancelled: isCancelled)
