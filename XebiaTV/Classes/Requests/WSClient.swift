@@ -9,6 +9,12 @@
 import Foundation
 import Alamofire
 
+enum RequestError: Error {
+    case unknownError
+    case unsupportedURL
+    case noData
+ }
+
 open class WSClient: WSClientProtocol {
     
     static var authorizationSaved = false
@@ -23,17 +29,22 @@ open class WSClient: WSClientProtocol {
         
         let task = WSRequestTask { fulfill, reject in
             
-            self.manager?.request("", method: method, parameters: parameters, encoding:encoding)
+            guard let urlPath = urlRequest.url?.absoluteString else {
+                reject(RequestError.unsupportedURL)
+                return
+            }
+
+            self.manager?.request(urlPath, method: method, parameters: parameters, encoding:encoding)
                 .validate()
                 .response { response in
+                    
                     if let error = response.error {
                         reject(error)
                         return
                     }
                     
                     guard let _ = response.response, let data = response.data else {
-                        let error = NSError(domain: "WSClient", code: 0, userInfo: ["errorDescription": "No data"])
-                        reject(error)
+                        reject(RequestError.noData)
                         return
                     }
                     

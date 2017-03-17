@@ -68,7 +68,7 @@ class FundationCell: AbstractCollectionViewCell {
         self.fundationTitle.font = UIFont.fontRegular(32)
         
         // Container
-        self.fundationContainer.backgroundColor = UIColor.commonPurpleColor(0.75)
+        self.fundationContainer.backgroundColor = UIColor(fullRed: 0, fullGreen: 0, fullBlue: 0, alpha: 0.75)
         self.fundationVisualEffectView.alpha = 0
         self.fundationContainer.alpha = 0
     }

@@ -58,13 +58,13 @@ class VideoPlayerViewController: AVPlayerViewController {
 
             let titleMetadataItem = AVMutableMetadataItem()
             titleMetadataItem.locale = NSLocale.current
-            titleMetadataItem.identifier = AVMetadataCommonKeyTitle
+            titleMetadataItem.key = AVMetadataCommonKeyTitle as (NSCopying & NSObjectProtocol)?
             titleMetadataItem.keySpace = AVMetadataKeySpaceCommon
             titleMetadataItem.value = self.selectedVideo?.snippet?.title as? (NSCopying & NSObjectProtocol)
             
             let descriptionMetadataItem = AVMutableMetadataItem()
             descriptionMetadataItem.locale = NSLocale.current
-            descriptionMetadataItem.identifier = AVMetadataCommonKeyDescription
+            descriptionMetadataItem.key = AVMetadataCommonKeyDescription as (NSCopying & NSObjectProtocol)?
             descriptionMetadataItem.keySpace = AVMetadataKeySpaceCommon
             descriptionMetadataItem.value = self.selectedVideo?.snippet?.description as? (NSCopying & NSObjectProtocol)
             
@@ -75,8 +75,8 @@ class VideoPlayerViewController: AVPlayerViewController {
             if let posterImage = self.posterImage {
                 let pictureMetadataItem = AVMutableMetadataItem()
                 pictureMetadataItem.locale = NSLocale.current
-                pictureMetadataItem.value = UIImageJPEGRepresentation(posterImage, 0.85) as? (NSCopying & NSObjectProtocol)
-                pictureMetadataItem.dataType = kCMMetadataBaseDataType_PNG as String
+                pictureMetadataItem.value = UIImageJPEGRepresentation(posterImage, 1.0) as? (NSCopying & NSObjectProtocol)
+                pictureMetadataItem.dataType = kCMMetadataBaseDataType_JPEG as String
                 pictureMetadataItem.identifier = AVMetadataCommonIdentifierArtwork
                 mediaItem.externalMetadata.append(pictureMetadataItem)
             }
