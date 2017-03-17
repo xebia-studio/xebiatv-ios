@@ -48,17 +48,11 @@ class HomeViewController: UIViewController {
     
     fileprivate func checkReachability() {
         // Reachability
-        let reachability: Reachability
-        do {
-            reachability = try Reachability.reachabilityForInternetConnection()
-            if reachability.isReachable() {
-                self.loadData()
-            } else {
-                self.clearRefresh(true)
-            }
-        } catch {
+        let reachability = Reachability.init()
+        if let reachability = reachability, reachability.isReachable {
+            self.loadData()
+        } else {
             self.clearRefresh(true)
-            return
         }
     }
     
@@ -123,10 +117,10 @@ class HomeViewController: UIViewController {
             let view = self.view as! HomeView
             if videos.count == 0 && !addAnyway {
                 self.menuDataSource.remove(at: self.currentLoadingIndex)
-                view.collectionView.deleteSections(NSIndexSet(index: self.currentLoadingIndex))
+                view.collectionView.deleteSections(IndexSet(integer: self.currentLoadingIndex))
             } else {
                 self.videosDataSource.insert(videos, at: self.currentLoadingIndex)
-                view.collectionView.reloadSections(NSIndexSet(index: self.currentLoadingIndex))
+                view.collectionView.reloadSections(IndexSet(integer: self.currentLoadingIndex))
                 self.currentLoadingIndex += 1
             }
             

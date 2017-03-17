@@ -42,16 +42,16 @@ class PlaylistDataAccess {
         guard let videos = playlistData["items"] as? Array<AnyObject> else { return list }
         
         for videoData in videos {
-            
-            let decodedObject:Video? = Unbox(videoData as! UnboxableDictionary)
-            
-            guard let video = decodedObject, let snippet = video.snippet, snippet.title != Constants.Configuration.PrivateVideoKey else {
-                XBLog("Error with data : \(videoData)")
-                continue
+            if let videoData = videoData as? UnboxableDictionary {
+                let decodedObject:Video? = unbox(dictionary: videoData)
+                
+                guard let video = decodedObject, let snippet = video.snippet, snippet.title != Constants.Configuration.PrivateVideoKey else {
+                    XBLog("Error with data : \(videoData)")
+                    continue
+                }
+                
+                list.append(video)
             }
-            
-            list.append(video)
-            
         }
         
         return list

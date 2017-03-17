@@ -18,14 +18,16 @@ class VideoPlayerViewController: AVPlayerViewController {
     
     // MARK: - Variables
     
-    fileprivate var watermarkView:UIImageView?
-    var selectedVideo:Video? {
+    fileprivate var watermarkView: UIImageView?
+    var selectedVideo: Video? {
         didSet {
             if selectedVideo?.urls.count == 0 {
                 self.loadData()
             }
         }
     }
+    
+    var posterImage: UIImage?
     
     // MARK: - Data
     
@@ -56,19 +58,28 @@ class VideoPlayerViewController: AVPlayerViewController {
 
             let titleMetadataItem = AVMutableMetadataItem()
             titleMetadataItem.locale = NSLocale.current
-            titleMetadataItem.key = AVMetadataCommonKeyTitle
+            titleMetadataItem.identifier = AVMetadataCommonKeyTitle
             titleMetadataItem.keySpace = AVMetadataKeySpaceCommon
-            titleMetadataItem.value = self.selectedVideo?.snippet?.title
+            titleMetadataItem.value = self.selectedVideo?.snippet?.title as? (NSCopying & NSObjectProtocol)
             
             let descriptionMetadataItem = AVMutableMetadataItem()
             descriptionMetadataItem.locale = NSLocale.current
-            descriptionMetadataItem.key = AVMetadataCommonKeyDescription
+            descriptionMetadataItem.identifier = AVMetadataCommonKeyDescription
             descriptionMetadataItem.keySpace = AVMetadataKeySpaceCommon
-            descriptionMetadataItem.value = self.selectedVideo?.snippet?.description
+            descriptionMetadataItem.value = self.selectedVideo?.snippet?.description as? (NSCopying & NSObjectProtocol)
             
             let mediaItem = AVPlayerItem(url: URL(string: url)!)
             mediaItem.externalMetadata.append(titleMetadataItem)
             mediaItem.externalMetadata.append(descriptionMetadataItem)
+            
+            if let posterImage = self.posterImage {
+                let pictureMetadataItem = AVMutableMetadataItem()
+                pictureMetadataItem.locale = NSLocale.current
+                pictureMetadataItem.value = UIImageJPEGRepresentation(posterImage, 0.85) as? (NSCopying & NSObjectProtocol)
+                pictureMetadataItem.dataType = kCMMetadataBaseDataType_PNG as String
+                pictureMetadataItem.identifier = AVMetadataCommonIdentifierArtwork
+                mediaItem.externalMetadata.append(pictureMetadataItem)
+            }
             
             // Subscribe to the AVPlayerItem's DidPlayToEndTime notification.
             NotificationCenter.default.addObserver(self, selector: #selector(self.notificationEndPlaying), name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: mediaItem)

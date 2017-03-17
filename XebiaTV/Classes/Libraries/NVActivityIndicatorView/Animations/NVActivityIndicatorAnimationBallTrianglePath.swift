@@ -53,7 +53,7 @@ class NVActivityIndicatorAnimationBallTrianglePath: NVActivityIndicatorAnimation
         layer.addSublayer(bottomRightCircle)
     }
     
-    func changeAnimation(_ animation: CAKeyframeAnimation, values rawValues: [String], deltaX: CGFloat, deltaY: CGFloat) -> CAAnimation {
+    @discardableResult func changeAnimation(_ animation: CAKeyframeAnimation, values rawValues: [String], deltaX: CGFloat, deltaY: CGFloat) -> CAAnimation {
         let values = NSMutableArray(capacity: 5)
         
         for rawValue in rawValues {

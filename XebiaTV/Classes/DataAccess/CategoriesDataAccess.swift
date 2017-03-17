@@ -60,7 +60,7 @@ class CategoriesDataAccess {
         }
         
         if fundations.count > 0 {
-            let fundationCategory:Category = Unbox(["name": "FUNDATIONS".localized])!
+            let fundationCategory:Category = unbox(dictionary: ["name": "FUNDATIONS".localized])!
             categories.insert(fundationCategory, at: 0)
         }
         
@@ -73,11 +73,11 @@ class CategoriesDataAccess {
         guard let dataList = categoryList as? Array<AnyObject> else { return list }
         
         for categoryData in dataList {
-            if categoryData.isKind(of: NSDictionary) {
+            if let categoryData = categoryData as? UnboxableDictionary {
                 
                 switch key {
                     case Constants.MenuKeys.CategoriesKey:
-                        if let category:Category = Unbox(categoryData as! UnboxableDictionary) {
+                        if let category:Category = unbox(dictionary :categoryData) {
                             list.append(category)
                         } else {
                             XBLog("Error while unboxing category : \(categoryData)");
@@ -85,7 +85,7 @@ class CategoriesDataAccess {
                         break
                     
                     case Constants.MenuKeys.FundationsKey:
-                        if let fundation:Fundation = Unbox(categoryData as! UnboxableDictionary) {
+                        if let fundation:Fundation = unbox(dictionary :categoryData) {
                             list.append(fundation)
                         } else {
                             XBLog("Error while unboxing fundation : \(categoryData)");

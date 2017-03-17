@@ -19,8 +19,8 @@ struct Category: CategoryProtocol {
     }
     
     internal init(unboxer: Unboxer) {
-        self.id = unboxer.unbox("id")
-        self.name = unboxer.unbox("name")
+        self.id = unboxer.unbox(key: "id")
+        self.name = unboxer.unbox(key: "name")
     }
     
 }

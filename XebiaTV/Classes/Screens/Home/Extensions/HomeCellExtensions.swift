@@ -94,8 +94,7 @@ extension HomeCell: UICollectionViewDelegate, UICollectionViewDataSource {
                     }
                 }
             }
-            .failure { [weak self] (error, isCancelled) -> Void in
-                guard let strongSelf = self else { return }
+            .failure { (error, isCancelled) -> Void in
                 print("Error \(error)  \(parameters)")
         }
     }

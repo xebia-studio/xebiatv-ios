@@ -43,7 +43,7 @@ class VideoDataAccess {
         
         for urlData in urls {
             
-            let decodedObject:VideoResource? = Unbox(urlData as! UnboxableDictionary)
+            let decodedObject:VideoResource? = unbox(dictionary: urlData as! UnboxableDictionary)
             guard let url = decodedObject else {
                 XBLog("Error with data : \(urlData)")
                 continue

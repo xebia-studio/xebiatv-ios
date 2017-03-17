@@ -149,7 +149,8 @@ struct Snippet: Unboxable {
         
         thumbnails = Array<Thumbnail>()
         for thumbnailDecoder in thumbs {
-            var thumbnail:Thumbnail = unboxer.unbox(keyPath: "thumbnails.\(thumbnailDecoder.0)")
+            guard var thumbnail:Thumbnail = unboxer.unbox(keyPath: "thumbnails.\(thumbnailDecoder.0)") else { continue }
+            
             thumbnail.type = ThumbnailType(rawValue: thumbnailDecoder.0)
             thumbnails.append(thumbnail)
         }

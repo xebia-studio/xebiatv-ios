@@ -94,6 +94,7 @@ class DetailsViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let viewController = segue.destination as? VideoPlayerViewController {
             viewController.selectedVideo = self.selectedVideo
+            viewController.posterImage = self.selectedVideoImage
         }
         
         if let viewController = segue.destination as? DetailsAlertViewController {

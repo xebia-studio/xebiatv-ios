@@ -10,11 +10,11 @@ import Foundation
 import Alamofire
 import SwiftTask
 
-typealias WSRequestTask = Task<Progress, NSData, Error>
+typealias WSRequestTask = Task<Progress, Data, Error>
 
 protocol WSClientProtocol  {
     
-    static func requestContent(_ method:Alamofire.Method, urlRequest: NSMutableURLRequest, parameters: GenericJSON?, encoding: ParameterEncoding) -> WSRequestTask
+    static func requestContent(_ method:Alamofire.Method, urlRequest: NSMutableURLRequest, parameters: [String: AnyObject]?, encoding: ParameterEncoding) -> WSRequestTask
     
 }
 
