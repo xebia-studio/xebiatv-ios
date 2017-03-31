@@ -13,6 +13,7 @@ struct Category: CategoryProtocol {
     
     var id:String?
     var name:String?
+    var nextPageToken:String?
     
     internal init() {
         

@@ -83,7 +83,7 @@ class HomeViewController: UIViewController {
                 self.currentLoadingIndex = 0
                 let category = categories[0]
                 if category.isFundation {
-                    self.populatePlaylistData([], addAnyway: true)
+                    self.populatePlaylistData((videos: [], nextPageToken: nil), addAnyway: true)
                 } else {
                     self.loadPlaylistData(category.idString)
                 }
@@ -108,18 +108,22 @@ class HomeViewController: UIViewController {
             }
             .failure { [weak self] (error, isCancelled) -> Void in
                 guard let strongSelf = self else { return }
-                strongSelf.populatePlaylistData([])
+                strongSelf.populatePlaylistData((videos: [], nextPageToken: nil))
             }
     }
     
-    fileprivate func populatePlaylistData(_ videos:[Video], addAnyway:Bool = false) {
+    fileprivate func populatePlaylistData(_ data: PlaylistData, addAnyway: Bool = false) {
         Async.main {
             let view = self.view as! HomeView
-            if videos.count == 0 && !addAnyway {
+            if data.videos.count == 0 && !addAnyway {
                 self.menuDataSource.remove(at: self.currentLoadingIndex)
                 view.collectionView.deleteSections(IndexSet(integer: self.currentLoadingIndex))
             } else {
-                self.videosDataSource.insert(videos, at: self.currentLoadingIndex)
+                if var category = self.menuDataSource[self.currentLoadingIndex] as? Category {
+                    category.nextPageToken = data.nextPageToken
+                }
+                
+                self.videosDataSource.insert(data.videos, at: self.currentLoadingIndex)
                 view.collectionView.reloadSections(IndexSet(integer: self.currentLoadingIndex))
                 self.currentLoadingIndex += 1
             }

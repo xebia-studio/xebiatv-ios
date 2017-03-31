@@ -10,7 +10,8 @@ import Foundation
 import SwiftTask
 import Unbox
 
-typealias PlaylistRetrieveTask = Task<Progress, [Video], Error>
+typealias PlaylistData = (videos:[Video], nextPageToken: String?)
+typealias PlaylistRetrieveTask = Task<Progress, PlaylistData, Error>
 
 class PlaylistDataAccess {
     
@@ -37,9 +38,10 @@ class PlaylistDataAccess {
         }
     }
     
-    static func buildPlaylist(_ playlistData: GenericJSON) -> [Video] {
+    static func buildPlaylist(_ playlistData: GenericJSON) -> PlaylistData {
         var list = [Video]()
-        guard let videos = playlistData["items"] as? Array<AnyObject> else { return list }
+        let nextPageToken = playlistData["nextPageToken"] as? String ?? nil
+        guard let videos = playlistData["items"] as? Array<AnyObject> else { return (videos: list, nextPageToken: nextPageToken) }
         
         for videoData in videos {
             if let videoData = videoData as? UnboxableDictionary {
@@ -52,7 +54,7 @@ class PlaylistDataAccess {
             }
         }
         
-        return list
+        return (videos: list, nextPageToken: nextPageToken)
     }
 
 }

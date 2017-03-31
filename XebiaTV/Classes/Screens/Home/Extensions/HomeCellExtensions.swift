@@ -51,6 +51,11 @@ extension HomeCell: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         if let cell = cell as? VideoCell, let item = self.videosDataSource?[indexPath.row] {
             cell.setup(item)
+            
+            if let videosDataSource = self.videosDataSource, indexPath.row == videosDataSource.count - 5 {
+                print("### LOAD MORE")
+            }
+            
         } else if let cell = cell as? FundationCell, let item = self.fundationsDataSource?[indexPath.row] as? Fundation {
             cell.setup(item)
         } else if let cell = cell as? HomeEmptyCell {
@@ -87,8 +92,9 @@ extension HomeCell: UICollectionViewDelegate, UICollectionViewDataSource {
         PlaylistDataAccess.retrieveVideos(parameters)
             .success { [weak self] response -> Void in // Populate
                 guard let strongSelf = self else { return }
-                if response.count > 0 {
-                    let selectedVideo = SelectedVideo(backgroundImage:nil, video:response.first!, response)
+                let videos = response.videos
+                if videos.count > 0 {
+                    let selectedVideo = SelectedVideo(backgroundImage:nil, video:videos.first!, videos)
                     Async.main {
                         strongSelf.onSelectCallback?(selectedVideo)
                     }
