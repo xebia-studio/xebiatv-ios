@@ -18,6 +18,9 @@ class HomeCell: AbstractCollectionViewCell {
     @IBOutlet weak var collectionView:UICollectionView!
     @IBOutlet weak var loaderView:NVActivityIndicatorView!
  
+    var playlistId: String?
+    var nextPageToken: String?
+    
     var videosDataSource:[Video]? = nil {
         didSet {
             self.refreshCollectionView()
@@ -31,6 +34,7 @@ class HomeCell: AbstractCollectionViewCell {
     }
     
     internal var onSelectCallback: ((SelectedVideo) -> Void)?
+    internal var isLoading: Bool = false
     
     let spaceBetweenCells:CGFloat = 100
     

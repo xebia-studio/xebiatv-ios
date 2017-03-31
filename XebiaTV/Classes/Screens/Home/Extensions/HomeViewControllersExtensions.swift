@@ -48,6 +48,13 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
             cell.fundationsDataSource = self.fundationsDataSource
         } else {
             let sectionDataItems = self.videosDataSource[indexPath.section]
+            if let category = category as? Category {
+                cell.nextPageToken = category.nextPageToken
+            } else {
+                cell.nextPageToken = nil
+            }
+            
+            cell.playlistId = category.idString
             cell.videosDataSource = sectionDataItems
         }
         cell.onSelect({ selectedVideo in

@@ -121,6 +121,7 @@ class HomeViewController: UIViewController {
             } else {
                 if var category = self.menuDataSource[self.currentLoadingIndex] as? Category {
                     category.nextPageToken = data.nextPageToken
+                    self.menuDataSource[self.currentLoadingIndex] = category
                 }
                 
                 self.videosDataSource.insert(data.videos, at: self.currentLoadingIndex)

@@ -52,8 +52,8 @@ extension HomeCell: UICollectionViewDelegate, UICollectionViewDataSource {
         if let cell = cell as? VideoCell, let item = self.videosDataSource?[indexPath.row] {
             cell.setup(item)
             
-            if let videosDataSource = self.videosDataSource, indexPath.row == videosDataSource.count - 5 {
-                print("### LOAD MORE")
+            if let videosDataSource = self.videosDataSource, indexPath.row == videosDataSource.count - 1 {
+                self.loadMoreVideos()
             }
             
         } else if let cell = cell as? FundationCell, let item = self.fundationsDataSource?[indexPath.row] as? Fundation {
@@ -78,6 +78,48 @@ extension HomeCell: UICollectionViewDelegate, UICollectionViewDataSource {
         if let video = self.videosDataSource?[indexPath.item] {
             let selectedVideo = SelectedVideo(backgroundImage:image, video:video, self.videosDataSource)
             self.onSelectCallback?(selectedVideo)
+        }
+    }
+    
+    fileprivate func loadMoreVideos() {
+        guard self.isLoading == false, self.nextPageToken != nil else { return }
+        
+        // Playlist request
+        var parameters = GenericJSON()
+        parameters["part"] = "snippet" as AnyObject?
+        parameters["key"] = Constants.Configuration.YoutubeAPIKey as AnyObject?
+        parameters["playlistId"] = self.playlistId as AnyObject?
+        parameters["pageToken"] = self.nextPageToken as AnyObject?
+        parameters["maxResults"] = 50 as AnyObject?
+        
+        self.isLoading = true
+        PlaylistDataAccess.retrieveVideos(parameters)
+            .success { [weak self] response -> Void in // Populate
+                guard let strongSelf = self else { return }
+                strongSelf.nextPageToken = response.nextPageToken
+                strongSelf.insertItems(data: response)
+            }
+            .failure { (error, isCancelled) -> Void in
+                print("### Error while loading more items :(")
+            }
+            .then { Void in
+                self.isLoading = false
+            }
+    }
+    
+    fileprivate func insertItems(data: PlaylistData) {
+        Async.main {
+            self.collectionView.performBatchUpdates({
+                let startIndex = self.videosDataSource?.count ?? 0
+                self.videosDataSource?.append(contentsOf: data.videos)
+                
+                var indexPaths = [IndexPath]()
+                for i in (startIndex..<(startIndex + data.videos.count)) {
+                    indexPaths.append(IndexPath(item: i, section: 0))
+                }
+                
+                self.collectionView.insertItems(at: indexPaths)
+            }, completion: nil)
         }
     }
     
