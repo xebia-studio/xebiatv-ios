@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5F0093F81E8E8DC7007D0A44 /* LoadingMoreCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F0093F71E8E8DC7007D0A44 /* LoadingMoreCell.swift */; };
+		5F0093FA1E8E8DE0007D0A44 /* LoadingMoreCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5F0093F91E8E8DE0007D0A44 /* LoadingMoreCell.xib */; };
 		5F109CBB1C048DBE00DC76B2 /* AbstractRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F109CB41C048DBE00DC76B2 /* AbstractRequest.swift */; };
 		5F109CBC1C048DBE00DC76B2 /* Deserializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F109CB61C048DBE00DC76B2 /* Deserializer.swift */; };
 		5F109CBD1C048DBE00DC76B2 /* JSONArrayDeserializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F109CB71C048DBE00DC76B2 /* JSONArrayDeserializer.swift */; };
@@ -101,6 +103,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		5F0093F71E8E8DC7007D0A44 /* LoadingMoreCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoadingMoreCell.swift; path = View/Cells/LoadingMoreCell.swift; sourceTree = "<group>"; };
+		5F0093F91E8E8DE0007D0A44 /* LoadingMoreCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LoadingMoreCell.xib; path = View/Cells/LoadingMoreCell.xib; sourceTree = "<group>"; };
 		5F109CB41C048DBE00DC76B2 /* AbstractRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AbstractRequest.swift; sourceTree = "<group>"; };
 		5F109CB61C048DBE00DC76B2 /* Deserializer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Deserializer.swift; sourceTree = "<group>"; };
 		5F109CB71C048DBE00DC76B2 /* JSONArrayDeserializer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONArrayDeserializer.swift; sourceTree = "<group>"; };
@@ -583,6 +587,8 @@
 				5FB236631C2C461E00A6BBD7 /* HomeEmptyCell.xib */,
 				5FE84E1A1C218C5F0047827C /* HomeHeaderCollectionReusableView.swift */,
 				5FE84E1E1C218D920047827C /* HomeHeaderCollectionReusableView.xib */,
+				5F0093F71E8E8DC7007D0A44 /* LoadingMoreCell.swift */,
+				5F0093F91E8E8DE0007D0A44 /* LoadingMoreCell.xib */,
 				5F97A5D91BFCD63F004A753B /* VideoCell.swift */,
 				5F97A5DA1BFCD63F004A753B /* VideoCell.xib */,
 			);
@@ -674,6 +680,7 @@
 				5F4A92371C0773C600C1B516 /* Lato-Regular.ttf in Resources */,
 				5F97A5E41BFDD297004A753B /* HomeCell.xib in Resources */,
 				5F576A821C2012D200DEF22D /* Info.plist in Resources */,
+				5F0093FA1E8E8DE0007D0A44 /* LoadingMoreCell.xib in Resources */,
 				5FB236641C2C461E00A6BBD7 /* HomeEmptyCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -776,6 +783,7 @@
 				5F576A741C2012D200DEF22D /* NVActivityIndicatorAnimationBallTrianglePath.swift in Sources */,
 				5FB617C71C107BD200712F6E /* DetailsAlertViewController.swift in Sources */,
 				5F576A6A1C2012D200DEF22D /* NVActivityIndicatorAnimationBallPulse.swift in Sources */,
+				5F0093F81E8E8DC7007D0A44 /* LoadingMoreCell.swift in Sources */,
 				5FB236621C2C452400A6BBD7 /* HomeEmptyCell.swift in Sources */,
 				5F97A5B51BFCB08E004A753B /* Video.swift in Sources */,
 				5F109CD41C0491A900DC76B2 /* CategoriesDataAccess.swift in Sources */,

@@ -33,12 +33,17 @@ extension HomeCell: UICollectionViewDelegate, UICollectionViewDataSource {
             return 1
         }
         
-        return max(self.videosDataSource?.count ?? 0, self.fundationsDataSource?.count ?? 0)
+        let videosCount = max(self.videosDataSource?.count ?? 0, self.fundationsDataSource?.count ?? 0)
+        return self.nextPageToken != nil ? videosCount + 1 : videosCount
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if let videosDataSource = self.videosDataSource, videosDataSource.count > 0 {
-            return collectionView.dequeueReusableCell(withReuseIdentifier: VideoCell.reuseIdentifier(), for: indexPath)
+            if let _ = self.nextPageToken, indexPath.item == videosDataSource.count - 1 {
+                return collectionView.dequeueReusableCell(withReuseIdentifier: LoadingMoreCell.reuseIdentifier(), for: indexPath)
+            } else {
+                return collectionView.dequeueReusableCell(withReuseIdentifier: VideoCell.reuseIdentifier(), for: indexPath)
+            }
         } else if let fundationsDataSource = self.fundationsDataSource, fundationsDataSource.count > 0 {
             return collectionView.dequeueReusableCell(withReuseIdentifier: FundationCell.reuseIdentifier(), for: indexPath)
         }
@@ -49,14 +54,14 @@ extension HomeCell: UICollectionViewDelegate, UICollectionViewDataSource {
     // MARK: UICollectionViewDelegate
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        if let cell = cell as? VideoCell, let item = self.videosDataSource?[indexPath.row] {
+        if let cell = cell as? VideoCell, let item = self.videosDataSource?[safe: indexPath.row] {
             cell.setup(item)
             
-            if let videosDataSource = self.videosDataSource, indexPath.row == videosDataSource.count - 1 {
+            if let videosDataSource = self.videosDataSource, indexPath.row == videosDataSource.count - 5 {
                 self.loadMoreVideos()
             }
             
-        } else if let cell = cell as? FundationCell, let item = self.fundationsDataSource?[indexPath.row] as? Fundation {
+        } else if let cell = cell as? FundationCell, let item = self.fundationsDataSource?[safe: indexPath.row] as? Fundation {
             cell.setup(item)
         } else if let cell = cell as? HomeEmptyCell {
             cell.category = self.category?.name
@@ -109,17 +114,20 @@ extension HomeCell: UICollectionViewDelegate, UICollectionViewDataSource {
     
     fileprivate func insertItems(data: PlaylistData) {
         Async.main {
-            self.collectionView.performBatchUpdates({
-                let startIndex = self.videosDataSource?.count ?? 0
-                self.videosDataSource?.append(contentsOf: data.videos)
-                
-                var indexPaths = [IndexPath]()
-                for i in (startIndex..<(startIndex + data.videos.count)) {
-                    indexPaths.append(IndexPath(item: i, section: 0))
-                }
-                
-                self.collectionView.insertItems(at: indexPaths)
-            }, completion: nil)
+            self.videosDataSource?.append(contentsOf: data.videos)
+            self.collectionView.reloadData()
+            
+//            self.collectionView.performBatchUpdates({
+//                let startIndex = self.videosDataSource?.count ?? 0
+//                self.videosDataSource?.append(contentsOf: data.videos)
+//                
+//                var indexPaths = [IndexPath]()
+//                for i in (startIndex..<(startIndex + data.videos.count)) {
+//                    indexPaths.append(IndexPath(item: i, section: 0))
+//                }
+//                
+//                self.collectionView.insertItems(at: indexPaths)
+//            }, completion: nil)
         }
     }
     

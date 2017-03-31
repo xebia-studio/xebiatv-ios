@@ -61,6 +61,7 @@ class HomeCell: AbstractCollectionViewCell {
         collectionView.register(VideoCell.nib(), forCellWithReuseIdentifier: VideoCell.reuseIdentifier())
         collectionView.register(HomeEmptyCell.nib(), forCellWithReuseIdentifier: HomeEmptyCell.reuseIdentifier())
         collectionView.register(FundationCell.nib(), forCellWithReuseIdentifier: FundationCell.reuseIdentifier())
+        collectionView.register(LoadingMoreCell.nib(), forCellWithReuseIdentifier: LoadingMoreCell.reuseIdentifier())
         collectionView.clipsToBounds = false
         layout.sectionInset = UIEdgeInsetsMake(0, self.spaceBetweenCells, 0, self.spaceBetweenCells)
         layout.minimumLineSpacing = self.spaceBetweenCells
@@ -71,6 +72,7 @@ class HomeCell: AbstractCollectionViewCell {
         
         self.loaderView.startAnimation()
         self.videosDataSource?.removeAll()
+        self.fundationsDataSource?.removeAll()
         self.collectionView.reloadData()
     }
     

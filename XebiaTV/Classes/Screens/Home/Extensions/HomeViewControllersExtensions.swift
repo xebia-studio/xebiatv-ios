@@ -46,6 +46,9 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
         // Configure the cell.
         if category.isFundation {
             cell.fundationsDataSource = self.fundationsDataSource
+            cell.videosDataSource = nil
+            cell.playlistId = nil
+            cell.nextPageToken = nil
         } else {
             let sectionDataItems = self.videosDataSource[indexPath.section]
             if let category = category as? Category {
@@ -56,7 +59,10 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
             
             cell.playlistId = category.idString
             cell.videosDataSource = sectionDataItems
+            cell.fundationsDataSource = nil
         }
+        
+        // Actions
         cell.onSelect({ selectedVideo in
             self.selectedIndex = indexPath.section
             self.selectedBackgroundImage = selectedVideo.backgroundImage
